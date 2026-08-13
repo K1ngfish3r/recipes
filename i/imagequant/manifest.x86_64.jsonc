@@ -1,0 +1,45 @@
+/** Human readable report. This is not consumed by boulder */
+{
+	"manifest-version": "0.2",
+	"packages": {
+		"imagequant": {
+			"build-depends": [
+				"cargo-c"
+			],
+			"depends": [
+				"soname(ld-linux-x86-64.so.2(x86_64))",
+				"soname(libc.so.6(x86_64))",
+				"soname(libgcc_s.so.1(x86_64))",
+				"soname(libm.so.6(x86_64))"
+			],
+			"files": [
+				"/usr/lib/libimagequant.so.0.4",
+				"/usr/lib/libimagequant.so.0.4.1"
+			],
+			"name": "imagequant",
+			"provides": [
+				"soname(libimagequant.so.0.4(x86_64))"
+			]
+		},
+		"imagequant-devel": {
+			"build-depends": [
+				"cargo-c"
+			],
+			"depends": [
+				"imagequant"
+			],
+			"files": [
+				"/usr/include/libimagequant.h",
+				"/usr/lib/libimagequant.so",
+				"/usr/lib/pkgconfig/imagequant.pc"
+			],
+			"name": "imagequant-devel",
+			"provides": [
+				"pkgconfig(imagequant)"
+			]
+		}
+	},
+	"source-name": "imagequant",
+	"source-release": "1",
+	"source-version": "4.4.1"
+}

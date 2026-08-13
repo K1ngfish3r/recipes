@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: 2026 AerynOS Developers
+# SPDX-License-Identifier: MPL-2.0
+
+name        : imagequant
+version     : "4.4.1"
+release     : 1
+homepage    : https://pngquant.org/lib
+upstreams   :
+    - https://github.com/ImageOptim/libimagequant/archive/refs/tags/4.4.1.tar.gz : 2464a3e922b5a220b633d674062b82f0670114f8f3dd30d1935a621c95965f1b
+summary     : Palette quantization library that powers pngquant and other PNG optimizers
+description : |
+    Imagequant library converts RGBA images to palette-based 8-bit indexed images, including alpha component.
+license     : GPL-3.0-or-later
+networking  : true
+builddeps   :
+    - cargo-c
+setup       : |
+    # uncomment, generate, and place inside pkg before update
+    # cargo generate-lockfile
+    # break_exit
+
+    cp %(pkgdir)/Cargo.lock %(workdir)/
+    %cargo_fetch
+build       : |
+    cd imagequant-sys
+    cargo cbuild --prefix=%(prefix) --%(cargo_profile)
+install     : |
+    cd imagequant-sys
+    cargo cinstall \
+        --destdir=%(installroot) \
+        --library-type=cdylib \
+        --prefix=%(prefix) \
+        --%(cargo_profile)
+check       : |
+    cd imagequant-sys
+    cargo ctest --%(cargo_profile)
