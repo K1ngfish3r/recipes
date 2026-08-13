@@ -1,0 +1,131 @@
+/** Human readable report. This is not consumed by boulder */
+{
+	"manifest-version": "0.2",
+	"packages": {
+		"m17n-lib": {
+			"build-depends": [
+				"binary(bison)",
+				"binary(objdump)",
+				"gettext-devel",
+				"pkgconfig(fontconfig)",
+				"pkgconfig(freetype2)",
+				"pkgconfig(fribidi)",
+				"pkgconfig(gdlib)",
+				"pkgconfig(libotf)",
+				"pkgconfig(libthai)",
+				"pkgconfig(libxml-2.0)",
+				"pkgconfig(m17n-db)",
+				"pkgconfig(x11)",
+				"pkgconfig(xaw7)",
+				"pkgconfig(xft)",
+				"pkgconfig(xt)"
+			],
+			"depends": [
+				"interpreter(/usr/lib/ld-linux-x86-64.so.2(x86_64))",
+				"soname(libICE.so.6(x86_64))",
+				"soname(libSM.so.6(x86_64))",
+				"soname(libX11.so.6(x86_64))",
+				"soname(libXaw.so.7(x86_64))",
+				"soname(libXft.so.2(x86_64))",
+				"soname(libXt.so.6(x86_64))",
+				"soname(libc.so.6(x86_64))",
+				"soname(libfontconfig.so.1(x86_64))",
+				"soname(libfreetype.so.6(x86_64))",
+				"soname(libfribidi.so.0(x86_64))",
+				"soname(libgd.so.3(x86_64))",
+				"soname(libicudata.so.78(x86_64))",
+				"soname(libicuuc.so.78(x86_64))",
+				"soname(libm.so.6(x86_64))",
+				"soname(libotf.so.1(x86_64))",
+				"soname(libthai.so.0(x86_64))",
+				"soname(libxml2.so.16(x86_64))",
+				"soname(libz.so.1(x86_64))"
+			],
+			"files": [
+				"/usr/bin/m17n-conv",
+				"/usr/bin/m17n-date",
+				"/usr/bin/m17n-dump",
+				"/usr/bin/m17n-edit",
+				"/usr/bin/m17n-input-test",
+				"/usr/bin/m17n-view",
+				"/usr/lib/libm17n-core.so.0",
+				"/usr/lib/libm17n-core.so.0.4.2",
+				"/usr/lib/libm17n-flt.so.0",
+				"/usr/lib/libm17n-flt.so.0.4.2",
+				"/usr/lib/libm17n-gui.so.0",
+				"/usr/lib/libm17n-gui.so.0.4.2",
+				"/usr/lib/libm17n.so.0",
+				"/usr/lib/libm17n.so.0.4.2",
+				"/usr/lib/m17n/1.0/libm17n-X.so",
+				"/usr/lib/m17n/1.0/libm17n-gd.so",
+				"/usr/lib/m17n/1.0/libmimx-anthy.so",
+				"/usr/lib/m17n/1.0/libmimx-ispell.so"
+			],
+			"name": "m17n-lib",
+			"provides": [
+				"binary(m17n-conv)",
+				"binary(m17n-date)",
+				"binary(m17n-dump)",
+				"binary(m17n-edit)",
+				"binary(m17n-input-test)",
+				"binary(m17n-view)",
+				"soname(libm17n-core.so.0(x86_64))",
+				"soname(libm17n-flt.so.0(x86_64))",
+				"soname(libm17n-gui.so.0(x86_64))",
+				"soname(libm17n.so.0(x86_64))",
+				"soname(m17n/1.0/libm17n-X.so(x86_64))",
+				"soname(m17n/1.0/libm17n-gd.so(x86_64))",
+				"soname(m17n/1.0/libmimx-anthy.so(x86_64))",
+				"soname(m17n/1.0/libmimx-ispell.so(x86_64))"
+			]
+		},
+		"m17n-lib-devel": {
+			"build-depends": [
+				"binary(bison)",
+				"binary(objdump)",
+				"gettext-devel",
+				"pkgconfig(fontconfig)",
+				"pkgconfig(freetype2)",
+				"pkgconfig(fribidi)",
+				"pkgconfig(gdlib)",
+				"pkgconfig(libotf)",
+				"pkgconfig(libthai)",
+				"pkgconfig(libxml-2.0)",
+				"pkgconfig(m17n-db)",
+				"pkgconfig(x11)",
+				"pkgconfig(xaw7)",
+				"pkgconfig(xft)",
+				"pkgconfig(xt)"
+			],
+			"depends": [
+				"m17n-lib"
+			],
+			"files": [
+				"/usr/include/m17n-X.h",
+				"/usr/include/m17n-core.h",
+				"/usr/include/m17n-flt.h",
+				"/usr/include/m17n-gui.h",
+				"/usr/include/m17n-misc.h",
+				"/usr/include/m17n.h",
+				"/usr/lib/libm17n-core.so",
+				"/usr/lib/libm17n-flt.so",
+				"/usr/lib/libm17n-gui.so",
+				"/usr/lib/libm17n.so",
+				"/usr/lib/pkgconfig/m17n-core.pc",
+				"/usr/lib/pkgconfig/m17n-flt.pc",
+				"/usr/lib/pkgconfig/m17n-gui.pc",
+				"/usr/lib/pkgconfig/m17n-shell.pc"
+			],
+			"name": "m17n-lib-devel",
+			"provides": [
+				"pkgconfig(m17n-core)",
+				"pkgconfig(m17n-flt)",
+				"pkgconfig(m17n-gui)",
+				"pkgconfig(m17n-shell)"
+			]
+		}
+	},
+	"source-name": "m17n-lib",
+	"source-release": "1",
+	"source-version": "1.8.6"
+}
