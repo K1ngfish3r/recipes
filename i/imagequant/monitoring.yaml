@@ -1,0 +1,8 @@
+# SPDX-FileCopyrightText: 2026 AerynOS Developers
+# SPDX-License-Identifier: MPL-2.0
+
+releases:
+  id: 12768
+  rss: https://github.com/ImageOptim/libimagequant/releases.atom
+security:
+  cpe: ~ # No CPE found, last checked (2026-08-06)
