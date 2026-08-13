@@ -1,0 +1,49 @@
+From 7efe12e671f695020078196db790bd8c9efaac0e Mon Sep 17 00:00:00 2001
+From: Pierre Joye <pierre.php@gmail.com>
+Date: Thu, 21 May 2026 12:11:02 +0700
+Subject: [PATCH] - HEIF support, bump to 1.x if possible, better error
+ messages in case of missing codecs
+
+---
+ CMakeLists.txt | 2 +-
+ src/gd_heif.c  | 7 ++++++-
+ 2 files changed, 7 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index f8f30009e..2b2cce04d 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -156,7 +156,7 @@ else (USE_EXT_GD)
+ 	ENDIF (ENABLE_HEIF)
+ 
+ 	IF (ENABLE_AVIF)
+-		FIND_PACKAGE(libavif 0.8.2 REQUIRED CONFIG)
++		FIND_PACKAGE(libavif 1.0 REQUIRED CONFIG)
+ 		SET(HAVE_LIBAVIF 1)
+ 		SET(AVIF_LIBRARIES avif)
+ 		SET(AVIF_FOUND 1)
+diff --git a/src/gd_heif.c b/src/gd_heif.c
+index adccbabed..21471f2ef 100644
+--- a/src/gd_heif.c
++++ b/src/gd_heif.c
+@@ -308,7 +308,7 @@ static int _gdImageHeifCtx(gdImagePtr im, gdIOCtx *outfile, int quality, gdHeifC
+ 	}
+ 	err = heif_context_get_encoder_for_format(heif_ctx, (enum heif_compression_format)codec, &heif_enc);
+ 	if (err.code != heif_error_Ok) {
+-		gd_error("gd-heif encoder acquisition failed (missing codec support?)\n");
++		gd_error("gd-heif encoder acquisition failed (missing codec support?: code: %d, subcode: %d, message: %s)\n", err.code, err.subcode, err.message);
+ 		heif_context_free(heif_ctx);
+ 		return GD_FALSE;
+ 	}
+@@ -440,6 +440,11 @@ BGD_DECLARE(void) gdImageHeifCtx(gdImagePtr im, gdIOCtx *outfile, int quality, g
+     usually implying both higher quality and larger image sizes or 200, for
+     lossless codec.
+ 
++	For _codec_, the default and most widely supported option is
++	GD_HEIF_CODEC_HEVC. GD_HEIF_CODEC_AV1 is a newer codec that may not be
++	supported by all decoders but can offer better compression efficiency. 
++	They must be installed on the system and enabled at compile time to be used.
++
+   Variants:
+ 
+     <gdImageHeifCtx> stores the image using a <gdIOCtx> struct.
