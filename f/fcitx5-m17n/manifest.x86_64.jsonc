@@ -1,0 +1,53 @@
+/** Human readable report. This is not consumed by boulder */
+{
+	"manifest-version": "0.2",
+	"packages": {
+		"fcitx5-m17n": {
+			"build-depends": [
+				"cmake(ECM)",
+				"cmake(Fcitx5Core)",
+				"cmake(Fcitx5Module)",
+				"cmake(Fcitx5ModuleTestFrontend)",
+				"gettext-devel",
+				"pkgconfig(m17n-db)",
+				"pkgconfig(m17n-gui)"
+			],
+			"depends": [
+				"soname(libFcitx5Config.so.6(x86_64))",
+				"soname(libFcitx5Core.so.7(x86_64))",
+				"soname(libFcitx5Utils.so.2(x86_64))",
+				"soname(libc.so.6(x86_64))",
+				"soname(libgcc_s.so.1(x86_64))",
+				"soname(libm17n-core.so.0(x86_64))",
+				"soname(libm17n.so.0(x86_64))",
+				"soname(libstdc++.so.6(x86_64))"
+			],
+			"files": [
+				"/usr/lib/fcitx5/libm17n.so",
+				"/usr/share/fcitx5/addon/m17n.conf",
+				"/usr/share/fcitx5/m17n/default",
+				"/usr/share/locale/ca/LC_MESSAGES/fcitx5-m17n.mo",
+				"/usr/share/locale/da/LC_MESSAGES/fcitx5-m17n.mo",
+				"/usr/share/locale/de/LC_MESSAGES/fcitx5-m17n.mo",
+				"/usr/share/locale/fr/LC_MESSAGES/fcitx5-m17n.mo",
+				"/usr/share/locale/he/LC_MESSAGES/fcitx5-m17n.mo",
+				"/usr/share/locale/ja/LC_MESSAGES/fcitx5-m17n.mo",
+				"/usr/share/locale/ka/LC_MESSAGES/fcitx5-m17n.mo",
+				"/usr/share/locale/ko/LC_MESSAGES/fcitx5-m17n.mo",
+				"/usr/share/locale/ru/LC_MESSAGES/fcitx5-m17n.mo",
+				"/usr/share/locale/tr/LC_MESSAGES/fcitx5-m17n.mo",
+				"/usr/share/locale/vi/LC_MESSAGES/fcitx5-m17n.mo",
+				"/usr/share/locale/zh_CN/LC_MESSAGES/fcitx5-m17n.mo",
+				"/usr/share/locale/zh_TW/LC_MESSAGES/fcitx5-m17n.mo",
+				"/usr/share/metainfo/org.fcitx.Fcitx5.Addon.M17N.metainfo.xml"
+			],
+			"name": "fcitx5-m17n",
+			"provides": [
+				"soname(fcitx5/libm17n.so(x86_64))"
+			]
+		}
+	},
+	"source-name": "fcitx5-m17n",
+	"source-release": "1",
+	"source-version": "5.1.6"
+}
