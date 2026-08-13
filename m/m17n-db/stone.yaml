@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 AerynOS Developers
+# SPDX-License-Identifier: MPL-2.0
+
+name        : m17n-db
+version     : "1.8.14"
+release     : 1
+homepage    : https://www.nongnu.org/m17n/
+upstreams   :
+    - https://download.savannah.nongnu.org/releases/m17n/m17n-db-1.8.14.tar.gz : 783e1a9440be2c9221cdded9dd9b276a8c51d34559feaf62017aedb5dc43da41
+summary     : Multilingual text processing library (database)
+description : |
+    Multilingual text processing library (database)
+license     : LGPL-2.1-only
+builddeps   :
+    - binary(bison)
+    - binary(objdump)
+    - binary(zstdcat)
+    - gettext-devel
+setup       : |
+    %configure
+build       : |
+    %make
+install     : |
+    %make_install
+
+    # Taken from Arch
+    # Drop script that makes UIM segfault http://savannah.nongnu.org/bugs/index.php?53202
+    rm %(installroot)%(datadir)/m17n/hu-rovas-post.mim
