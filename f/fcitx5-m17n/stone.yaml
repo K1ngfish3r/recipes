@@ -1,0 +1,29 @@
+# SPDX-FileCopyrightText: 2026 AerynOS Developers
+# SPDX-License-Identifier: MPL-2.0
+
+name        : fcitx5-m17n
+version     : "5.1.6"
+release     : 1
+homepage    : https://github.com/fcitx/fcitx5-m17n
+upstreams   :
+    - https://github.com/fcitx/fcitx5-m17n/archive/refs/tags/5.1.6.tar.gz : 0070ed245bfb4153d13d5906c1afae4314cd4a0592cb3cd0e7b31a1e5d114932
+summary     : Wrapper for m17n input method engine
+description : |
+    Wrap the m17n input method engine into a fcitx input method.
+license     : LGPL-2.1-or-later
+builddeps   :
+    - cmake(ECM)
+    - cmake(Fcitx5Core)
+    - cmake(Fcitx5Module)
+    - cmake(Fcitx5ModuleTestFrontend)
+    - pkgconfig(m17n-db)
+    - pkgconfig(m17n-gui)
+    - gettext-devel
+setup       : |
+    %cmake
+build       : |
+    %cmake_build
+install     : |
+    %cmake_install
+check       : |
+    %cmake_test

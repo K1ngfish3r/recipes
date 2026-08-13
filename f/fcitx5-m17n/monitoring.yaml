@@ -1,0 +1,8 @@
+# SPDX-FileCopyrightText: 2026 AerynOS Developers
+# SPDX-License-Identifier: MPL-2.0
+
+releases:
+  id: 174359
+  rss: https://github.com/fcitx/fcitx5-m17n/releases.atom
+security:
+  cpe: ~ # No CPE found, last checked (2026-05-13)
