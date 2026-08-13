@@ -1,0 +1,47 @@
+--- a/tests/CMakeLists.txt
++++ b/tests/CMakeLists.txt
+@@ -78,7 +78,6 @@
+ 		gdimagestringup16
+ 		gdimagetruecolortopalette
+ 		gdinterpolatedscale
+-		gdmatrix
+ 		gdnewfilectx
+ 		gdtest
+ 		gdtiled
+diff --git a/tests/avif/CMakeLists.txt b/tests/avif/CMakeLists.txt
+index e2df47be..0ae223d8 100644
+--- a/tests/avif/CMakeLists.txt
++++ b/tests/avif/CMakeLists.txt
+@@ -1,9 +1,6 @@
+ IF(AVIF_FOUND)
+ LIST(APPEND TESTS_FILES
+ 	avif_ptr_double_free
+-	avif_im2im
+-	avif_null
+-	bad_input
+ )
+ 
+ IF(PNG_FOUND)
+diff --git a/tests/gdimagecopyrotated/CMakeLists.txt b/tests/gdimagecopyrotated/CMakeLists.txt
+index 7d4f0015..7f1a6786 100644
+--- a/tests/gdimagecopyrotated/CMakeLists.txt
++++ b/tests/gdimagecopyrotated/CMakeLists.txt
+@@ -1,6 +1,3 @@
+-LIST(APPEND TESTS_FILES
+-	bug00320
+-)
+ IF(PNG_FOUND)
+ LIST(APPEND TESTS_FILES
+ 	bug00020
+diff --git a/tests/gif/CMakeLists.txt b/tests/gif/CMakeLists.txt
+index 8349ace5..d071874f 100644
+--- a/tests/gif/CMakeLists.txt
++++ b/tests/gif/CMakeLists.txt
+@@ -11,7 +11,6 @@ LIST(APPEND TESTS_FILES
+ 	bug00006
+ 	bug00060
+ 	gif_im2im
+-	bug00415
+ )
+ 
+ IF(PNG_FOUND)

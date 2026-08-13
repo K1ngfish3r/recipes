@@ -1,0 +1,70 @@
+# SPDX-FileCopyrightText: 2026 AerynOS Developers
+# SPDX-License-Identifier: MPL-2.0
+
+name        : gd
+version     : "2.3.3"
+release     : 1
+homepage    : https://libgd.github.io/
+upstreams   :
+    - https://github.com/libgd/libgd/releases/download/gd-2.3.3/libgd-2.3.3.tar.xz : 3fe822ece20796060af63b7c60acb151e5844204d289da0ce08f8fdf131e5a61
+summary     : GD Graphics Library
+description : |
+    GD is an open source code library for the dynamic creation of images by programmers.
+license     : BSD-3-Clause
+builddeps   :
+    - binary(autoreconf)
+    - binary(bison)
+    - binary(flex)
+    - binary(objdump)
+    - binary(perl)
+    - pkgconfig(fontconfig)
+    - pkgconfig(freetype2)
+    - pkgconfig(imagequant)
+    - pkgconfig(libavif)
+    - pkgconfig(libheif)
+    - pkgconfig(libjpeg)
+    - pkgconfig(libpng)
+    - pkgconfig(libtiff-4)
+    - pkgconfig(libwebp)
+    - pkgconfig(raqm)
+    - pkgconfig(x11)
+    - pkgconfig(xpm)
+    - pkgconfig(zlib)
+setup       : |
+    # from https://github.com/libgd/libgd/commit/f1a53c082173567b8ad07eaba8fc7ba66457a730
+    # from https://github.com/libgd/libgd/commit/7efe12e671f695020078196db790bd8c9efaac0e
+    # TODO: remove in next release
+    %patch %(pkgdir)/HEIF-stride.patch
+    %patch %(pkgdir)/HEIF-support.patch
+
+    # these tests are not in the generated tarball
+    # TODO: remove in next release
+    %patch %(pkgdir)/remove-missing-tests.patch
+
+    %cmake \
+        -DBUILD_TEST=ON \
+        -DENABLE_AVIF=ON \
+        -DENABLE_GD_FORMATS=ON \
+        -DENABLE_FONTCONFIG=ON \
+        -DENABLE_FREETYPE=ON \
+        -DENABLE_HEIF=ON \
+        -DENABLE_ICONV=ON \
+        -DENABLE_JPEG=ON \
+        -DENABLE_LIQ=ON \
+        -DENABLE_PNG=ON \
+        -DENABLE_RAQM=ON \
+        -DENABLE_TIFF=ON \
+        -DENABLE_WEBP=ON \
+        -DENABLE_XPM=ON \
+        -Wno-dev
+build       : |
+    %cmake_build
+install     : |
+    %cmake_install
+check       : |
+    # /tmp cant be accessed within mason, but check accepts a TMPDIR var
+    mkdir %(buildroot)/tmp
+    export TMPDIR=%(buildroot)/tmp
+
+    # our libs too new for these tests, try again in next release
+    %cmake_test -E "test_fontconfig_basic|test_gdimagestringft_gdimagestringft_bbox"
