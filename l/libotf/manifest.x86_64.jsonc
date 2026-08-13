@@ -1,0 +1,69 @@
+/** Human readable report. This is not consumed by boulder */
+{
+	"manifest-version": "0.2",
+	"packages": {
+		"libotf": {
+			"build-depends": [
+				"binary(bison)",
+				"binary(flex)",
+				"pkgconfig(freetype2)",
+				"pkgconfig(x11)",
+				"pkgconfig(xaw7)"
+			],
+			"depends": [
+				"interpreter(/usr/lib/ld-linux-x86-64.so.2(x86_64))",
+				"soname(libICE.so.6(x86_64))",
+				"soname(libSM.so.6(x86_64))",
+				"soname(libX11.so.6(x86_64))",
+				"soname(libXaw.so.7(x86_64))",
+				"soname(libXmu.so.6(x86_64))",
+				"soname(libXt.so.6(x86_64))",
+				"soname(libc.so.6(x86_64))",
+				"soname(libfreetype.so.6(x86_64))"
+			],
+			"files": [
+				"/usr/bin/libotf-config",
+				"/usr/bin/otfdump",
+				"/usr/bin/otflist",
+				"/usr/bin/otftobdf",
+				"/usr/bin/otfview",
+				"/usr/lib/libotf.so.1",
+				"/usr/lib/libotf.so.1.0.0"
+			],
+			"name": "libotf",
+			"provides": [
+				"binary(libotf-config)",
+				"binary(otfdump)",
+				"binary(otflist)",
+				"binary(otftobdf)",
+				"binary(otfview)",
+				"soname(libotf.so.1(x86_64))"
+			]
+		},
+		"libotf-devel": {
+			"build-depends": [
+				"binary(bison)",
+				"binary(flex)",
+				"pkgconfig(freetype2)",
+				"pkgconfig(x11)",
+				"pkgconfig(xaw7)"
+			],
+			"depends": [
+				"libotf",
+				"pkgconfig(freetype2)"
+			],
+			"files": [
+				"/usr/include/otf.h",
+				"/usr/lib/libotf.so",
+				"/usr/lib/pkgconfig/libotf.pc"
+			],
+			"name": "libotf-devel",
+			"provides": [
+				"pkgconfig(libotf)"
+			]
+		}
+	},
+	"source-name": "libotf",
+	"source-release": "1",
+	"source-version": "0.9.16"
+}
