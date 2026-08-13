@@ -1,0 +1,29 @@
+# SPDX-FileCopyrightText: 2026 AerynOS Developers
+# SPDX-License-Identifier: MPL-2.0
+
+name        : libotf
+version     : "0.9.16"
+release     : 1
+homepage    : https://www.nongnu.org/m17n/
+upstreams   :
+    - https://download.savannah.gnu.org/releases/m17n/libotf-0.9.16.tar.gz : 68db0ca3cda2d46a663a92ec26e6eb5adc392ea5191bcda74268f0aefa78066b
+summary     : OpenType Font library
+description : |
+    OpenType Font library
+license     : LGPL-2.1-or-later
+builddeps   :
+    - binary(bison)
+    - binary(flex)
+    - pkgconfig(freetype2)
+    - pkgconfig(x11)
+    - pkgconfig(xaw7)
+setup       : |
+    # From Arch
+    %patch %(pkgdir)/replace-freetype-config.patch
+
+    %reconfigure \
+        --disable-static
+build       : |
+    %make
+install     : |
+    %make_install
