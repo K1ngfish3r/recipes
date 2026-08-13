@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2026 AerynOS Developers
+# SPDX-License-Identifier: MPL-2.0
+
+name        : m17n-lib
+version     : "1.8.6"
+release     : 1
+homepage    : https://www.nongnu.org/m17n/
+upstreams   :
+    - https://download.savannah.nongnu.org/releases/m17n/m17n-lib-1.8.6.tar.gz : 7129fe3b7ad500f88b8af8605ef07b96c87a75ec986a695fffc0a409f44a7c86
+summary     : Multilingual text processing library
+description : |
+    Multilingual text processing library
+license     : LGPL-2.1-only
+builddeps   :
+    - binary(bison)
+    - binary(objdump)
+    - pkgconfig(fontconfig)
+    - pkgconfig(freetype2)
+    - pkgconfig(fribidi)
+    - pkgconfig(gdlib)
+    - pkgconfig(libotf)
+    - pkgconfig(libthai)
+    - pkgconfig(libxml-2.0)
+    - pkgconfig(m17n-db)
+    - pkgconfig(x11)
+    - pkgconfig(xaw7)
+    - pkgconfig(xft)
+    - pkgconfig(xt)
+    - gettext-devel
+setup       : |
+    %configure \
+        --disable-static
+build       : |
+    %make
+install     : |
+    %make_install
+
+    # empty folder (why?)
+    rm -r %(installroot)%(datadir)
