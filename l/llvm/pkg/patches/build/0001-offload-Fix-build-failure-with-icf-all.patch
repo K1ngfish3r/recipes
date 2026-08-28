@@ -5,21 +5,21 @@ Subject: [PATCH] offload: Fix build failure with --icf=all
 
 Origin: vendor
 Forwarded: not-needed
-Last-Update: 2026-03-10
+Last-Update: 2026-08-28
 ---
  openmp/device/CMakeLists.txt | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/openmp/device/CMakeLists.txt b/openmp/device/CMakeLists.txt
-index 54cfdfef440a..0d8927062757 100644
+index a41cc5866938..59509291e4eb 100644
 --- a/openmp/device/CMakeLists.txt
 +++ b/openmp/device/CMakeLists.txt
-@@ -75,7 +75,7 @@ target_include_directories(libompdevice PRIVATE
-                            ${CMAKE_CURRENT_SOURCE_DIR}/../../offload/include)
- target_compile_options(libompdevice PRIVATE ${compile_options})
- target_link_options(libompdevice PRIVATE
--                    "-flto" "-r" "-nostdlib" "-Wl,--lto-emit-llvm")
-+                    "-flto" "-r" "-Wl,--icf=none" "-nostdlib" "-Wl,--lto-emit-llvm")
- if(LLVM_DEFAULT_TARGET_TRIPLE)
-   target_link_options(libompdevice PRIVATE "--target=${LLVM_DEFAULT_TARGET_TRIPLE}")
- endif()
+@@ -80,7 +80,7 @@ target_compile_options(libompdevice PRIVATE ${compile_options})
+ if(NOT "${LLVM_DEFAULT_TARGET_TRIPLE}" MATCHES "^spirv" AND
+    NOT "${CMAKE_CXX_COMPILER_TARGET}" MATCHES "^spirv")
+   target_link_options(libompdevice PRIVATE
+-                  "-flto" "-r" "-nostdlib" "-Wl,--lto-emit-llvm")
++                  "-flto" "-r" "-Wl,--icf=none" "-nostdlib" "-Wl,--lto-emit-llvm")
+ else()
+   target_link_options(libompdevice PRIVATE
+                   "-nostdlib" "-emit-llvm")

@@ -1,9 +1,9 @@
-# SPDX-FileCopyrightText: 2024 AerynOS Developers
+# SPDX-FileCopyrightText: 2026 AerynOS Developers
 # SPDX-License-Identifier: MPL-2.0
 
 name        : llvm
-version     : "22.1.8"
-release     : 60
+version     : "23.1.0"
+release     : 61
 summary     : Low Level Virtual Machine
 license     :
     - Apache-2.0 WITH LLVM-exception
@@ -12,8 +12,10 @@ homepage    : https://www.llvm.org
 description : |
     Low Level Virtual Machine
 upstreams   :
-    - https://github.com/llvm/llvm-project/releases/download/llvmorg-22.1.8/llvm-project-22.1.8.src.tar.xz : 922f1817a0df7b1489272d18134ee0087a8b068828f87ac63b9861b1a9965888
+    - https://github.com/llvm/llvm-project/releases/download/llvmorg-23.1.0/llvm-project-23.1.0.src.tar.xz : ab1f0e3ec52448c33e8782eaf0422504b87c7b016b22514653ee0d8fcee479ff
 builddeps   :
+    # - binary(llvm-spirv) # Re-enable after bootstrapping LLVM 23
+    - binary(node)
     - binary(perl)
     - binary(python3)
     - binary(sed)
@@ -22,9 +24,11 @@ builddeps   :
     # - pkgconfig(level-zero) # TODO: Check in a future LLVM release if this is supported properly
     - pkgconfig(libedit)
     - pkgconfig(liblzma)
+    - pkgconfig(lua)
     - pkgconfig(mimalloc)
     - pkgconfig(ncurses)
     - pkgconfig(python3)
+    - pkgconfig(tree-sitter)
     - pkgconfig32(libffi)
     - pkgconfig32(libxcrypt)
     - pkgconfig32(libxml-2.0)
@@ -45,6 +49,20 @@ tuning      :
     - optimize: speed
     - symbolic
 environment : |
+    # Change this to 1 if you want a much faster (but slower at runtime) build
+    # This is useful when updating to a new version
+    _FAST_BUILD=1
+
+    if [ $_FAST_BUILD -eq 1 ]; then
+        EXTRA_LLVM_FLAGS="-DLLVM_ENABLE_LTO=OFF"
+    else
+        EXTRA_LLVM_FLAGS="-DLLVM_ENABLE_LTO=Thin"
+    fi
+
+    if [[ " ${PATH[*]} " =~ "ccache" ]]; then
+        EXTRA_LLVM_FLAGS+=" -DLLVM_CCACHE_BUILD=ON"
+    fi
+
     if [[ %(target_triple) = i686* ]]; then
         _TARGET_ARCH=x86
         _IS_64BIT_BUILD="OFF"
@@ -65,18 +83,23 @@ environment : |
         # Full-fat (in the milk sense) build suitable for cross-compilation
         _BUILD_TARGETS="AArch64;AMDGPU;ARM;AVR;BPF;Hexagon;Lanai;LoongArch;Mips;MSP430;NVPTX;PowerPC;RISCV;Sparc;SPIRV;SystemZ;VE;WebAssembly;X86;XCore"
         _PROJECTS="bolt;clang;clang-tools-extra;flang;lld;lldb;llvm;mlir;polly"
-        _RUNTIMES="compiler-rt;flang-rt;libclc;libcxx;libcxxabi;libunwind;offload;openmp"
-        _RUNTIME_TARGETS="default;amdgcn-amd-amdhsa;nvptx64-nvidia-cuda"
-    fi
+        _RUNTIMES="compiler-rt;flang-rt;libcxx;libcxxabi;libunwind;offload;openmp"
+        _RUNTIME_TARGETS="default"
 
-    EXTRA_LLVM_FLAGS=""
-    if [[ " ${PATH[*]} " =~ "ccache" ]]; then
-        EXTRA_LLVM_FLAGS="-DLLVM_CCACHE_BUILD=ON"
-    fi
+        _LIBCLC_TARGETS=(amdgcn-amd-amdhsa-llvm spirv64-unknown-vulkan nvptx64-- nvptx64--nvidiacl nvptx64-nvidia-cuda)
 
-    # BOLT: -update-debug-sections doesn't yet support SHF_COMPRESSED
-    #       https://github.com/llvm/llvm-project/pull/215835
-    export LDFLAGS="${LDFLAGS} -Wl,--compress-debug-sections=none"
+        if which llvm-spirv > /dev/null 2>&1; then
+            _LIBCLC_TARGETS+=(spirv-mesa3d- spirv64-mesa3d-)
+
+            EXTRA_LLVM_FLAGS+=" -DLIBCLC_USE_SPIRV_BACKEND=ON"
+        fi
+
+        for i in ${_LIBCLC_TARGETS[@]}; do
+            _RUNTIME_TARGETS+=";${i}"
+            EXTRA_LLVM_FLAGS+=" -DRUNTIMES_${i}_LLVM_ENABLE_RUNTIMES=libclc"
+        done
+
+    fi
 
     _MAJOR_VERSION=$(echo %(version) | cut -d. -f1)
 
@@ -90,7 +113,8 @@ environment : |
         %patch %(pkgdir)/patches/build/0001-openmp-Don-t-install-static-libarcher.patch
         %patch %(pkgdir)/patches/build/0001-polly-Create-targets-for-headers-cmake.patch
         %patch %(pkgdir)/patches/build/0001-offload-Fix-build-failure-with-icf-all.patch
-        %patch %(pkgdir)/patches/build/0001-Emit-relocations-for-BOLT.patch
+        %patch %(pkgdir)/patches/build/0001-flang-rt-Customize-installdir.patch
+        # %patch %(pkgdir)/patches/build/0001-Emit-relocations-for-BOLT.patch
 
         # Runtime config changes. These often duplicate settings set by our CFLAGS/LDFLAGS and are intended as sane
         # defaults when a build either doesn't respect our flags or when a user is building a project outside of
@@ -108,25 +132,14 @@ environment : |
         %patch %(pkgdir)/patches/perf/0001-Use-mimalloc-for-clang-lld-llvm.patch
 
         ## Upstream backports/reverts
-        %patch %(pkgdir)/patches/upstream/0001-Backport-177953.patch
-        # Fix ffmpeg build
-        %patch %(pkgdir)/patches/upstream/0001-SLP-Support-for-tree-throttling-in-SLP-graphs-with-g.patch
-        %patch %(pkgdir)/patches/upstream/0002-X86-vectorizeExtractedCast-don-t-assume-vector-sourc.patch
-        # Fixes rust 1.97 miscompilation
-        %patch %(pkgdir)/patches/upstream/208683.patch
-        # Fix rustc bpf support + prereq
-        %patch %(pkgdir)/patches/upstream/0001-bpf-Support-aggregate-returns-190894.patch
-        %patch %(pkgdir)/patches/upstream/0002-Fixes-for-compile-rust-code-192134.patch
         # BOLT issues
         %patch %(pkgdir)/patches/upstream/0001-BOLT-X86-Add-missing-MOV8-instruction-cases-in-X86MC.patch
         %patch %(pkgdir)/patches/upstream/bolt-fix-relr-addends-for-non-zero-image.patch
-        %patch %(pkgdir)/patches/build/0001-BOLT-Ensure-runtime-is-built-with-uncompressed-debug.patch
+        %patch %(pkgdir)/patches/upstream/0001-BOLT-Ensure-runtime-is-built-with-uncompressed-debug.patch
+        %patch %(pkgdir)/patches/upstream/215835.patch
+        %patch %(pkgdir)/patches/upstream/219861.patch
     }
 
-    # 2025-03-25: Add LIBCXX_TYPEINFO_COMPARISON_IMPLEMENTATION=2 for https://bugs.kde.org/show_bug.cgi?id=479679
-    #  See also https://github.com/llvm/llvm-project/issues/36746
-    # TODO is it worth adding Lua support to lldb?
-    # 2026-03-10 (LLVM 22 update): amdgcn and nvptx are GPU architectures and we need to override the CFLAGS/CXXFLAGS as they would otherwise be incorrect
     function cmake_llvm_configure() {
         %cmake \
             -DCMAKE_SKIP_INSTALL_RPATH=ON \
@@ -153,7 +166,7 @@ environment : |
             -DLLDB_ENABLE_LZMA=ON \
             -DLLDB_ENABLE_LIBXML2=ON \
             -DLLDB_ENABLE_PYTHON=ON \
-            -DLLDB_ENABLE_LUA=OFF \
+            -DLLDB_ENABLE_LUA=ON \
             -DLLDB_NO_INSTALL_DEFAULT_RPATH=ON \
             -DLLDB_SKIP_STRIP=ON \
             -DLLVM_APPEND_VC_REV=OFF \
@@ -166,7 +179,6 @@ environment : |
             -DLLVM_ENABLE_DOXYGEN=OFF \
             -DLLVM_ENABLE_FFI=ON \
             -DLLVM_ENABLE_LIBXML2=ON \
-            -DLLVM_ENABLE_LTO=Thin \
             -DLLVM_ENABLE_MIMALLOC=$_IS_64BIT_BUILD \
             -DLLVM_ENABLE_MODULES=OFF \
             -DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=OFF \
@@ -187,7 +199,7 @@ environment : |
             -DLLVM_LINK_LLVM_DYLIB=ON \
             -DLLVM_PARALLEL_LINK_JOBS=1 \
             -DLLVM_POLLY_LINK_INTO_TOOLS=OFF \
-            -DLLVM_RUNTIME_TARGETS=$_RUNTIME_TARGETS \
+            -DLLVM_RUNTIME_TARGETS=${_RUNTIME_TARGETS} \
             -DLLVM_TARGET_ARCH=$_TARGET_ARCH \
             -DLLVM_TARGETS_TO_BUILD=$_BUILD_TARGETS \
             -DLLVM_TOOL_OPENMP_BUILD=ON \
@@ -197,10 +209,6 @@ environment : |
             -DMLIR_INSTALL_AGGREGATE_OBJECTS=OFF \
             -DMLIR_LINK_MLIR_DYLIB=ON \
             -DOPENMP_INSTALL_LIBDIR="%(libdir)" \
-            -DRUNTIMES_amdgcn-amd-amdhsa_LLVM_ENABLE_RUNTIMES=openmp \
-            -DRUNTIMES_amdgcn-amd-amdhsa_CMAKE_CXX_FLAGS="" \
-            -DRUNTIMES_nvptx64-nvidia-cuda_LLVM_ENABLE_RUNTIMES=openmp \
-            -DRUNTIMES_nvptx64-nvidia-cuda_CMAKE_CXX_FLAGS="" \
             -DSPHINX_OUTPUT_MAN=$_IS_64BIT_BUILD \
             -DSPHINX_OUTPUT_HTML=OFF \
             -DSPHINX_WARNINGS_AS_ERRORS=OFF \
@@ -239,10 +247,14 @@ environment : |
                 llvm-headers|cmake-exports)
                     ;;
                 # Bins
-                FileCheck|UnicodeNameMappingGenerator|bugpoint|dsymutil|llc|lli|obj2yaml|opt|opt-viewer|reduce-chunk-list|sancov|sanstats|split-file|verify-uselistorder|yaml2obj)
+                FileCheck|UnicodeNameMappingGenerator|dsymutil|llc|lli|llubi|obj2yaml|opt|opt-viewer|reduce-chunk-list|sancov|sanstats|split-file|verify-uselistorder|yaml2obj)
                     ;;
                 # Devel bins
                 count|lli-child-target|not|yaml-bench)
+                    ;;
+                # Test tools
+                llvm-gpu-loader)
+                    continue
                     ;;
                 # Various binaries (everything we don't want has already been excluded)
                 llvm-*)
@@ -430,29 +442,31 @@ profiles    :
             rm -fv %(installroot)%(mandir)/man1/lit* \
                    %(installroot)%(mandir)/man1/lldb-tblgen*
 
-            export PATH="%(installroot)/usr/bin:${PATH}"
-            export LD_LIBRARY_PATH="%(installroot)/%(libdir)"
+            if [ $_FAST_BUILD -ne 1 ]; then
+                export PATH="%(installroot)/usr/bin:${PATH}"
+                export LD_LIBRARY_PATH="%(installroot)/%(libdir)"
 
-            export BOLTED_BINS="/usr/lib/libclang-cpp.so.22.1 /usr/lib/libLLVM.so.22.1"
+                export BOLTED_BINS="/usr/lib/libclang-cpp.so.${_MAJOR_VERSION}.1 /usr/lib/libLLVM.so.${_MAJOR_VERSION}.1"
 
-            for i in ${BOLTED_BINS}; do
-              %bolt_instr %(installroot)/$i
-            done
+                for i in ${BOLTED_BINS}; do
+                  %bolt_instr %(installroot)/$i
+                done
 
-            cmake -G Ninja -B bolt-clang -S runtimes \
-              -DCMAKE_C_COMPILER="%(installroot)/usr/bin/clang" \
-              -DCMAKE_CXX_COMPILER="%(installroot)/usr/bin/clang++" \
-              -DLLVM_ENABLE_RUNTIMES='libcxx;libcxxabi;libunwind' \
-              -DLLVM_USE_LINKER="%(installroot)/usr/bin/ld.lld" \
-              -DLLVM_ENABLE_LTO=Full
-            ninja -C bolt-clang
+                cmake -G Ninja -B bolt-clang -S runtimes \
+                  -DCMAKE_C_COMPILER="%(installroot)/usr/bin/clang" \
+                  -DCMAKE_CXX_COMPILER="%(installroot)/usr/bin/clang++" \
+                  -DLLVM_ENABLE_RUNTIMES='libcxx;libcxxabi;libunwind' \
+                  -DLLVM_USE_LINKER="%(installroot)/usr/bin/ld.lld" \
+                  -DLLVM_ENABLE_LTO=Full
+                ninja -C bolt-clang
 
-            for i in ${BOLTED_BINS}; do
-              %bolt_merge %(installroot)/$i
-              %bolt_opt %(installroot)/$i
-              # Clean-up
-              rm -v %(installroot)/$i.{bolt,orig}
-            done
+                for i in ${BOLTED_BINS}; do
+                  %bolt_merge %(installroot)/$i
+                  %bolt_opt %(installroot)/$i
+                  # Clean-up
+                  rm -v %(installroot)/$i.{bolt,orig}
+                done
+            fi
 
             ### LLVM (begin)
             %install_dir %(installroot)/%(libdir)/bfd-plugins
@@ -528,10 +542,10 @@ packages    :
         paths:
             - /usr/bin/FileCheck
             - /usr/bin/UnicodeNameMappingGenerator
-            - /usr/bin/bugpoint
             - /usr/bin/dsymutil
             - /usr/bin/llc
             - /usr/bin/lli
+            - /usr/bin/llubi
             - /usr/bin/llvm-*
             - /usr/bin/obj2yaml
             - /usr/bin/opt
@@ -542,10 +556,10 @@ packages    :
             - /usr/bin/verify-uselistorder
             - /usr/bin/yaml2obj
             - /usr/share/man/man1/FileCheck*
-            - /usr/share/man/man1/bugpoint*
             - /usr/share/man/man1/dsymutil*
             - /usr/share/man/man1/llc*
             - /usr/share/man/man1/lli*
+            - /usr/share/man/man1/llubi*
             - /usr/share/man/man1/llvm-*
             - /usr/share/man/man1/opt*
             - /usr/share/opt-viewer
@@ -677,6 +691,7 @@ packages    :
             - /usr/bin/clang-refactor
             - /usr/bin/clang-reorder-fields
             - /usr/bin/clang-repl
+            - /usr/bin/clang-ssaf*
             - /usr/bin/clang-sycl-linker
             - /usr/bin/clang-tidy
             - /usr/bin/clangd
@@ -789,6 +804,7 @@ packages    :
             - /usr/bin/flang*
             - /usr/bin/tco
             - /usr/lib/clang/*/include/ISO_Fortran_binding.h
+            - /usr/lib/clang/*/finclude/flang/
             - /usr/include/flang
             - /usr/share/man/man1/flang*
 
@@ -813,8 +829,8 @@ packages    :
         description: |
             libclc is an open source implementation of the OpenCL 1.1 Specification
         paths:
-            - /usr/lib/clang/*/lib/libclc/*.bc
-            - /usr/share/pkgconfig/libclc.pc
+            - /usr/lib/clang/*/lib/*/libclc.a
+            - /usr/lib/clang/*/lib/*/libclc.bc
 
     - "libclc-devel":
         summary: libclc is an open source implementation of the OpenCL 1.1 Specification
@@ -823,7 +839,7 @@ packages    :
         rundeps:
             - libclc
         paths:
-            - /usr/share/docs/libclc-devel/README
+            - /usr/share/doc/libclc-devel/README
 
     - "libcxx":
         summary: "Modern C++ standard library"
@@ -988,6 +1004,7 @@ packages    :
             - /usr/lib/liblldb*.so.*
             - /usr/lib/python3*/site-packages/lldb/
             - /usr/share/man/man1/lldb*.1*
+            - /usr/lib/lua/*/lldb.so
 
     - "lldb-devel":
         summary: LLVM Debugger
@@ -1044,8 +1061,6 @@ packages    :
             - /usr/bin/llvm-omp-kernel-replay
             - /usr/include/offload
             - /usr/lib/libLLVMOffload.so
-            - /usr/lib/libompdevice*.a
-            - /usr/lib/libomptarget*.bc
             - /usr/lib/libomptarget.so
 
     - "openmp":
