@@ -1,0 +1,24 @@
+/** Human readable report. This is not consumed by boulder */
+{
+	"manifest-version": "0.2",
+	"packages": {
+		"mesa-libclc": {
+			"build-depends": [
+				"binary(llvm-config-23)",
+				"binary(llvm-spirv)"
+			],
+			"files": [
+				"/usr/share/mesa-clc/spirv-mesa3d-.spv",
+				"/usr/share/mesa-clc/spirv64-mesa3d-.spv",
+				"/usr/share/pkgconfig/mesa-libclc.pc"
+			],
+			"name": "mesa-libclc",
+			"provides": [
+				"pkgconfig(mesa-libclc)"
+			]
+		}
+	},
+	"source-name": "mesa-libclc",
+	"source-release": "1",
+	"source-version": "22.1.8.3"
+}

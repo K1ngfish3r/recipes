@@ -1,0 +1,9 @@
+# SPDX-FileCopyrightText: 2025 AerynOS Developers
+# SPDX-License-Identifier: MPL-2.0
+
+releases:
+  id: 15525
+  rss: https://gitlab.freedesktop.org/karolherbst/mesa-libclc/-/releases.atom
+security:
+  # Last checked 2026-08-31
+  cpe: ~
