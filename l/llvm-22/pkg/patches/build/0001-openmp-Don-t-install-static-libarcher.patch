@@ -7,13 +7,13 @@ Not used on Aeryn
 
 Origin: vendor
 Forwarded: not-needed
-Last-Update: 2026-08-28
+Last-Update: 2026-03-10
 ---
  openmp/tools/archer/CMakeLists.txt | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/openmp/tools/archer/CMakeLists.txt b/openmp/tools/archer/CMakeLists.txt
-index 68008d504350..46cf4383b25b 100644
+index a1c768c449d0..5b8a0bdcd7f2 100644
 --- a/openmp/tools/archer/CMakeLists.txt
 +++ b/openmp/tools/archer/CMakeLists.txt
 @@ -30,7 +30,7 @@ if(LIBOMP_OMPT_SUPPORT AND LIBOMP_ARCHER_SUPPORT)
@@ -22,6 +22,6 @@ index 68008d504350..46cf4383b25b 100644
  
 -  install(TARGETS archer archer_static
 +  install(TARGETS archer
-     LIBRARY DESTINATION ${OPENMP_INSTALL_LIBDIR} COMPONENT openmp
-     ARCHIVE DESTINATION ${OPENMP_INSTALL_LIBDIR} COMPONENT openmp)
+     LIBRARY DESTINATION ${OPENMP_INSTALL_LIBDIR}
+     ARCHIVE DESTINATION ${OPENMP_INSTALL_LIBDIR})
  

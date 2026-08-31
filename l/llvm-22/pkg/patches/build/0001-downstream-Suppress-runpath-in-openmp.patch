@@ -7,21 +7,21 @@ The libraries for openmp are installed into libdir, so RUNPATH is unnecessary. I
 
 Origin: vendor
 Forwarded: not-needed
-Last-Update: 2026-08-28
+Last-Update: 2025-01-14
 ---
  offload/tools/CMakeLists.txt | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/offload/tools/CMakeLists.txt b/offload/tools/CMakeLists.txt
-index 7c35cd4c80b9..6f5db4534b22 100644
+index 13772a4a675e..b6814dafa7d2 100644
 --- a/offload/tools/CMakeLists.txt
 +++ b/offload/tools/CMakeLists.txt
-@@ -7,7 +7,7 @@ macro(add_offload_tool name)
+@@ -5,7 +5,7 @@ mark_as_advanced(OPENMP_TOOLS_INSTALL_DIR)
+ # Move these macros to AddOpenMP if such a CMake module is ever created.
+ 
+ macro(add_openmp_tool name)
+-  llvm_add_tool(OPENMP ${ARGV})
++  llvm_add_tool(OPENMP ${ARGV} NO_INSTALL_RPATH)
  endmacro()
  
- macro(add_offload_tool_symlink name)
--  llvm_add_tool_symlink(OFFLOAD ${ARGV})
-+  llvm_add_tool_symlink(OFFLOAD ${ARGV} NO_INSTALL_RPATH)
- endmacro()
- 
- add_subdirectory(deviceinfo)
+ macro(add_openmp_tool_symlink name)
