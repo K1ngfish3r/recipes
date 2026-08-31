@@ -3,7 +3,7 @@
 
 name        : llvm-21
 version     : "21.1.8"
-release     : 4
+release     : 5
 summary     : Low Level Virtual Machine
 license     :
     - Apache-2.0 WITH LLVM-exception
@@ -14,7 +14,7 @@ description : |
 upstreams   :
     - https://github.com/llvm/llvm-project/releases/download/llvmorg-21.1.8/llvm-project-21.1.8.src.tar.xz : 4633a23617fa31a3ea51242586ea7fb1da7140e426bd62fc164261fe036aa142
 builddeps   :
-    - binary(clang-22) # Ensure correct build ordering
+    - binary(clang-23) # Ensure correct build ordering
     - binary(perl)
     - binary(python3)
     - binary(sed)
@@ -22,8 +22,8 @@ builddeps   :
     - pkgconfig(hwloc)
     - pkgconfig(libedit)
     - pkgconfig(liblzma)
-    - pkgconfig(ncurses)
     - pkgconfig(mimalloc)
+    - pkgconfig(ncurses)
     - pkgconfig(python3)
     - pkgconfig32(libffi)
     - pkgconfig32(libxcrypt)
@@ -92,10 +92,6 @@ environment : |
         %patch %(pkgdir)/patches/upstream/0001-compiler-rt-sanitizer-Remove-linux-scc.h-194116.patch
     }
 
-    # 2025-03-25: Add LIBCXX_TYPEINFO_COMPARISON_IMPLEMENTATION=2 for https://bugs.kde.org/show_bug.cgi?id=479679
-    #  See also https://github.com/llvm/llvm-project/issues/36746
-    # TODO is it worth adding Lua support to lldb?
-    # 2025-10-16: Using FLANG_RT_ENABLE_SHARED=ON causes the flang-rt build to fail with linker errors. TODO fix that.
     function cmake_llvm_configure() {
         %cmake \
             -DCMAKE_INSTALL_PREFIX=%(libdir)/%(name) \
@@ -167,6 +163,7 @@ environment : |
             -DOPENMP_INSTALL_LIBDIR="%(libdir)" \
             -DSPHINX_OUTPUT_MAN=ON \
             -DSPHINX_OUTPUT_HTML=OFF \
+            -DSPHINX_WARNINGS_AS_ERRORS=OFF \
             $EXTRA_LLVM_FLAGS \
             "$@"
     }
@@ -555,7 +552,7 @@ packages    :
             - /usr/lib/llvm-21/bin/scan-*
             - /usr/lib/llvm-21/lib/libear
             - /usr/lib/llvm-21/lib/libscanbuild
-            - /usr/lib/llvm-21/*-analyzer
+            - /usr/lib/llvm-21/c*-analyzer
             - /usr/lib/llvm-21/intercept-*
             - /usr/lib/llvm-21/share/clang/clang-format*
             - /usr/lib/llvm-21/share/clang/clang-include-fixer*
