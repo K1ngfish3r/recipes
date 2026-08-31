@@ -3,7 +3,7 @@
 
 name        : bcc
 version     : "0.37.0"
-release     : 9
+release     : 10
 upstreams   :
     - https://github.com/iovisor/bcc/releases/download/v0.37.0/bcc-src-with-submodule-0.37.0.tar.gz : 7734b780202b22dff335780b506b56833ec6cf7435e03b1346d5bf644b4e1f95
 homepage    : https://github.com/iovisor/bcc
@@ -16,7 +16,7 @@ builddeps   :
     - binary(bpftool)
     - binary(flex)
     - binary(gzip)
-    - binary(llvm-config-22)
+    - binary(llvm-config-23)
     - binary(python3)
     - cmake(Clang)
     - pkgconfig(libbpf)
@@ -30,6 +30,7 @@ environment : |
     cd bcc
 setup       : |
     %patch %(pkgdir)/0001-Always-escape.patch
+    %patch %(pkgdir)/ftbfs-llvm-23.patch
 
     %cmake \
         -DCMAKE_USE_LIBBPF_PACKAGE=ON \
