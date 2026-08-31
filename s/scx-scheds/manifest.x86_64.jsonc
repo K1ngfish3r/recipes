@@ -28,7 +28,6 @@
 				"/usr/bin/scx_cosmos",
 				"/usr/bin/scx_flash",
 				"/usr/bin/scx_lavd",
-				"/usr/bin/scx_mlfq",
 				"/usr/bin/scx_p2dq",
 				"/usr/bin/scx_pandemonium",
 				"/usr/bin/scx_rusty",
@@ -42,7 +41,6 @@
 				"binary(scx_cosmos)",
 				"binary(scx_flash)",
 				"binary(scx_lavd)",
-				"binary(scx_mlfq)",
 				"binary(scx_p2dq)",
 				"binary(scx_pandemonium)",
 				"binary(scx_rusty)",
@@ -93,6 +91,6 @@
 		}
 	},
 	"source-name": "scx-scheds",
-	"source-release": "11",
-	"source-version": "1.1.3"
+	"source-release": "12",
+	"source-version": "1.1.2"
 }
