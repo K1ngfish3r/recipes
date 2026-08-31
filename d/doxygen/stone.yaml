@@ -3,7 +3,7 @@
 
 name        : doxygen
 version     : "1.18.0"
-release     : 15
+release     : 16
 homepage    :  https://www.doxygen.org/
 upstreams   :
     - https://github.com/doxygen/doxygen/releases/download/Release_1_18_0/doxygen-1.18.0.src.tar.gz : a1deed70a6785bbec95a2b2a9e419dc7f7b223a9d74a8644ae611c8e2dcdd354
@@ -14,7 +14,7 @@ license     : GPL-2.0-only
 builddeps  :
     - binary(bison)
     - binary(flex)
-    - binary(llvm-config-22)
+    - binary(llvm-config-23)
     - binary(python3)
     - cmake(Qt6LinguistTools)
     - pkgconfig(Qt6Core)
