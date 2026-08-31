@@ -1993,7 +1993,6 @@
 				"soname(libMLIR.so.23.1(x86_64))",
 				"soname(libc.so.6(x86_64))",
 				"soname(libclang-cpp.so.23.1(x86_64))",
-				"soname(libgcc_s.so.1(x86_64))",
 				"soname(libm.so.6(x86_64))",
 				"soname(libquadmath.so.0(x86_64))",
 				"soname(libstdc++.so.6(x86_64))"
@@ -2169,17 +2168,11 @@
 				"python(myst-parser)",
 				"python(sphinx)"
 			],
+			"depends": [
+				"mesa-libclc"
+			],
 			"files": [
-				"/usr/lib/clang/23/lib/amdgcn-amd-amdhsa-llvm/libclc.a",
-				"/usr/lib/clang/23/lib/amdgcn-amd-amdhsa-llvm/libclc.bc",
-				"/usr/lib/clang/23/lib/nvptx64-nvidia-cuda/libclc.a",
-				"/usr/lib/clang/23/lib/nvptx64-nvidia-cuda/libclc.bc",
-				"/usr/lib/clang/23/lib/nvptx64-unknown-nvidiacl/libclc.a",
-				"/usr/lib/clang/23/lib/nvptx64-unknown-nvidiacl/libclc.bc",
-				"/usr/lib/clang/23/lib/nvptx64-unknown-unknown/libclc.a",
-				"/usr/lib/clang/23/lib/nvptx64-unknown-unknown/libclc.bc",
-				"/usr/lib/clang/23/lib/spirv64-unknown-vulkan/libclc.a",
-				"/usr/lib/clang/23/lib/spirv64-unknown-vulkan/libclc.bc"
+				"/usr/share/doc/libclc/README"
 			],
 			"name": "libclc"
 		},
@@ -2210,7 +2203,7 @@
 				"python(sphinx)"
 			],
 			"depends": [
-				"libclc"
+				"mesa-libclc"
 			],
 			"files": [
 				"/usr/share/doc/libclc-devel/README"
@@ -10989,6 +10982,6 @@
 		}
 	},
 	"source-name": "llvm",
-	"source-release": "61",
+	"source-release": "62",
 	"source-version": "23.1.0"
 }
