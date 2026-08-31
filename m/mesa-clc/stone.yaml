@@ -3,7 +3,7 @@
 
 name        : mesa-clc
 version     : "26.2.1"
-release     : 43
+release     : 44
 homepage    : https://mesa3d.org/
 upstreams   :
     - https://mesa.freedesktop.org/archive/mesa-26.2.1.tar.xz : c47e81bddc4760360a41ac3c5acec38acb81f9d750ecef47e7f3adc7021a4442
@@ -15,12 +15,11 @@ license     :
     - MIT
 builddeps   :
     - binary(glslangValidator)
-    - binary(llvm-config-22)
+    - binary(llvm-config-23)
     - cmake(Clang)
     - pkgconfig(LLVMSPIRVLib)
     - pkgconfig(SPIRV-Tools)
     - pkgconfig(expat)
-    - pkgconfig(libclc)
     - pkgconfig(libdrm)
     - python(mako)
     - python(packaging)

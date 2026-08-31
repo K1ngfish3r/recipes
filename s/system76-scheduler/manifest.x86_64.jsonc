@@ -5,7 +5,7 @@
 		"system76-scheduler": {
 			"build-depends": [
 				"binary(just)",
-				"binary(llvm-config-22)",
+				"binary(llvm-config-23)",
 				"cmake(Clang)",
 				"pkgconfig(libpipewire-0.3)"
 			],
@@ -32,6 +32,6 @@
 		}
 	},
 	"source-name": "system76-scheduler",
-	"source-release": "5",
+	"source-release": "6",
 	"source-version": "2.0.2"
 }

@@ -3,7 +3,7 @@
 
 name        : suitesparse
 version     : "7.12.3"
-release     : 2
+release     : 3
 homepage    : https://github.com/DrTimothyAldenDavis/SuiteSparse
 upstreams   :
     - https://github.com/DrTimothyAldenDavis/SuiteSparse/archive/refs/tags/v7.12.3.tar.gz : 158ee4ed2ce3fdcbf52c4e47e94b0d1a8ae13344b4a835991d78a3ad20f08086

@@ -3,7 +3,7 @@
 
 name        : llvm
 version     : "23.1.0"
-release     : 61
+release     : 62
 summary     : Low Level Virtual Machine
 license     :
     - Apache-2.0 WITH LLVM-exception
@@ -14,7 +14,6 @@ description : |
 upstreams   :
     - https://github.com/llvm/llvm-project/releases/download/llvmorg-23.1.0/llvm-project-23.1.0.src.tar.xz : ab1f0e3ec52448c33e8782eaf0422504b87c7b016b22514653ee0d8fcee479ff
 builddeps   :
-    # - binary(llvm-spirv) # Re-enable after bootstrapping LLVM 23
     - binary(node)
     - binary(perl)
     - binary(python3)
@@ -51,7 +50,7 @@ tuning      :
 environment : |
     # Change this to 1 if you want a much faster (but slower at runtime) build
     # This is useful when updating to a new version
-    _FAST_BUILD=1
+    _FAST_BUILD=0
 
     if [ $_FAST_BUILD -eq 1 ]; then
         EXTRA_LLVM_FLAGS="-DLLVM_ENABLE_LTO=OFF"
@@ -74,7 +73,6 @@ environment : |
         _BUILD_TARGETS="AMDGPU;SPIRV;X86"
         _PROJECTS="llvm"
         _RUNTIMES="libcxx;libcxxabi;libunwind"
-        _RUNTIME_TARGETS="default"
 
     else
         _TARGET_ARCH=x86_64
@@ -84,20 +82,6 @@ environment : |
         _BUILD_TARGETS="AArch64;AMDGPU;ARM;AVR;BPF;Hexagon;Lanai;LoongArch;Mips;MSP430;NVPTX;PowerPC;RISCV;Sparc;SPIRV;SystemZ;VE;WebAssembly;X86;XCore"
         _PROJECTS="bolt;clang;clang-tools-extra;flang;lld;lldb;llvm;mlir;polly"
         _RUNTIMES="compiler-rt;flang-rt;libcxx;libcxxabi;libunwind;offload;openmp"
-        _RUNTIME_TARGETS="default"
-
-        _LIBCLC_TARGETS=(amdgcn-amd-amdhsa-llvm spirv64-unknown-vulkan nvptx64-- nvptx64--nvidiacl nvptx64-nvidia-cuda)
-
-        if which llvm-spirv > /dev/null 2>&1; then
-            _LIBCLC_TARGETS+=(spirv-mesa3d- spirv64-mesa3d-)
-
-            EXTRA_LLVM_FLAGS+=" -DLIBCLC_USE_SPIRV_BACKEND=ON"
-        fi
-
-        for i in ${_LIBCLC_TARGETS[@]}; do
-            _RUNTIME_TARGETS+=";${i}"
-            EXTRA_LLVM_FLAGS+=" -DRUNTIMES_${i}_LLVM_ENABLE_RUNTIMES=libclc"
-        done
 
     fi
 
@@ -114,7 +98,7 @@ environment : |
         %patch %(pkgdir)/patches/build/0001-polly-Create-targets-for-headers-cmake.patch
         %patch %(pkgdir)/patches/build/0001-offload-Fix-build-failure-with-icf-all.patch
         %patch %(pkgdir)/patches/build/0001-flang-rt-Customize-installdir.patch
-        # %patch %(pkgdir)/patches/build/0001-Emit-relocations-for-BOLT.patch
+        %patch %(pkgdir)/patches/build/0001-Emit-relocations-for-BOLT.patch
 
         # Runtime config changes. These often duplicate settings set by our CFLAGS/LDFLAGS and are intended as sane
         # defaults when a build either doesn't respect our flags or when a user is building a project outside of
@@ -199,7 +183,7 @@ environment : |
             -DLLVM_LINK_LLVM_DYLIB=ON \
             -DLLVM_PARALLEL_LINK_JOBS=1 \
             -DLLVM_POLLY_LINK_INTO_TOOLS=OFF \
-            -DLLVM_RUNTIME_TARGETS=${_RUNTIME_TARGETS} \
+            -DLLVM_RUNTIME_TARGETS=default \
             -DLLVM_TARGET_ARCH=$_TARGET_ARCH \
             -DLLVM_TARGETS_TO_BUILD=$_BUILD_TARGETS \
             -DLLVM_TOOL_OPENMP_BUILD=ON \
@@ -520,6 +504,8 @@ profiles    :
             # libcxx/libunwind (end)
 
             ### libclc (begin)
+            %install_dir %(installroot)%(docdir)/libclc/
+            echo "DEPRECATED" > %(installroot)%(docdir)/libclc/README
             %install_dir %(installroot)%(docdir)/libclc-devel/
             echo "DEPRECATED" > %(installroot)%(docdir)/libclc-devel/README
             ### libclc (end)
@@ -828,16 +814,17 @@ packages    :
         summary: libclc is an open source implementation of the OpenCL 1.1 Specification
         description: |
             libclc is an open source implementation of the OpenCL 1.1 Specification
+        rundeps:
+            - mesa-libclc
         paths:
-            - /usr/lib/clang/*/lib/*/libclc.a
-            - /usr/lib/clang/*/lib/*/libclc.bc
+            - /usr/share/doc/libclc/README
 
     - "libclc-devel":
         summary: libclc is an open source implementation of the OpenCL 1.1 Specification
         description: |
             libclc is an open source implementation of the OpenCL 1.1 Specification
         rundeps:
-            - libclc
+            - mesa-libclc
         paths:
             - /usr/share/doc/libclc-devel/README
 

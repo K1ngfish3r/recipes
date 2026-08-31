@@ -4,7 +4,7 @@
 	"packages": {
 		"inputplumber": {
 			"build-depends": [
-				"binary(llvm-config-22)",
+				"binary(llvm-config-23)",
 				"clang-devel",
 				"pkgconfig(libevdev)",
 				"pkgconfig(libiio)",
@@ -151,6 +151,6 @@
 		}
 	},
 	"source-name": "inputplumber",
-	"source-release": "64",
+	"source-release": "65",
 	"source-version": "0.78.1"
 }

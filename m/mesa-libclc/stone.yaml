@@ -1,0 +1,26 @@
+# SPDX-FileCopyrightText: 2025 AerynOS Developers
+# SPDX-License-Identifier: MPL-2.0
+
+name        : mesa-libclc
+version     : "22.1.8.3"
+release     : 1
+upstreams   :
+    - https://gitlab.freedesktop.org/karolherbst/mesa-libclc/-/archive/22.1.8.3/mesa-libclc-22.1.8.3.tar.gz : d6fc17db2c4ae20ecfe04060af0572b2ab3701bb13822dab93efcaca0675205e
+homepage    : https://gitlab.freedesktop.org/karolherbst/mesa-libclc
+license     : Apache-2.0 WITH LLVM-exception
+summary     : Mesa-maintained fork of libclc
+description : |
+    Mesa-maintained fork of libclc
+builddeps   :
+    - binary(llvm-config-23)
+    - binary(llvm-spirv)
+setup       : |
+    %cmake
+build       : |
+    %cmake_build
+install     : |
+    %cmake_install
+packages    :
+    - "%(name)":
+        paths:
+            - /usr/share/pkgconfig/

@@ -272,3 +272,6 @@ NB: Each entry *must* contain all sub-packages created by the package!
 - kmime
 - kmime-devel
 - kmime-dbginfo
+
+### Replaced by mesa-libclc
+- libclc

@@ -3,7 +3,7 @@
 
 name        : qt5-tools
 version     : "5.15.18+kde.fa40a2d3"
-release     : 14
+release     : 15
 homepage    : https://www.qt.io
 upstreams   :
     - git|https://invent.kde.org/qt/qt/qttools.git:
@@ -19,7 +19,7 @@ license     :
     - GFDL-1.3-or-later
     - GPL-3.0-or-later
 builddeps   :
-    - binary(llvm-config-22)
+    - binary(llvm-config-23)
     - clang-devel
 setup       : |
     %qmake_qt5
