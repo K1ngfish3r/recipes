@@ -4,7 +4,7 @@
 	"packages": {
 		"clang-20": {
 			"build-depends": [
-				"binary(clang-22)",
+				"binary(clang-23)",
 				"binary(perl)",
 				"binary(python3)",
 				"binary(sed)",
@@ -62,7 +62,7 @@
 		},
 		"clang-20-devel": {
 			"build-depends": [
-				"binary(clang-22)",
+				"binary(clang-23)",
 				"binary(perl)",
 				"binary(python3)",
 				"binary(sed)",
@@ -947,7 +947,7 @@
 		},
 		"clang-20-libs": {
 			"build-depends": [
-				"binary(clang-22)",
+				"binary(clang-23)",
 				"binary(perl)",
 				"binary(python3)",
 				"binary(sed)",
@@ -1257,7 +1257,7 @@
 		},
 		"clang-tools-20": {
 			"build-depends": [
-				"binary(clang-22)",
+				"binary(clang-23)",
 				"binary(perl)",
 				"binary(python3)",
 				"binary(sed)",
@@ -1324,7 +1324,6 @@
 				"/usr/lib/llvm-20/bin/git-clang-format",
 				"/usr/lib/llvm-20/bin/hmaptool",
 				"/usr/lib/llvm-20/bin/intercept-build",
-				"/usr/lib/llvm-20/bin/llvm-debuginfo-analyzer",
 				"/usr/lib/llvm-20/bin/nvptx-arch",
 				"/usr/lib/llvm-20/bin/scan-build",
 				"/usr/lib/llvm-20/bin/scan-build-py",
@@ -1388,7 +1387,7 @@
 		},
 		"compiler-rt-20": {
 			"build-depends": [
-				"binary(clang-22)",
+				"binary(clang-23)",
 				"binary(perl)",
 				"binary(python3)",
 				"binary(sed)",
@@ -1533,7 +1532,7 @@
 		},
 		"lld-20": {
 			"build-depends": [
-				"binary(clang-22)",
+				"binary(clang-23)",
 				"binary(perl)",
 				"binary(python3)",
 				"binary(sed)",
@@ -1585,7 +1584,7 @@
 		},
 		"lld-20-devel": {
 			"build-depends": [
-				"binary(clang-22)",
+				"binary(clang-23)",
 				"binary(perl)",
 				"binary(python3)",
 				"binary(sed)",
@@ -1638,7 +1637,7 @@
 		},
 		"lld-20-libs": {
 			"build-depends": [
-				"binary(clang-22)",
+				"binary(clang-23)",
 				"binary(perl)",
 				"binary(python3)",
 				"binary(sed)",
@@ -1694,7 +1693,7 @@
 		},
 		"llvm-20": {
 			"build-depends": [
-				"binary(clang-22)",
+				"binary(clang-23)",
 				"binary(perl)",
 				"binary(python3)",
 				"binary(sed)",
@@ -1832,6 +1831,7 @@
 				"/usr/lib/llvm-20/bin/llvm-cxxdump",
 				"/usr/lib/llvm-20/bin/llvm-cxxfilt",
 				"/usr/lib/llvm-20/bin/llvm-cxxmap",
+				"/usr/lib/llvm-20/bin/llvm-debuginfo-analyzer",
 				"/usr/lib/llvm-20/bin/llvm-debuginfod",
 				"/usr/lib/llvm-20/bin/llvm-debuginfod-find",
 				"/usr/lib/llvm-20/bin/llvm-diff",
@@ -1992,7 +1992,7 @@
 		},
 		"llvm-20-devel": {
 			"build-depends": [
-				"binary(clang-22)",
+				"binary(clang-23)",
 				"binary(perl)",
 				"binary(python3)",
 				"binary(sed)",
@@ -4195,7 +4195,7 @@
 		},
 		"llvm-20-libs": {
 			"build-depends": [
-				"binary(clang-22)",
+				"binary(clang-23)",
 				"binary(perl)",
 				"binary(python3)",
 				"binary(sed)",
@@ -4244,6 +4244,6 @@
 		}
 	},
 	"source-name": "llvm-20",
-	"source-release": "8",
+	"source-release": "9",
 	"source-version": "20.1.8"
 }
