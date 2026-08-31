@@ -51,7 +51,8 @@ setup       : |
 build       : |
     %make $MAKE_ARGS
 install     : |
-    %make_install $MAKE_ARGS
+    # Racy, probably because of uutils
+    %make_install -j1 $MAKE_ARGS
 
     # Incompatible with dracut
     rm -rfv %(installroot)/usr/share/initramfs-tools
