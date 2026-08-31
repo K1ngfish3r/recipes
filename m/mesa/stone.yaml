@@ -8,7 +8,7 @@ name        : mesa
 version     : "26.2.1"
 ##@@END_VERSION
 # Note: keep mesa-clc in-sync with this package version-wise
-release     : 86
+release     : 87
 homepage    : https://mesa3d.org/
 upstreams   :
 ##@@BEGIN_SOURCE
@@ -148,12 +148,11 @@ builddeps   :
     - binary(bison)
     - binary(cbindgen)
     - binary(flex)
-    - binary(llvm-config32-22)
+    - binary(llvm-config32-23)
     - binary(mesa_clc)
     - binary(python3)
     - binary(rustc)
     - binary(rustfmt) # Probably can be removed in next version
-    - cmake(Clang)
     - cmake(glslang)
     - cmake(libxml2)
     - pkgconfig(LLVMSPIRVLib)
