@@ -1,0 +1,27 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Reilly Brogan <reilly@reillybrogan.com>
+Date: Mon, 31 Mar 2025 13:58:18 -0500
+Subject: [PATCH] openmp: Don't install static libarcher
+
+Not used on Aeryn
+
+Origin: vendor
+Forwarded: not-needed
+Last-Update: 2026-03-10
+---
+ openmp/tools/archer/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/openmp/tools/archer/CMakeLists.txt b/openmp/tools/archer/CMakeLists.txt
+index a1c768c449d0..5b8a0bdcd7f2 100644
+--- a/openmp/tools/archer/CMakeLists.txt
++++ b/openmp/tools/archer/CMakeLists.txt
+@@ -30,7 +30,7 @@ if(LIBOMP_OMPT_SUPPORT AND LIBOMP_ARCHER_SUPPORT)
+     add_dependencies(archer_static cxxabi_shared)
+   endif()
+ 
+-  install(TARGETS archer archer_static
++  install(TARGETS archer
+     LIBRARY DESTINATION ${OPENMP_INSTALL_LIBDIR}
+     ARCHIVE DESTINATION ${OPENMP_INSTALL_LIBDIR})
+ 
