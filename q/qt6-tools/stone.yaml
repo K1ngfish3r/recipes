@@ -3,7 +3,7 @@
 
 name        : qt6-tools
 version     : "6.11.2"
-release     : 17
+release     : 18
 homepage    : https://www.qt.io
 upstreams   :
     - https://download.qt.io/official_releases/qt/6.11/6.11.2/submodules/qttools-everywhere-src-6.11.2.tar.xz : 9ea75af35c512f7e09e61c8c3af3997f13b4d43bb099cf43fcec470126b4041e
@@ -15,14 +15,14 @@ license     :
     - GPL-3.0-or-later
     - LGPL-3.0-or-later
 builddeps   :
-    - binary(llvm-config-22)
+    - binary(llvm-config-23)
     - cmake(Qt6CorePrivate)
     - cmake(Qt6QmlTools)
     - pkgconfig(libzstd)
     - clang-devel
 setup       : |
     %patch %(pkgdir)/ftbfs-zstd.patch
-    %patch %(pkgdir)/ftbfs-llvm-22.patch
+    %patch %(pkgdir)/ftbfs-llvm-23.patch
 
     %cmake_qt6
 build       : |
