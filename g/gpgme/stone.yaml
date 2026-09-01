@@ -2,11 +2,11 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name        : gpgme
-version     : "2.1.2"
-release     : 9
+version     : "2.2.0"
+release     : 10
 homepage    : https://gnupg.org/software/gpgme/index.html
 upstreams   :
-    - https://www.gnupg.org/ftp/gcrypt/gpgme/gpgme-2.1.2.tar.bz2 : 0687a95b299871c4141f507c0f740de6b429c9ac067d0fa4e062e3264df5fb77
+    - https://www.gnupg.org/ftp/gcrypt/gpgme/gpgme-2.2.0.tar.bz2 : 7160e80e84dafd00d956c84891c533bb7ab16a6a54fbe1574b2f3acf0496977b
 summary     : Library to provide easy access to GnuPG
 description : |
     GnuPG Made Easy (GPGME) is a library designed to make access to GnuPG easier
