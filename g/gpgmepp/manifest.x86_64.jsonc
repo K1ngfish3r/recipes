@@ -15,7 +15,7 @@
 			],
 			"files": [
 				"/usr/lib/libgpgmepp.so.7",
-				"/usr/lib/libgpgmepp.so.7.1.0"
+				"/usr/lib/libgpgmepp.so.7.2.0"
 			],
 			"name": "gpgmepp",
 			"provides": [
@@ -93,6 +93,6 @@
 		}
 	},
 	"source-name": "gpgmepp",
-	"source-release": "6",
-	"source-version": "2.1.0"
+	"source-release": "7",
+	"source-version": "2.2.0"
 }
