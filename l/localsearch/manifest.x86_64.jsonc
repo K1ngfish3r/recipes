@@ -157,7 +157,6 @@
 				"/usr/share/locale/kab/LC_MESSAGES/localsearch3.mo",
 				"/usr/share/locale/kk/LC_MESSAGES/localsearch3.mo",
 				"/usr/share/locale/ko/LC_MESSAGES/localsearch3.mo",
-				"/usr/share/locale/lo/LC_MESSAGES/localsearch3.mo",
 				"/usr/share/locale/lt/LC_MESSAGES/localsearch3.mo",
 				"/usr/share/locale/lv/LC_MESSAGES/localsearch3.mo",
 				"/usr/share/locale/mk/LC_MESSAGES/localsearch3.mo",
@@ -264,6 +263,6 @@
 		}
 	},
 	"source-name": "localsearch",
-	"source-release": "21",
-	"source-version": "3.11.2"
+	"source-release": "22",
+	"source-version": "3.11.1"
 }
