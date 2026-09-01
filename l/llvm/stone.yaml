@@ -3,7 +3,7 @@
 
 name        : llvm
 version     : "23.1.0"
-release     : 62
+release     : 63
 summary     : Low Level Virtual Machine
 license     :
     - Apache-2.0 WITH LLVM-exception
@@ -456,8 +456,10 @@ profiles    :
             %install_dir %(installroot)/%(libdir)/bfd-plugins
             ln -srf %(installroot)/%(libdir)/LLVMgold.so %(installroot)/%(libdir)/bfd-plugins/LLVMgold.so
 
-            # Versioned llvm-config
-            ln -srv %(installroot)%(bindir)/llvm-config %(installroot)%(bindir)/llvm-config-${_MAJOR_VERSION}
+            # Some versioned binaries
+            for i in llvm-config llvm-profdata llvm-profgen; do
+                ln -srv %(installroot)%(bindir)/${i} %(installroot)%(bindir)/${i}-${_MAJOR_VERSION}
+            done
 
             # Finish supporting 32 & 64bit llvm config headers
             mv %(installroot)%(includedir)/llvm/Config/llvm-config.h %(installroot)%(includedir)/llvm/Config/llvm-config64.h

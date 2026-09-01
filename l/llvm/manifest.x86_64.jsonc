@@ -4702,7 +4702,7 @@
 				"soname(libpanelw.so.6(x86_64))",
 				"soname(libpython3.14.so.1.0(x86_64))",
 				"soname(libstdc++.so.6(x86_64))",
-				"soname(libtree-sitter.so.0.26(x86_64))",
+				"soname(libtree-sitter.so.0.27(x86_64))",
 				"soname(libxml2.so.16(x86_64))",
 				"soname(libz.so.1(x86_64))"
 			],
@@ -5528,7 +5528,9 @@
 				"/usr/bin/llvm-otool",
 				"/usr/bin/llvm-pdbutil",
 				"/usr/bin/llvm-profdata",
+				"/usr/bin/llvm-profdata-23",
 				"/usr/bin/llvm-profgen",
+				"/usr/bin/llvm-profgen-23",
 				"/usr/bin/llvm-ranlib",
 				"/usr/bin/llvm-rc",
 				"/usr/bin/llvm-readelf",
@@ -5684,7 +5686,9 @@
 				"binary(llvm-otool)",
 				"binary(llvm-pdbutil)",
 				"binary(llvm-profdata)",
+				"binary(llvm-profdata-23)",
 				"binary(llvm-profgen)",
+				"binary(llvm-profgen-23)",
 				"binary(llvm-ranlib)",
 				"binary(llvm-rc)",
 				"binary(llvm-readelf)",
@@ -10982,6 +10986,6 @@
 		}
 	},
 	"source-name": "llvm",
-	"source-release": "62",
+	"source-release": "63",
 	"source-version": "23.1.0"
 }
