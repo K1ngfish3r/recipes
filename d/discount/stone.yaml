@@ -2,10 +2,10 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name        : discount
-version     : "3.0.1.3"
-release     : 5
+version     : "3.0.2.0"
+release     : 6
 upstreams   :
-    - https://github.com/Orc/discount/archive/v3.0.1.3.tar.gz : ec04f366cd0a5036598c6a0bf4f7f2582d8ff04b31e81121314b8fde6db6899d
+    - https://github.com/Orc/discount/archive/v3.0.2.0.tar.gz : 99f6db36d3fff6c99acd21d4c6096176d4ac8785eab319d0faf77ad995b8b7c5
 homepage    : https://www.pell.portland.or.us/~orc/Code/discount/
 license     : BSD-3-Clause
 summary     : DISCOUNT is a implementation of John Gruber's Markdown markup language.
