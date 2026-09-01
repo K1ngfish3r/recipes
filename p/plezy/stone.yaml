@@ -3,7 +3,7 @@
 
 name        : plezy
 version     : "2.18.0"
-release     : 9
+release     : 10
 homepage    : https://plezy.app/
 upstreams   :
     - https://github.com/edde746/plezy/archive/refs/tags/2.18.0.tar.gz:
@@ -33,6 +33,8 @@ environment: |
     export PATH="$PATH:%(workdir)/flutter/bin"
     export JAVA_HOME=%(libdir)/openjdk-25
 setup       : |
+    %patch %(pkgdir)/ftbfs-llvm23.patch
+
     # Everything below translated from Arch Linux PKGBUILD
     %patch %(pkgdir)/set-flutter-paths.patch
 
