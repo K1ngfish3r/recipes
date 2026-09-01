@@ -5,30 +5,31 @@
 		"ldc": {
 			"build-depends": [
 				"binary(ldc2)",
-				"binary(llvm-config-21)",
+				"binary(llvm-config-22)",
 				"binary(make)",
-				"compiler-rt-21",
+				"compiler-rt-22",
 				"ldc-static",
-				"lld-21-devel",
+				"lld-22-devel",
 				"pkgconfig(zlib)"
 			],
 			"depends": [
-				"compiler-rt-21",
+				"compiler-rt-22",
 				"interpreter(/usr/lib/ld-linux-x86-64.so.2(x86_64))",
 				"ldc-libs",
 				"ldc-libs-debug",
 				"soname(ld-linux-x86-64.so.2(x86_64))",
-				"soname(libLLVM.so.21.1(x86_64))",
+				"soname(libLLVM.so.22.1(x86_64))",
 				"soname(libc.so.6(x86_64))",
 				"soname(libgcc_s.so.1(x86_64))",
-				"soname(liblldCOFF.so.21.1(x86_64))",
-				"soname(liblldCommon.so.21.1(x86_64))",
-				"soname(liblldELF.so.21.1(x86_64))",
-				"soname(liblldMachO.so.21.1(x86_64))",
-				"soname(liblldMinGW.so.21.1(x86_64))",
-				"soname(liblldWasm.so.21.1(x86_64))",
+				"soname(liblldCOFF.so.22.1(x86_64))",
+				"soname(liblldCommon.so.22.1(x86_64))",
+				"soname(liblldELF.so.22.1(x86_64))",
+				"soname(liblldMachO.so.22.1(x86_64))",
+				"soname(liblldMinGW.so.22.1(x86_64))",
+				"soname(liblldWasm.so.22.1(x86_64))",
 				"soname(libm.so.6(x86_64))",
-				"soname(libstdc++.so.6(x86_64))"
+				"soname(libstdc++.so.6(x86_64))",
+				"soname(libzstd.so.1(x86_64))"
 			],
 			"files": [
 				"/usr/bin/ldc-build-plugin",
@@ -107,7 +108,8 @@
 				"/usr/include/d/core/internal/utf.d",
 				"/usr/include/d/core/internal/util/array.d",
 				"/usr/include/d/core/internal/util/math.d",
-				"/usr/include/d/core/internal/vararg/aarch64.d",
+				"/usr/include/d/core/internal/vararg/aapcs64.d",
+				"/usr/include/d/core/internal/vararg/gnu.d",
 				"/usr/include/d/core/internal/vararg/sysv_x64.d",
 				"/usr/include/d/core/interpolation.d",
 				"/usr/include/d/core/lifetime.d",
@@ -246,6 +248,7 @@
 				"/usr/include/d/core/sys/linux/execinfo.d",
 				"/usr/include/d/core/sys/linux/fcntl.d",
 				"/usr/include/d/core/sys/linux/fs.d",
+				"/usr/include/d/core/sys/linux/hdlc/ioctl.d",
 				"/usr/include/d/core/sys/linux/ifaddrs.d",
 				"/usr/include/d/core/sys/linux/input.d",
 				"/usr/include/d/core/sys/linux/input_event_codes.d",
@@ -253,6 +256,7 @@
 				"/usr/include/d/core/sys/linux/link.d",
 				"/usr/include/d/core/sys/linux/linux/if_arp.d",
 				"/usr/include/d/core/sys/linux/linux/if_packet.d",
+				"/usr/include/d/core/sys/linux/net/if_.d",
 				"/usr/include/d/core/sys/linux/netinet/in_.d",
 				"/usr/include/d/core/sys/linux/netinet/tcp.d",
 				"/usr/include/d/core/sys/linux/perf_event.d",
@@ -783,7 +787,8 @@
 				"/usr/share/defaults/ldc2/ldc2.conf/00-docs.conf",
 				"/usr/share/defaults/ldc2/ldc2.conf/30-compiler.conf",
 				"/usr/share/defaults/ldc2/ldc2.conf/50-target-default.conf",
-				"/usr/share/defaults/ldc2/ldc2.conf/55-target-wasm.conf",
+				"/usr/share/defaults/ldc2/ldc2.conf/51-target-wasm-base.conf",
+				"/usr/share/defaults/ldc2/ldc2.conf/55-target-wasm-naked.conf",
 				"/usr/share/defaults/ldc2/ldc2.conf/70-compiler-rt.conf"
 			],
 			"name": "ldc",
@@ -802,11 +807,11 @@
 		"ldc-devel": {
 			"build-depends": [
 				"binary(ldc2)",
-				"binary(llvm-config-21)",
+				"binary(llvm-config-22)",
 				"binary(make)",
-				"compiler-rt-21",
+				"compiler-rt-22",
 				"ldc-static",
-				"lld-21-devel",
+				"lld-22-devel",
 				"pkgconfig(zlib)"
 			],
 			"depends": [
@@ -820,11 +825,11 @@
 		"ldc-libs": {
 			"build-depends": [
 				"binary(ldc2)",
-				"binary(llvm-config-21)",
+				"binary(llvm-config-22)",
 				"binary(make)",
-				"compiler-rt-21",
+				"compiler-rt-22",
 				"ldc-static",
-				"lld-21-devel",
+				"lld-22-devel",
 				"pkgconfig(zlib)"
 			],
 			"depends": [
@@ -835,25 +840,25 @@
 				"soname(libz.so.1(x86_64))"
 			],
 			"files": [
-				"/usr/lib/libdruntime-ldc-shared.so.112",
-				"/usr/lib/libdruntime-ldc-shared.so.112.1",
-				"/usr/lib/libphobos2-ldc-shared.so.112",
-				"/usr/lib/libphobos2-ldc-shared.so.112.1"
+				"/usr/lib/libdruntime-ldc-shared.so.113",
+				"/usr/lib/libdruntime-ldc-shared.so.113.0",
+				"/usr/lib/libphobos2-ldc-shared.so.113",
+				"/usr/lib/libphobos2-ldc-shared.so.113.0"
 			],
 			"name": "ldc-libs",
 			"provides": [
-				"soname(libdruntime-ldc-shared.so.112(x86_64))",
-				"soname(libphobos2-ldc-shared.so.112(x86_64))"
+				"soname(libdruntime-ldc-shared.so.113(x86_64))",
+				"soname(libphobos2-ldc-shared.so.113(x86_64))"
 			]
 		},
 		"ldc-libs-debug": {
 			"build-depends": [
 				"binary(ldc2)",
-				"binary(llvm-config-21)",
+				"binary(llvm-config-22)",
 				"binary(make)",
-				"compiler-rt-21",
+				"compiler-rt-22",
 				"ldc-static",
-				"lld-21-devel",
+				"lld-22-devel",
 				"pkgconfig(zlib)"
 			],
 			"depends": [
@@ -864,25 +869,25 @@
 				"soname(libz.so.1(x86_64))"
 			],
 			"files": [
-				"/usr/lib/libdruntime-ldc-debug-shared.so.112",
-				"/usr/lib/libdruntime-ldc-debug-shared.so.112.1",
-				"/usr/lib/libphobos2-ldc-debug-shared.so.112",
-				"/usr/lib/libphobos2-ldc-debug-shared.so.112.1"
+				"/usr/lib/libdruntime-ldc-debug-shared.so.113",
+				"/usr/lib/libdruntime-ldc-debug-shared.so.113.0",
+				"/usr/lib/libphobos2-ldc-debug-shared.so.113",
+				"/usr/lib/libphobos2-ldc-debug-shared.so.113.0"
 			],
 			"name": "ldc-libs-debug",
 			"provides": [
-				"soname(libdruntime-ldc-debug-shared.so.112(x86_64))",
-				"soname(libphobos2-ldc-debug-shared.so.112(x86_64))"
+				"soname(libdruntime-ldc-debug-shared.so.113(x86_64))",
+				"soname(libphobos2-ldc-debug-shared.so.113(x86_64))"
 			]
 		},
 		"ldc-static": {
 			"build-depends": [
 				"binary(ldc2)",
-				"binary(llvm-config-21)",
+				"binary(llvm-config-22)",
 				"binary(make)",
-				"compiler-rt-21",
+				"compiler-rt-22",
 				"ldc-static",
-				"lld-21-devel",
+				"lld-22-devel",
 				"pkgconfig(zlib)"
 			],
 			"depends": [
@@ -901,6 +906,6 @@
 		}
 	},
 	"source-name": "ldc",
-	"source-release": "23",
-	"source-version": "1.42.0"
+	"source-release": "24",
+	"source-version": "1.43.0"
 }

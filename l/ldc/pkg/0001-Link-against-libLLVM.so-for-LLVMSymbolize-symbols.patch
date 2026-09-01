@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Reilly Brogan <reilly@reillybrogan.com>
 Date: Wed, 7 May 2025 18:11:47 -0500
-Subject: [PATCH] Link against libLLVM.so for LLVMSymbolize symbols
+Subject: [PATCH] Link against libLLVM.so for LLVMSymbolize/LLVMDTLTO symbols
 
 LLVMSymbolize has a large target dependency tree which would dramatically balloon the number of LLVM static libs if we added it.
 
@@ -9,21 +9,28 @@ It's also part of libLLVM, so we can just avoid that entirely by linking against
 
 Origin: vendor
 Forwarded: no
-Last-Update: 2025-10-25
+Last-Update: 2026-09-01
 ---
- CMakeLists.txt       | 2 +-
- tools/CMakeLists.txt | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ CMakeLists.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 21aad6d367..bfd07b0a2b 100644
+index b96a47657a..472df81757 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -624,7 +624,7 @@ if(LDC_WITH_LLD)
-     if(MSVC)
-         list(APPEND LDC_LINKERFLAG_LIST LLVMSymbolize.lib)
-     else()
--        set(LDC_LINKERFLAG_LIST -lLLVMSymbolize ${LDC_LINKERFLAG_LIST})
-+        set(LDC_LINKERFLAG_LIST -lLLVM ${LDC_LINKERFLAG_LIST})
+@@ -566,13 +566,13 @@ if(LDC_WITH_LLD)
+         if(MSVC)
+             list(APPEND LDC_LINKERFLAG_LIST LLVMDTLTO.lib)
+         else()
+-            set(LDC_LINKERFLAG_LIST -lLLVMDTLTO ${LDC_LINKERFLAG_LIST})
++            set(LDC_LINKERFLAG_LIST -lLLVM ${LDC_LINKERFLAG_LIST})
+         endif()
      endif()
      if(MSVC)
+         list(APPEND LDC_LINKERFLAG_LIST lldMinGW.lib lldCOFF.lib lldELF.lib lldMachO.lib lldWasm.lib lldCommon.lib LLVMSymbolize.lib)
+     else()
+-        set(LDC_LINKERFLAG_LIST -llldMinGW -llldCOFF -llldELF -llldMachO -llldWasm -llldCommon -lLLVMSymbolize ${LDC_LINKERFLAG_LIST})
++        set(LDC_LINKERFLAG_LIST -llldMinGW -llldCOFF -llldELF -llldMachO -llldWasm -llldCommon -lLLVM ${LDC_LINKERFLAG_LIST})
+     endif()
+     if(LLVM_IS_SHARED)
+         # LLD's ELF backend references zstd (OutputSection::maybeCompress). A shared
