@@ -2,10 +2,10 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name        : kquickimageeditor
-version     : "0.6.2.1"
-release     : 16
+version     : "0.7.0"
+release     : 17
 upstreams   :
-    - https://download.kde.org/stable/kquickimageeditor/kquickimageeditor-0.6.2.1.tar.xz : 6d37a479463dcd16e4746d8b43d4adb05640e8b49056baabc82c865e2e1a4c85
+    - https://download.kde.org/stable/kquickimageeditor/kquickimageeditor-0.7.0.tar.xz : 56789a323250a52cfaa14175c6836e66cef9f2fbb4e56f8cac9f526c243633ae
 homepage    : https://invent.kde.org/libraries/kquickimageeditor
 license     :
     - BSD-2-Clause
@@ -17,12 +17,12 @@ description : |
 builddeps   :
     - cmake(ECM)
     - cmake(KF6Config)
-    - cmake(OpenCV)
     - cmake(Qt6CorePrivate)
     - cmake(Qt6Qml)
+    - cmake(Qt6ShaderTools)
+    - cmake(hwy)
 setup       : |
-    %cmake \
-        -DWITH_OPENCV=ON
+    %cmake
 build       : |
     %cmake_build
 install     : |
