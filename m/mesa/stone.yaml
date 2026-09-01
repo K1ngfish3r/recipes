@@ -8,7 +8,7 @@ name        : mesa
 version     : "26.2.1"
 ##@@END_VERSION
 # Note: keep mesa-clc in-sync with this package version-wise
-release     : 87
+release     : 88
 homepage    : https://mesa3d.org/
 upstreams   :
 ##@@BEGIN_SOURCE
@@ -157,8 +157,8 @@ builddeps   :
     - cmake(libxml2)
     - pkgconfig(LLVMSPIRVLib)
     - pkgconfig(libarchive)
-    - pkgconfig(libclc)
     - pkgconfig(libdisplay-info)
+    - pkgconfig(mesa-libclc)
     - pkgconfig(sysprof-capture-4)
     - pkgconfig(wayland-protocols)
     - pkgconfig32(SPIRV-Tools)
