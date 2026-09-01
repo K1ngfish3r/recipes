@@ -17,7 +17,7 @@
 			],
 			"files": [
 				"/usr/lib/libqgpgmeqt6.so.15",
-				"/usr/lib/libqgpgmeqt6.so.15.8.0"
+				"/usr/lib/libqgpgmeqt6.so.15.9.0"
 			],
 			"name": "qgpgme-qt6",
 			"provides": [
@@ -35,6 +35,8 @@
 				"qgpgme-qt6"
 			],
 			"files": [
+				"/usr/include/qgpgme-qt6/QGpgME/ADQueryJob",
+				"/usr/include/qgpgme-qt6/QGpgME/ADQueryResult",
 				"/usr/include/qgpgme-qt6/QGpgME/AbstractImportJob",
 				"/usr/include/qgpgme-qt6/QGpgME/AddExistingSubkeyJob",
 				"/usr/include/qgpgme-qt6/QGpgME/AddUserIDJob",
@@ -87,6 +89,8 @@
 				"/usr/include/qgpgme-qt6/qgpgme/abstractimportjob.h",
 				"/usr/include/qgpgme-qt6/qgpgme/addexistingsubkeyjob.h",
 				"/usr/include/qgpgme-qt6/qgpgme/adduseridjob.h",
+				"/usr/include/qgpgme-qt6/qgpgme/adqueryjob.h",
+				"/usr/include/qgpgme-qt6/qgpgme/adqueryresult.h",
 				"/usr/include/qgpgme-qt6/qgpgme/changeexpiryjob.h",
 				"/usr/include/qgpgme-qt6/qgpgme/changeownertrustjob.h",
 				"/usr/include/qgpgme-qt6/qgpgme/changepasswdjob.h",
@@ -150,6 +154,6 @@
 		}
 	},
 	"source-name": "qgpgme",
-	"source-release": "7",
-	"source-version": "2.1.0"
+	"source-release": "8",
+	"source-version": "2.2.0"
 }

@@ -2,11 +2,11 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name        : qgpgme
-version     : "2.1.0"
-release     : 7
+version     : "2.2.0"
+release     : 8
 homepage    : https://gnupg.org/software/gpgme/index.html
 upstreams   :
-    - https://www.gnupg.org/ftp/gcrypt/qgpgme/qgpgme-2.1.0.tar.xz : 5b32feb3eee4a7f9402d22b7206480908dc43bb4df382917c075c512116f8f08
+    - https://www.gnupg.org/ftp/gcrypt/qgpgme/qgpgme-2.2.0.tar.xz : 3c6290ff5bfeab981bb48b2951703761f1dbea640cb637beb3560d5fefb0e0b3
 summary     : GnuPG Made Easy library (Qt bindings)
 description : |
     GnuPG Made Easy (GPGME) is a library designed to make access to GnuPG easier
