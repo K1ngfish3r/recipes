@@ -2,10 +2,10 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name        : libphonenumber
-version     : "9.0.37"
-release     : 15
+version     : "9.0.38"
+release     : 16
 upstreams   :
-    - https://github.com/google/libphonenumber/archive/refs/tags/v9.0.37.tar.gz : 4bd34bc3aec5a89dc9035d15aaf2256c5e8f7e0524e6eb3e7bac1e811987c230
+    - https://github.com/google/libphonenumber/archive/refs/tags/v9.0.38.tar.gz : 75e0a15fdc8fab9efc8a101d1d36ba3866c407889faae6c025e6aac58957da77
 homepage    : https://github.com/googlei18n/libphonenumber
 license     :
     - Apache-2.0
