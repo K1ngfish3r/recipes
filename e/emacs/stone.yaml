@@ -3,7 +3,7 @@
 
 name        : emacs
 version     : "31.1"
-release     : 3
+release     : 4
 homepage    : https://www.gnu.org/software/emacs
 upstreams   :
     # GNU mirror
