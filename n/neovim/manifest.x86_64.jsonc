@@ -20,7 +20,7 @@
 				"soname(libluajit-5.1.so.2(x86_64))",
 				"soname(libluv.so.1(x86_64))",
 				"soname(libm.so.6(x86_64))",
-				"soname(libtree-sitter.so.0.26(x86_64))",
+				"soname(libtree-sitter.so.0.27(x86_64))",
 				"soname(libunibilium.so.4(x86_64))",
 				"soname(libutf8proc.so.3(x86_64))",
 				"soname(libuv.so.1(x86_64))"
@@ -2136,6 +2136,6 @@
 		}
 	},
 	"source-name": "neovim",
-	"source-release": "4",
+	"source-release": "5",
 	"source-version": "0.12.5"
 }
