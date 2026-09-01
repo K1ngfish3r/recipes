@@ -12,7 +12,7 @@
 			],
 			"files": [
 				"/usr/bin/tree-sitter",
-				"/usr/lib/libtree-sitter.so.0.26",
+				"/usr/lib/libtree-sitter.so.0.27",
 				"/usr/share/bash-completion/completions/tree-sitter",
 				"/usr/share/elvish/lib/tree-sitter.elv",
 				"/usr/share/fish/vendor_completions.d/tree-sitter.fish",
@@ -21,7 +21,7 @@
 			"name": "tree-sitter",
 			"provides": [
 				"binary(tree-sitter)",
-				"soname(libtree-sitter.so.0.26(x86_64))"
+				"soname(libtree-sitter.so.0.27(x86_64))"
 			]
 		},
 		"tree-sitter-devel": {
@@ -40,6 +40,6 @@
 		}
 	},
 	"source-name": "tree-sitter",
-	"source-release": "5",
-	"source-version": "0.26.13"
+	"source-release": "6",
+	"source-version": "0.27.0"
 }
