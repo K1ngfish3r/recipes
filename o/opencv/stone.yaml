@@ -3,7 +3,7 @@
 
 name        : opencv
 version     : "4.14.0"
-release     : 23
+release     : 24
 upstreams   :
     - https://github.com/opencv/opencv/archive/refs/tags/4.14.0.tar.gz:
         hash: ee8fb9b30eb60850431b4656447080e3737b56e45719c92b67f245950609f86e
