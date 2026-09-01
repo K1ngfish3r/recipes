@@ -2,11 +2,11 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name        : libvirt
-version     : "12.6.0"
-release     : 19
+version     : "12.7.0"
+release     : 20
 homepage    : https://gitlab.com/libvirt/libvirt
 upstreams   :
-    - https://libvirt.org/sources/libvirt-12.6.0.tar.xz : 1592256deb76fc94028ff083a4d9f06a74f3b92a66a1794f37bc26f21430c888
+    - https://libvirt.org/sources/libvirt-12.7.0.tar.xz : 7ec1a04e7e4f4069353d4daac117bbe869287f5b202695de61fe1b079efb6cb6
 summary     : Libvirt native C API and daemons
 description : |
     Libvirt provides a portable, long term stable C API for managing the virtualization technologies provided by many operating systems. It includes support for QEMU, KVM, Xen, LXC, bhyve, Virtuozzo, VMware vCenter and ESX, VMware Desktop, Hyper-V, VirtualBox and the POWER Hypervisor.
