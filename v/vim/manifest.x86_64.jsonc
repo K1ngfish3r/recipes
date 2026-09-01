@@ -876,6 +876,7 @@
 				"/usr/share/vim/vim92/ftplugin/awk.vim",
 				"/usr/share/vim/vim92/ftplugin/bash.vim",
 				"/usr/share/vim/vim92/ftplugin/basic.vim",
+				"/usr/share/vim/vim92/ftplugin/bazelrc.vim",
 				"/usr/share/vim/vim92/ftplugin/bdf.vim",
 				"/usr/share/vim/vim92/ftplugin/beancount.vim",
 				"/usr/share/vim/vim92/ftplugin/bicep-params.vim",
@@ -1162,6 +1163,7 @@
 				"/usr/share/vim/vim92/ftplugin/r.vim",
 				"/usr/share/vim/vim92/ftplugin/racc.vim",
 				"/usr/share/vim/vim92/ftplugin/racket.vim",
+				"/usr/share/vim/vim92/ftplugin/radvd.vim",
 				"/usr/share/vim/vim92/ftplugin/raku.vim",
 				"/usr/share/vim/vim92/ftplugin/rasi.vim",
 				"/usr/share/vim/vim92/ftplugin/readline.vim",
@@ -1969,6 +1971,7 @@
 				"/usr/share/vim/vim92/syntax/baan.vim",
 				"/usr/share/vim/vim92/syntax/bash.vim",
 				"/usr/share/vim/vim92/syntax/basic.vim",
+				"/usr/share/vim/vim92/syntax/bazelrc.vim",
 				"/usr/share/vim/vim92/syntax/bc.vim",
 				"/usr/share/vim/vim92/syntax/bdf.vim",
 				"/usr/share/vim/vim92/syntax/beancount.vim",
@@ -2448,6 +2451,7 @@
 				"/usr/share/vim/vim92/syntax/racc.vim",
 				"/usr/share/vim/vim92/syntax/racket.vim",
 				"/usr/share/vim/vim92/syntax/radiance.vim",
+				"/usr/share/vim/vim92/syntax/radvd.vim",
 				"/usr/share/vim/vim92/syntax/raku.vim",
 				"/usr/share/vim/vim92/syntax/raml.vim",
 				"/usr/share/vim/vim92/syntax/rapid.vim",
@@ -2864,6 +2868,6 @@
 		}
 	},
 	"source-name": "vim",
-	"source-release": "30",
-	"source-version": "9.2.1001"
+	"source-release": "31",
+	"source-version": "9.2.1025"
 }
