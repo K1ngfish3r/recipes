@@ -3,7 +3,7 @@
 
 name        : dub
 version     : "1.42.0"
-release     : 9
+release     : 10
 homepage    : https://dub.pm/
 upstreams   :
     - https://github.com/dlang/dub/archive/refs/tags/v1.42.0.tar.gz : 7f0a5133885a71b89f7a683d8f3e3616e070238424b36ae04fdbc0d7b99e3027
