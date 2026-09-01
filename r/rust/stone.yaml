@@ -4,7 +4,7 @@
 name        : rust
 ### IMPORTANT NOTE: Rust does not have a stable ABI. This is particularly important for the kernel where the version of Rust used to build the kernel must exactly match the version used to build extramodules. In other words you MUST do a round of kernel rebuilds whenever Rust is upgraded.
 version     : "1.98.0"
-release     : 42
+release     : 43
 homepage    : https://www.rust-lang.org/
 upstreams   :
     - https://static.rust-lang.org/dist/rustc-1.98.0-src.tar.xz : 271fa73d8174f53d713c46a8310da7bf7cfdcfb8b7cfd1c2b74b84a83ae9fb1e
@@ -27,6 +27,7 @@ license     :
 builddeps   :
     - binary(FileCheck)
     - binary(cargo)
+    - binary(clang-22)
     - binary(cmake)
     - binary(llvm-config-22)
     - binary(ln)
@@ -44,6 +45,7 @@ builddeps   :
     - pkgconfig(sqlite3)
     - pkgconfig(zlib)
     - clang-32bit
+    - compiler-rt-22-32bit
 environment : |
     # Don't set these here, all configuration should come from config.toml or the package.yml
     unset RUSTFLAGS
@@ -60,6 +62,7 @@ environment : |
     # This needs to match which llvm we're building against. This should generally be `/usr/bin/llvm-config` but if we're using a versioned
     # package that will need to point to the versioned llvm-config
     LLVM_CONFIG=%(bindir)/llvm-config-22
+    LLVM_PROFDATA=%(bindir)/llvm-profdata-22
 setup       : |
     # Ensure that we use the system sqlite3
     %patch %(pkgdir)/0001-unbundle-sqlite.patch -d src/tools/cargo
@@ -110,7 +113,7 @@ build       : |
         --rust-profile-generate %(workdir)/rustc-pgo-profile-data \
         --stage 2
 
-    llvm-profdata merge -output=%(workdir)/rustc-pgo-profile-data/rustc-pgo.profdata %(workdir)/rustc-pgo-profile-data/default_*.profraw
+    ${LLVM_PROFDATA} merge -output=%(workdir)/rustc-pgo-profile-data/rustc-pgo.profdata %(workdir)/rustc-pgo-profile-data/default_*.profraw
 
     # rust-bootstrap is very inconsistent with the stages of various tools that it wants to build between `dist` and `install`. This
     # causes a lot of redundant and unnecessary builds if we attempt to do the build with various stages (IE build the compiler first, then the
@@ -141,9 +144,11 @@ packages    :
             - /usr/lib/lib*.so
             - /usr/lib/rustlib/x86_64-unknown-linux-gnu
         rundeps:
-            - binary(clang)
+            # - binary(clang)
+            - binary(clang-22)
             - binary(lld)
-            - compiler-rt
+            # - compiler-rt
+            - compiler-rt-22
 
     - "%(name)-32bit":
         paths:
@@ -151,7 +156,8 @@ packages    :
         rundeps:
             - "%(name)"
             - clang-32bit
-            - compiler-rt-32bit
+            # - compiler-rt-32bit
+            - compiler-rt-22-32bit
 
     - "%(name)-bpf":
         paths:

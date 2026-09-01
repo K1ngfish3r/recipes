@@ -6,6 +6,7 @@
 			"build-depends": [
 				"binary(FileCheck)",
 				"binary(cargo)",
+				"binary(clang-22)",
 				"binary(cmake)",
 				"binary(llvm-config-22)",
 				"binary(ln)",
@@ -14,6 +15,7 @@
 				"binary(strip)",
 				"binary(which)",
 				"clang-32bit",
+				"compiler-rt-22-32bit",
 				"pkgconfig(jemalloc)",
 				"pkgconfig(libcurl)",
 				"pkgconfig(libffi)",
@@ -25,9 +27,9 @@
 				"pkgconfig(zlib)"
 			],
 			"depends": [
-				"binary(clang)",
+				"binary(clang-22)",
 				"binary(lld)",
-				"compiler-rt",
+				"compiler-rt-22",
 				"interpreter(/usr/lib/ld-linux-x86-64.so.2(x86_64))",
 				"soname(ld-linux-x86-64.so.2(x86_64))",
 				"soname(libLLVM.so.22.1(x86_64))",
@@ -157,6 +159,7 @@
 			"build-depends": [
 				"binary(FileCheck)",
 				"binary(cargo)",
+				"binary(clang-22)",
 				"binary(cmake)",
 				"binary(llvm-config-22)",
 				"binary(ln)",
@@ -165,6 +168,7 @@
 				"binary(strip)",
 				"binary(which)",
 				"clang-32bit",
+				"compiler-rt-22-32bit",
 				"pkgconfig(jemalloc)",
 				"pkgconfig(libcurl)",
 				"pkgconfig(libffi)",
@@ -177,7 +181,7 @@
 			],
 			"depends": [
 				"clang-32bit",
-				"compiler-rt-32bit",
+				"compiler-rt-22-32bit",
 				"rust",
 				"soname(ld-linux.so.2(386))",
 				"soname(libc.so.6(386))",
@@ -249,6 +253,7 @@
 			"build-depends": [
 				"binary(FileCheck)",
 				"binary(cargo)",
+				"binary(clang-22)",
 				"binary(cmake)",
 				"binary(llvm-config-22)",
 				"binary(ln)",
@@ -257,6 +262,7 @@
 				"binary(strip)",
 				"binary(which)",
 				"clang-32bit",
+				"compiler-rt-22-32bit",
 				"pkgconfig(jemalloc)",
 				"pkgconfig(libcurl)",
 				"pkgconfig(libffi)",
@@ -290,6 +296,7 @@
 			"build-depends": [
 				"binary(FileCheck)",
 				"binary(cargo)",
+				"binary(clang-22)",
 				"binary(cmake)",
 				"binary(llvm-config-22)",
 				"binary(ln)",
@@ -298,6 +305,7 @@
 				"binary(strip)",
 				"binary(which)",
 				"clang-32bit",
+				"compiler-rt-22-32bit",
 				"pkgconfig(jemalloc)",
 				"pkgconfig(libcurl)",
 				"pkgconfig(libffi)",
@@ -3965,6 +3973,7 @@
 			"build-depends": [
 				"binary(FileCheck)",
 				"binary(cargo)",
+				"binary(clang-22)",
 				"binary(cmake)",
 				"binary(llvm-config-22)",
 				"binary(ln)",
@@ -3973,6 +3982,7 @@
 				"binary(strip)",
 				"binary(which)",
 				"clang-32bit",
+				"compiler-rt-22-32bit",
 				"pkgconfig(jemalloc)",
 				"pkgconfig(libcurl)",
 				"pkgconfig(libffi)",
@@ -4017,6 +4027,6 @@
 		}
 	},
 	"source-name": "rust",
-	"source-release": "42",
+	"source-release": "43",
 	"source-version": "1.98.0"
 }
