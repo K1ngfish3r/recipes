@@ -2,17 +2,20 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name        : nftables
-version     : "1.1.6"
-release     : 12
+version     : "1.1.7"
+release     : 13
 homepage    : https://www.netfilter.org/projects/nftables/
 upstreams   :
-    - https://netfilter.org/pub/nftables/nftables-1.1.6.tar.xz : 372931bda8556b310636a2f9020adc710f9bab66f47efe0ce90bff800ac2530c
+    - https://netfilter.org/pub/nftables/nftables-1.1.7.tar.xz : a6fbf060d8d4fff001517a2b94f356bb4366bfbf0ba366366f9d27cc38caa58f
 summary     : Netfilter nf_tables user library
 description : |
     Netfilter nf_tables user library
 license     :
     - GPL-2.0-only
 builddeps   :
+    - binary(a2x)
+    - binary(bison)
+    - binary(flex)
     - binary(python3)
     - pkgconfig(gmp)
     - pkgconfig(jansson)
@@ -21,8 +24,7 @@ builddeps   :
     - pkgconfig(readline)
     - python(setuptools)
 setup       : |
-    # bad loop variable error with dash (still present as of dash 0.5.13.2)
-    %configure_with_bash \
+    %configure \
         --disable-static \
         --sysconfdir=%(vendordir)/ \
         --with-json \

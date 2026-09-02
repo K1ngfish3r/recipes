@@ -4,6 +4,9 @@
 	"packages": {
 		"nftables": {
 			"build-depends": [
+				"binary(a2x)",
+				"binary(bison)",
+				"binary(flex)",
 				"binary(python3)",
 				"pkgconfig(gmp)",
 				"pkgconfig(jansson)",
@@ -51,6 +54,9 @@
 		},
 		"nftables-devel": {
 			"build-depends": [
+				"binary(a2x)",
+				"binary(bison)",
+				"binary(flex)",
 				"binary(python3)",
 				"pkgconfig(gmp)",
 				"pkgconfig(jansson)",
@@ -75,6 +81,9 @@
 		},
 		"nftables-docs": {
 			"build-depends": [
+				"binary(a2x)",
+				"binary(bison)",
+				"binary(flex)",
 				"binary(python3)",
 				"pkgconfig(gmp)",
 				"pkgconfig(jansson)",
@@ -93,6 +102,9 @@
 		},
 		"python-nftables": {
 			"build-depends": [
+				"binary(a2x)",
+				"binary(bison)",
+				"binary(flex)",
 				"binary(python3)",
 				"pkgconfig(gmp)",
 				"pkgconfig(jansson)",
@@ -125,6 +137,6 @@
 		}
 	},
 	"source-name": "nftables",
-	"source-release": "12",
-	"source-version": "1.1.6"
+	"source-release": "13",
+	"source-version": "1.1.7"
 }
