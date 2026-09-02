@@ -1,7 +1,7 @@
 From adcb6841b93a680ece1330f4952ca673f46d929a Mon Sep 17 00:00:00 2001
 From: "Derek J. Clark" <derekjohn.clark@gmail.com>
 Date: Mon, 3 Aug 2026 15:16:09 -0700
-Subject: [PATCH 096/148] [FROM-ML] platform/x86: msi-wmi-platform: Move guard
+Subject: [PATCH 096/164] [FROM-ML] platform/x86: msi-wmi-platform: Move guard
  out of switch in platform_write()
 
 The ML patch set uses a guard within a switch case that violates cleanup

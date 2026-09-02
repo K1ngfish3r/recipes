@@ -1,7 +1,7 @@
 From 02d32d0737d33a79375c3e19c8a9f00eade21fa4 Mon Sep 17 00:00:00 2001
 From: "Chen, Yu C" <yu.c.chen@intel.com>
 Date: Sat, 20 Jun 2026 11:54:22 +0800
-Subject: [PATCH 029/148] [FROM-ML] sched/fair: Fix overflow in
+Subject: [PATCH 029/164] [FROM-ML] sched/fair: Fix overflow in
  update_tg_cfs_runnable()
 
 A divide-by-zero crash is observed when running hackbench:

@@ -1,7 +1,7 @@
 From 656e3d39e25f79f84d63b815d9c2d234cb1da505 Mon Sep 17 00:00:00 2001
 From: Peter Zijlstra <peterz@infradead.org>
 Date: Thu, 12 Mar 2026 16:04:18 +0100
-Subject: [PATCH 033/148] [FROM-ML] sched/fair: Add cgroup_mode: concur
+Subject: [PATCH 033/164] [FROM-ML] sched/fair: Add cgroup_mode: concur
 
 Improve upon the previous scheme ("max") by no longer assuming maximal
 concurrency. Instead scale by: 'min(nr_tasks, nr_cpus)'. This handles

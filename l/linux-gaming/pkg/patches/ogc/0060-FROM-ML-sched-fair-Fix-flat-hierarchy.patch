@@ -1,7 +1,7 @@
 From 598a167d0e1b085d49529c5d4a92137eeff8df70 Mon Sep 17 00:00:00 2001
 From: Vincent Guittot <vincent.guittot@linaro.org>
 Date: Wed, 12 Aug 2026 14:50:39 +0200
-Subject: [PATCH 060/148] [FROM-ML] sched/fair: Fix flat hierarchy
+Subject: [PATCH 060/164] [FROM-ML] sched/fair: Fix flat hierarchy
 
 When a fair task is enqueued, we must update curr and more precisely
 its vruntime before placing the enqueued task so avg vruntime will take

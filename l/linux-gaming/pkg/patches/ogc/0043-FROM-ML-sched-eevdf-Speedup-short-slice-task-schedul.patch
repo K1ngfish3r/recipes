@@ -1,7 +1,7 @@
 From 584c2e69ea0e948d2d7eb503a934c3e09bb2d41f Mon Sep 17 00:00:00 2001
 From: Vincent Guittot <vincent.guittot@linaro.org>
 Date: Wed, 24 Jun 2026 17:12:29 +0200
-Subject: [PATCH 043/148] [FROM-ML] sched/eevdf: Speedup short slice task
+Subject: [PATCH 043/164] [FROM-ML] sched/eevdf: Speedup short slice task
  scheduling
 
 When a task with a shorter slice is enqueued, we protect the running

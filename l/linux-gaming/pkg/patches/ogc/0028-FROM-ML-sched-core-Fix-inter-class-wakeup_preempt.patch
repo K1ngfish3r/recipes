@@ -1,7 +1,7 @@
 From 33a8cc7375f75209fdd49a067648c5c21d5ca098 Mon Sep 17 00:00:00 2001
 From: Peter Zijlstra <peterz@infradead.org>
 Date: Fri, 26 Jun 2026 09:36:52 +0200
-Subject: [PATCH 028/148] [FROM-ML] sched/core: Fix inter-class
+Subject: [PATCH 028/164] [FROM-ML] sched/core: Fix inter-class
  wakeup_preempt()
 
 The way wakeup_preempt() works since commit 704069649b5b ("sched/core: Rework

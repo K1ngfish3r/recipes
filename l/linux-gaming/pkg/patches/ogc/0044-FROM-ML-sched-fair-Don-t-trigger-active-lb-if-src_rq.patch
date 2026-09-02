@@ -1,7 +1,7 @@
 From 9c6a4bebaa7540757d0892df3dca162f717ba5fb Mon Sep 17 00:00:00 2001
 From: Xin Zhao <jackzxcui1989@163.com>
 Date: Wed, 17 Jun 2026 15:21:50 +0800
-Subject: [PATCH 044/148] [FROM-ML] sched/fair: Don't trigger active lb if
+Subject: [PATCH 044/164] [FROM-ML] sched/fair: Don't trigger active lb if
  src_rq->curr is not on_rq
 
 Active load balancing relies on migration threads, which temporarily preempt

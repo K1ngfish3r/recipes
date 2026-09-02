@@ -1,7 +1,7 @@
 From 1d5e9f52416cd21d9f5b329a797476a8e244a8f1 Mon Sep 17 00:00:00 2001
 From: Peter Zijlstra <peterz@infradead.org>
 Date: Fri, 5 Jun 2026 10:35:01 +0200
-Subject: [PATCH 034/148] [FROM-ML] sched/fair: Add cgroup_mode: tasks
+Subject: [PATCH 034/164] [FROM-ML] sched/fair: Add cgroup_mode: tasks
 
 Since we are exploring this space; include a scheme that scales by total number
 of runnable tasks. This results in:

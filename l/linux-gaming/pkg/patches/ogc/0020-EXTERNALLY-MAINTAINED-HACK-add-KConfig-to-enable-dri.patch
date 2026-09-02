@@ -1,7 +1,7 @@
 From 15059d275cb38dab3207e59c76557ae25bab4bd2 Mon Sep 17 00:00:00 2001
 From: Melissa Wen <mwen@igalia.com>
 Date: Sat, 22 Apr 2023 14:08:47 -0100
-Subject: [PATCH 020/148] [EXTERNALLY-MAINTAINED] HACK: add KConfig to enable
+Subject: [PATCH 020/164] [EXTERNALLY-MAINTAINED] HACK: add KConfig to enable
  driver-specific color mgmt props
 
 We are enabling a large set of color calibration features to enhance KMS

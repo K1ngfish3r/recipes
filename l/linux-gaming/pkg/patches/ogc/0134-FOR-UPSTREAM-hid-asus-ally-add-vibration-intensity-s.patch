@@ -1,7 +1,7 @@
 From 9cd165fe8e801628d6a8c4f939d8aa4c621d3ee9 Mon Sep 17 00:00:00 2001
 From: "Luke D. Jones" <luke@ljones.dev>
 Date: Sat, 5 Oct 2024 20:46:00 +1300
-Subject: [PATCH 134/148] [FOR-UPSTREAM] hid-asus-ally: add vibration intensity
+Subject: [PATCH 134/164] [FOR-UPSTREAM] hid-asus-ally: add vibration intensity
  settings
 
 Signed-off-by: Luke D. Jones <luke@ljones.dev>

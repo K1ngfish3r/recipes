@@ -1,7 +1,7 @@
 From 4935b8de31c580ef1aa6a1f0c1a7c76f1494fbcb Mon Sep 17 00:00:00 2001
 From: K Prateek Nayak <kprateek.nayak@amd.com>
 Date: Fri, 26 Jun 2026 08:56:14 +0200
-Subject: [PATCH 037/148] [FROM-ML] sched/fair: Remove unused arguments from
+Subject: [PATCH 037/164] [FROM-ML] sched/fair: Remove unused arguments from
  set_preempt_buddy()
 
 On a tangential note, I just noticed set_preempt_buddy() has two unused

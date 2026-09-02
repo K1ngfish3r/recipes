@@ -1,7 +1,7 @@
 From cd36ef2112b6d7223eabedf5713dc40ef368739b Mon Sep 17 00:00:00 2001
 From: "Luke D. Jones" <luke@ljones.dev>
 Date: Thu, 10 Oct 2024 11:15:36 +1300
-Subject: [PATCH 140/148] [FOR-UPSTREAM] hid-asus-ally: add calibrations (wip)
+Subject: [PATCH 140/164] [FOR-UPSTREAM] hid-asus-ally: add calibrations (wip)
 
 Signed-off-by: Luke D. Jones <luke@ljones.dev>
 ---

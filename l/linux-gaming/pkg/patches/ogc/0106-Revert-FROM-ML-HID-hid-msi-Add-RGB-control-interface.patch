@@ -1,7 +1,7 @@
 From 56abcae20212a05bb92d3a0929f1d6a485fc9e3a Mon Sep 17 00:00:00 2001
 From: "Derek J. Clark" <derekjohn.clark@gmail.com>
 Date: Wed, 26 Aug 2026 01:56:22 +0000
-Subject: [PATCH 106/148] Revert "[FROM-ML] HID: hid-msi: Add RGB control
+Subject: [PATCH 106/164] Revert "[FROM-ML] HID: hid-msi: Add RGB control
  interface"
 
 This reverts commit d17e6f3ce080213c06c8b307f1d1daafaf9714c6.

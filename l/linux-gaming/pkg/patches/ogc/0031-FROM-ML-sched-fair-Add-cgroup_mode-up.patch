@@ -1,7 +1,7 @@
 From 58c7d6741d800118a31d4179075e77665394b179 Mon Sep 17 00:00:00 2001
 From: Peter Zijlstra <peterz@infradead.org>
 Date: Thu, 12 Mar 2026 14:59:06 +0100
-Subject: [PATCH 031/148] [FROM-ML] sched/fair: Add cgroup_mode: up
+Subject: [PATCH 031/164] [FROM-ML] sched/fair: Add cgroup_mode: up
 
 Instead of calculating the proportional fraction of the group weight for each
 CPU, just give each CPU the full measure, ignoring these pesky SMP problems.

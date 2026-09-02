@@ -1,7 +1,7 @@
 From 4e4acab130360e046a34301be39fc9b587dc3b51 Mon Sep 17 00:00:00 2001
 From: Antheas Kapenekakis <lkml@antheas.dev>
 Date: Sun, 11 May 2025 22:44:20 +0200
-Subject: [PATCH 083/148] [FROM-ML] platform/x86: msi-wmi-platform: Add quirk
+Subject: [PATCH 083/164] [FROM-ML] platform/x86: msi-wmi-platform: Add quirk
  system
 
 MSI uses the WMI interface as a passthrough for writes to the EC

@@ -1,7 +1,7 @@
 From d0bfd9b4e045d1c2f55db7af63ea07b16e7bffbe Mon Sep 17 00:00:00 2001
 From: Antheas Kapenekakis <lkml@antheas.dev>
 Date: Mon, 16 Feb 2026 21:45:44 +0100
-Subject: [PATCH 071/148] [FROM-ML] drm: panel-orientation-quirks: add
+Subject: [PATCH 071/164] [FROM-ML] drm: panel-orientation-quirks: add
  SuiPlay0X1
 
 Very similar to the AYANEO 2S, the Mysten SuiPlay0X1 is a handheld

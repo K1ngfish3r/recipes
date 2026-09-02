@@ -1,7 +1,7 @@
 From 215c06ba002405b2c3a4f0c434e954e5a19471a9 Mon Sep 17 00:00:00 2001
 From: Xin Zhao <jackzxcui1989@163.com>
 Date: Wed, 17 Jun 2026 15:21:51 +0800
-Subject: [PATCH 045/148] [FROM-ML] sched/fair: Simplify balance_interval reset
+Subject: [PATCH 045/164] [FROM-ML] sched/fair: Simplify balance_interval reset
  logic in sched_balance_rq()
 
 Because active_balance is initialized to 0, and need_active_balance()

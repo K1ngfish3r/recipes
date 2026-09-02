@@ -1,7 +1,7 @@
 From ab5cedfadf5f1f3addc500abde1f53fa244c34a1 Mon Sep 17 00:00:00 2001
 From: Ricardo Neri <ricardo.neri-calderon@linux.intel.com>
 Date: Mon, 20 Jul 2026 19:43:19 -0700
-Subject: [PATCH 055/148] [FROM-ML] sched/fair: Check CPU capacity before
+Subject: [PATCH 055/164] [FROM-ML] sched/fair: Check CPU capacity before
  comparing group types during load balance
 
 update_sd_pick_busiest() may incorrectly select a fully_busy group as the

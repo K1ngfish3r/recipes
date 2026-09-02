@@ -1,7 +1,7 @@
 From 5d04b15cd9d89aada9daaa35466251bbc1e5cddb Mon Sep 17 00:00:00 2001
 From: Antheas Kapenekakis <lkml@antheas.dev>
 Date: Mon, 16 Feb 2026 21:45:47 +0100
-Subject: [PATCH 074/148] [FROM-ML] drm: panel-orientation-quirks: Add
+Subject: [PATCH 074/164] [FROM-ML] drm: panel-orientation-quirks: Add
  OneXPlayer X1 Air
 
 Special edition of the X1 with a new Intel chipset.

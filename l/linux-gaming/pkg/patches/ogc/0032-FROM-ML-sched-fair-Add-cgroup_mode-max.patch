@@ -1,7 +1,7 @@
 From 5e64ebcabe92f5732dd8b38b18e1278208f6138c Mon Sep 17 00:00:00 2001
 From: Peter Zijlstra <peterz@infradead.org>
 Date: Thu, 12 Mar 2026 15:42:35 +0100
-Subject: [PATCH 032/148] [FROM-ML] sched/fair: Add cgroup_mode: max
+Subject: [PATCH 032/164] [FROM-ML] sched/fair: Add cgroup_mode: max
 
 In order to avoid the average CPU fraction avg(F_g_n) becoming tiny '1/N',
 assume each cgroup is maximally concurrent and distrubute 'N*weight', such

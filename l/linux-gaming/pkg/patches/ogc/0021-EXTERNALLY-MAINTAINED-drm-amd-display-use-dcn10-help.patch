@@ -1,7 +1,7 @@
 From c9ee62d584995e148602bd00bf9388dfed7bc31e Mon Sep 17 00:00:00 2001
 From: Melissa Wen <mwen@igalia.com>
 Date: Tue, 29 Jul 2025 20:44:34 -0100
-Subject: [PATCH 021/148] [EXTERNALLY-MAINTAINED] drm/amd/display: use dcn10
+Subject: [PATCH 021/164] [EXTERNALLY-MAINTAINED] drm/amd/display: use dcn10
  helper to translate in_shaper_lut on dcn32
 
 it's the same used by dcn20 and dcn30 for plane shaper LUT and have some

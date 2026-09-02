@@ -1,7 +1,7 @@
 From 7804d2207f07b01517c6b47cf17a5d96499d3240 Mon Sep 17 00:00:00 2001
 From: Andrey Smirnov <andrew.smirnov@gmail.com>
 Date: Sun, 24 Sep 2023 15:02:33 -0700
-Subject: [PATCH 016/148] [EXTERNALLY-MAINTAINED] mfd: steamdeck: Expose
+Subject: [PATCH 016/164] [EXTERNALLY-MAINTAINED] mfd: steamdeck: Expose
  controller board power in sysfs
 
 As of version 118 Deck's BIOS implements "SCBP" method that allows

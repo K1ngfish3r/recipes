@@ -1,7 +1,7 @@
 From 3950c3c7e29c6fbb1f89cb99c3546b667a4aec6c Mon Sep 17 00:00:00 2001
 From: Joshua Ashton <joshua@froggi.es>
 Date: Wed, 6 Sep 2023 22:00:26 +0100
-Subject: [PATCH 011/148] [EXTERNALLY-MAINTAINED] drm/amd/display: Don't
+Subject: [PATCH 011/164] [EXTERNALLY-MAINTAINED] drm/amd/display: Don't
  consider vblank passed if currently in vertical front porch time
 
 Changing refresh rates on OLED displays works differently to typical

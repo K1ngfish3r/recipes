@@ -1,7 +1,7 @@
 From 9ff9b24040be57e7a14a64b99a3b1c84e1d6769f Mon Sep 17 00:00:00 2001
 From: "Luke D. Jones" <luke@ljones.dev>
 Date: Wed, 6 Nov 2024 00:27:03 +0300
-Subject: [PATCH 141/148] [FOR-UPSTREAM] debug by default
+Subject: [PATCH 141/164] [FOR-UPSTREAM] debug by default
 
 ---
  drivers/hid/hid-asus-ally.c | 2 ++

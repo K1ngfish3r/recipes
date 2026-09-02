@@ -1,7 +1,7 @@
 From 06f71bcc0f32c475b82d98b35fcf224f376c2ebc Mon Sep 17 00:00:00 2001
 From: Vincent Guittot <vincent.guittot@linaro.org>
 Date: Wed, 24 Jun 2026 17:12:26 +0200
-Subject: [PATCH 040/148] [FROM-ML] sched/eevdf: Update slice protection even
+Subject: [PATCH 040/164] [FROM-ML] sched/eevdf: Update slice protection even
  when resched is already set
 
 Even if resched is already set, we might want to update or even cancel

@@ -1,7 +1,7 @@
 From a34d0a5a7806b6ac9095538bd05351ed0a297afa Mon Sep 17 00:00:00 2001
 From: Peter Zijlstra <peterz@infradead.org>
 Date: Thu, 4 Jun 2026 15:15:51 +0200
-Subject: [PATCH 035/148] [FROM-ML] sched/fair: Change the default cgroup_mode
+Subject: [PATCH 035/164] [FROM-ML] sched/fair: Change the default cgroup_mode
  to concur
 
 For all the reasons described in the preceding patches, the way cgroup

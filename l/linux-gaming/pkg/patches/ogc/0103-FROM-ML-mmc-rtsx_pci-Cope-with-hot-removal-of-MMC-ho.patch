@@ -1,7 +1,7 @@
 From 27401ea2361e0998b71734d8e5c416ad172b5ffa Mon Sep 17 00:00:00 2001
 From: Lukas Wunner <lukas@wunner.de>
 Date: Sat, 15 Aug 2026 10:10:29 +0200
-Subject: [PATCH 103/148] [FROM-ML] mmc: rtsx_pci: Cope with hot-removal of MMC
+Subject: [PATCH 103/164] [FROM-ML] mmc: rtsx_pci: Cope with hot-removal of MMC
  host
 
 Derek reports a lockup on hot-removal of a PCI-attached Realtek RTS525A
