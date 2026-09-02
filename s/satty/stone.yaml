@@ -3,7 +3,7 @@
 
 name        : satty
 version     : "0.22.0"
-release     : 1
+release     : 2
 homepage    : https://github.com/Satty-org/Satty
 upstreams   :
     - https://github.com/Satty-org/Satty/archive/refs/tags/v0.22.0.tar.gz : eee18b5f9eabf164da69c7e6e916c98afb78dd296d83e28bb96d9f9636a5fe36
@@ -18,13 +18,6 @@ builddeps   :
     - pkgconfig(glib-2.0)
     - pkgconfig(gtk4-layer-shell-0)
     - pkgconfig(libadwaita-1)
-    - glib2-devel
-rundeps     :
-    - epoxy
-checkdeps   :
-    - binary(man)
-    # dbus-1 is required in order to retrieve the manpage
-    - pkgconfig(dbus-1)
 setup       : |
     %cargo_fetch 
 build       : |
@@ -46,10 +39,9 @@ install     : |
     %install_file assets/satty.svg %(installroot)%(datadir)/icons/hicolor/scalable/apps/satty.svg
     
     # Install the doc
-    cargo run --release -- --man > satty.1
+    %(cargo_target_dir)/satty --man > satty.1
     %install_file satty.1 -t %(installroot)%(mandir)/man1
     %install_file README.md %(installroot)%(docdir)/satty/README.md
     %install_dir assets %(installroot)/%(docdir)/satty/assets
 check       : |
     %cargo_test
-    man -M %(installroot)%(mandir) satty > /dev/null

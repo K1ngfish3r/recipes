@@ -4,9 +4,6 @@
 	"packages": {
 		"satty": {
 			"build-depends": [
-				"binary(man)",
-				"glib2-devel",
-				"pkgconfig(dbus-1)",
 				"pkgconfig(epoxy)",
 				"pkgconfig(fontconfig)",
 				"pkgconfig(gdk-pixbuf-2.0)",
@@ -15,7 +12,6 @@
 				"pkgconfig(libadwaita-1)"
 			],
 			"depends": [
-				"epoxy",
 				"interpreter(/usr/lib/ld-linux-x86-64.so.2(x86_64))",
 				"soname(ld-linux-x86-64.so.2(x86_64))",
 				"soname(libadwaita-1.so.0(x86_64))",
@@ -49,6 +45,6 @@
 		}
 	},
 	"source-name": "satty",
-	"source-release": "1",
+	"source-release": "2",
 	"source-version": "0.22.0"
 }
