@@ -15,6 +15,7 @@
 				"soname(libglib-2.0.so.0(x86_64))",
 				"soname(libgobject-2.0.so.0(x86_64))",
 				"soname(libgstbase-1.0.so.0(x86_64))",
+				"soname(libgstnet-1.0.so.0(x86_64))",
 				"soname(libgstreamer-1.0.so.0(x86_64))",
 				"soname(libnice.so.10(x86_64))"
 			],
@@ -47,7 +48,7 @@
 				"/usr/bin/stund",
 				"/usr/lib/girepository-1.0/Nice-0.1.typelib",
 				"/usr/lib/libnice.so.10",
-				"/usr/lib/libnice.so.10.15.0"
+				"/usr/lib/libnice.so.10.16.0"
 			],
 			"name": "libnice",
 			"provides": [
@@ -99,6 +100,6 @@
 		}
 	},
 	"source-name": "libnice",
-	"source-release": "3",
-	"source-version": "0.1.23"
+	"source-release": "4",
+	"source-version": "0.1.24"
 }
