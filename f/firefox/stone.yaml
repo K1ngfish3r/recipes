@@ -2,12 +2,12 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name        : firefox
-version     : "154.0.1"
-release     : 80
+version     : "155.0"
+release     : 81
 homepage    : https://www.mozilla.org/
 upstreams   :
-    - https://releases.mozilla.org/pub/firefox/releases/154.0.1/source/firefox-154.0.1.source.tar.xz:
-        hash: 9cbe191fc74b46108376b1d9bf607c0a40288074e0f2333671253789d6ebbd15
+    - https://releases.mozilla.org/pub/firefox/releases/155.0/source/firefox-155.0.source.tar.xz:
+        hash: c57fd59835f8c5b9c7f68bead2782238c11d8626b57509cc809915b0b4d70dfb
         unpackdir: firefox
 summary     : Firefox web browser
 description : |
@@ -51,7 +51,7 @@ networking  : true # PGO
 environment : |
     # Set this to 1 if you want to create a release build, 0 if you're just doing builds locally for testing purposes
     # Note that you still need to do a full release build locally and test it before pushing it
-    FULL_BUILD=1
+    FULL_BUILD=0
 
     export MOZ_NOSPAM=1
     export PIP_NETWORK_INSTALL_RESTRICTED_VIRTUALENVS=mach
@@ -64,27 +64,6 @@ setup       : |
     # %%patch %(pkgdir)/patches/pgo.patch
     %patch %(pkgdir)/patches/0001-Fix-Firefox-Thunderbird-envvar-conflicts.patch
     %patch %(pkgdir)/patches/0001-Allow-installing-addons-from-user-scope.patch
-
-    # Unknown FF 154.0 build issue. See if fixed in future release
-    # │B│ 27:26.05 W Traceback (most recent call last):
-    # │B│ 27:26.05 W   File "<frozen runpy>", line 203, in _run_module_as_main
-    # │B│ 27:26.05 W   File "<frozen runpy>", line 88, in _run_code
-    # │B│ 27:26.05 W   File "/mason/build/x86_64/firefox/python/mozbuild/mozbuild/action/install_objdir_file.py", line 23, in <module>
-    # │B│ 27:26.05 W     sys.exit(main(sys.argv[1:]))
-    # │B│ 27:26.05 W              ~~~~^^^^^^^^^^^^^^
-    # │B│ 27:26.05 W   File "/mason/build/x86_64/firefox/python/mozbuild/mozbuild/action/install_objdir_file.py", line 18, in main
-    # │B│ 27:26.05 W     shutil.copy(source, dest)
-    # │B│ 27:26.05 W     ~~~~~~~~~~~^^^^^^^^^^^^^^
-    # │B│ 27:26.05 W   File "/usr/lib/python3.14/shutil.py", line 489, in copy
-    # │B│ 27:26.05 W     copyfile(src, dst, follow_symlinks=follow_symlinks)
-    # │B│ 27:26.05 W     ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    # │B│ 27:26.05 W   File "/usr/lib/python3.14/shutil.py", line 313, in copyfile
-    # │B│ 27:26.05 W     with open(src, 'rb') as fsrc:
-    # │B│ 27:26.05 W          ~~~~^^^^^^^^^^^
-    # │B│ 27:26.05 W FileNotFoundError: [Errno 2] No such file or directory: 'WriteArgument'
-    %patch %(pkgdir)/patches/0001-Revert-Bug-2038789-Support-renaming-and-mode-preserv.patch
-
-    %patch %(pkgdir)/patches/ftbfs-rust-1.98.patch
 
     # TODO: Figure out if we still need to enable unsigned addon loading considering we switched back to unmodified langpacks
 

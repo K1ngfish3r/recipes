@@ -96,7 +96,7 @@
 				"/usr/lib/firefox/firefox",
 				"/usr/lib/firefox/firefox-bin",
 				"/usr/lib/firefox/fonts/TwemojiMozilla.ttf",
-				"/usr/lib/firefox/glxtest",
+				"/usr/lib/firefox/gfxtest",
 				"/usr/lib/firefox/gmp-clearkey/0.1/libclearkey.so",
 				"/usr/lib/firefox/gmp-clearkey/0.1/manifest.json",
 				"/usr/lib/firefox/libgkcodecs.so",
@@ -113,8 +113,6 @@
 				"/usr/lib/firefox/pingsender",
 				"/usr/lib/firefox/platform.ini",
 				"/usr/lib/firefox/removed-files",
-				"/usr/lib/firefox/vaapitest",
-				"/usr/lib/firefox/vulkantest",
 				"/usr/share/applications/org.mozilla.firefox.desktop",
 				"/usr/share/dbus-1/services/org.mozilla.firefox.SearchProvider.service",
 				"/usr/share/gnome-shell/search-providers/org.mozilla.firefox.search-provider.ini",
@@ -143,6 +141,6 @@
 		}
 	},
 	"source-name": "firefox",
-	"source-release": "80",
-	"source-version": "154.0.1"
+	"source-release": "81",
+	"source-version": "155.0"
 }
