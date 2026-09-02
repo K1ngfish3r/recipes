@@ -2,11 +2,11 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name        : gst-thumbnailers
-version     : "1.0.0"
-release     : 3
+version     : "1.1.0"
+release     : 4
 homepage    : https://gitlab.gnome.org/GNOME/gst-thumbnailers
 upstreams   :
-    - https://download.gnome.org/sources/gst-thumbnailers/1.0/gst-thumbnailers-1.0.0.tar.xz : f2a68019d319995d20a55cf0c32db1bb248834c2300ee757b417a5337d5d6497
+    - https://download.gnome.org/sources/gst-thumbnailers/1.1/gst-thumbnailers-1.1.0.tar.xz : d980be383088261f8bc2ec5a8953edaca7c59abcc90abf24a5052493e726bf53
 summary     : GStreamer video and audio file thumbnailer
 description : |
     GStreamer video and audio file thumbnailer
