@@ -52,6 +52,7 @@
 				"/usr/share/foot/themes/aeroroot",
 				"/usr/share/foot/themes/alacritty",
 				"/usr/share/foot/themes/apprentice",
+				"/usr/share/foot/themes/ayu-dark",
 				"/usr/share/foot/themes/ayu-mirage",
 				"/usr/share/foot/themes/catppuccin-frappe",
 				"/usr/share/foot/themes/catppuccin-latte",
@@ -63,6 +64,7 @@
 				"/usr/share/foot/themes/dracula",
 				"/usr/share/foot/themes/dracula-iterm",
 				"/usr/share/foot/themes/electrophoretic",
+				"/usr/share/foot/themes/ferra",
 				"/usr/share/foot/themes/gruvbox",
 				"/usr/share/foot/themes/gruvbox-dark",
 				"/usr/share/foot/themes/gruvbox-light",
@@ -174,6 +176,6 @@
 		}
 	},
 	"source-name": "foot",
-	"source-release": "6",
-	"source-version": "1.27.0"
+	"source-release": "7",
+	"source-version": "1.28.0"
 }

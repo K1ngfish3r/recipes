@@ -2,11 +2,11 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name        : foot
-version     : "1.27.0"
-release     : 6
+version     : "1.28.0"
+release     : 7
 homepage    : https://codeberg.org/dnkl/foot
 upstreams   :
-    - https://codeberg.org/dnkl/foot/archive/1.27.0.tar.gz : f5917cad2d7b723b99873e53d78fd10ea202923d189aed5086591fc53b70b7e3
+    - https://codeberg.org/dnkl/foot/archive/1.28.0.tar.gz : 4296be402b5684d049534598e69db92b918f92beac9dab76b585207045f0b037
 summary     : The fast, lightweight and minimalistic Wayland terminal emulator.
 description : |
     The fast, lightweight and minimalistic Wayland terminal emulator.
