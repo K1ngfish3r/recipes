@@ -1,7 +1,7 @@
 From 71b1ee6df8e9789f3d66be14b4a7b4936a40117d Mon Sep 17 00:00:00 2001
 From: Vincent Guittot <vincent.guittot@linaro.org>
 Date: Wed, 24 Jun 2026 17:12:28 +0200
-Subject: [PATCH 042/148] [FROM-ML] sched/eevdf: Always update slice protection
+Subject: [PATCH 042/164] [FROM-ML] sched/eevdf: Always update slice protection
 
 Even if p will not preempt current, it modifies the avg_vruntime and
 possibly the min slice. Make sure to update the slice protection with the

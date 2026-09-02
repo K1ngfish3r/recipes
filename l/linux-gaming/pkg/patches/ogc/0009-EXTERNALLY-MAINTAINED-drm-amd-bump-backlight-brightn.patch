@@ -1,7 +1,7 @@
 From eb1502ada8c38c58abbee410f3b47f871b91b138 Mon Sep 17 00:00:00 2001
 From: Jeremy Selan <jeremys@valvesoftware.com>
 Date: Wed, 28 Apr 2021 14:33:36 -0700
-Subject: [PATCH 009/148] [EXTERNALLY-MAINTAINED] drm/amd: bump backlight
+Subject: [PATCH 009/164] [EXTERNALLY-MAINTAINED] drm/amd: bump backlight
  brightness precision from 8 -> 16-bits
 
 Signed-off-by: Gabriel Krisman Bertazi <krisman@collabora.com>

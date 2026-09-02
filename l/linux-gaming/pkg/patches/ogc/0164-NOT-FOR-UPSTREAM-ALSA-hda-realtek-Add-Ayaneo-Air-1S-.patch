@@ -1,27 +1,27 @@
-From 16b6676c788f49f4df8e5f8e0776c60e27ab9117 Mon Sep 17 00:00:00 2001
+From a289bc02298a81c55302ced3713437926300f7aa Mon Sep 17 00:00:00 2001
 From: fewtarius <fewtarius@steamfork.org>
-Date: Thu, 27 Aug 2026 16:47:03 +0900
-Subject: [PATCH] fix: alc269: add pin fixup for AyaNeo AIR 1S internal speaker
+Date: Tue, 1 Sep 2026 22:49:18 +0900
+Subject: [PATCH 164/164] [NOT-FOR-UPSTREAM] ALSA: hda/realtek: Add Ayaneo Air
+ 1S audio quirk
 
 The ALC269VB codec's internal speaker pin isn't configured
 correctly on the AyaNeo AIR 1S out of the box, so no audio
-plays even once the aw87xxx amplifier driver (added in this
-same PR) is working. Add a pin fixup matching the AIR 1S's
+plays even once the aw87xxx amplifier driver (added earlier in
+this branch) is working. Add a pin fixup matching the AIR 1S's
 PCI SSID that sets pin 0x1a to 0x90170110, restoring internal
 speaker output.
 
-Ported from hhd-dev/patchwork, where this same fix has
-already been carried and verified across several AyaNeo
-devices.
+This is deliberately an OGC-carried patch and must not be sent upstream.
 
 Co-developed-by: linh1987
+(cherry picked from commit 89eb9630d9114c38f35edc4041daf8b1d25886d3)
 Signed-off-by: Hijae Song <hijae@naver.com>
 ---
  sound/hda/codecs/realtek/alc269.c | 10 ++++++++++
  1 file changed, 10 insertions(+)
 
 diff --git a/sound/hda/codecs/realtek/alc269.c b/sound/hda/codecs/realtek/alc269.c
-index 48a2e7f2ebb15..429ea815496ac 100644
+index 48a2e7f2ebb1..429ea815496a 100644
 --- a/sound/hda/codecs/realtek/alc269.c
 +++ b/sound/hda/codecs/realtek/alc269.c
 @@ -3932,6 +3932,7 @@ enum {
@@ -62,3 +62,6 @@ index 48a2e7f2ebb15..429ea815496ac 100644
  	{.id = ALC282_FIXUP_ASUS_TX300, .name = "asus-tx300"},
  	{.id = ALC283_FIXUP_INT_MIC, .name = "alc283-int-mic"},
  	{.id = ALC290_FIXUP_MONO_SPEAKERS_HSJACK, .name = "mono-speakers"},
+-- 
+2.55.0
+

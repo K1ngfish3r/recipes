@@ -1,7 +1,7 @@
 From d396f7fde6426e41a89b529d9b1a23e2ee037f5e Mon Sep 17 00:00:00 2001
 From: Philip Mueller <philm@manjaro.org>
 Date: Fri, 31 Jul 2026 21:53:25 +0200
-Subject: [PATCH 121/148] [FROM-ML] iio: imu: bmi270: fix typo found in dc757dc
+Subject: [PATCH 121/164] [FROM-ML] iio: imu: bmi270: fix typo found in dc757dc
 
 Fixes a typo found in dc757dc.
 

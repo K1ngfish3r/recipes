@@ -1,7 +1,7 @@
 From 9f558aa924e9f1f25b9bc84e4c4de1c955c0ea70 Mon Sep 17 00:00:00 2001
 From: Ricardo Neri <ricardo.neri-calderon@linux.intel.com>
 Date: Mon, 20 Jul 2026 19:43:21 -0700
-Subject: [PATCH 057/148] [FROM-ML] sched/fair: Allow load balancing between
+Subject: [PATCH 057/164] [FROM-ML] sched/fair: Allow load balancing between
  CPUs of identical capacity
 
 sched_balance_find_src_rq() avoids selecting a runqueue with a single

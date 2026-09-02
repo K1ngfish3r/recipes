@@ -1,7 +1,7 @@
 From 1078078c8c3111f8270cca56c135daba83dde157 Mon Sep 17 00:00:00 2001
 From: Kyle Gospodnetich <me@kylegospodneti.ch>
 Date: Tue, 28 Jul 2026 20:59:57 -0700
-Subject: [PATCH 095/148] [NOT-FOR-UPSTREAM] HID: hid-msi: Report RGB LED under
+Subject: [PATCH 095/164] [NOT-FOR-UPSTREAM] HID: hid-msi: Report RGB LED under
  the Legion Go name
 
 This is deliberately an OGC-carried patch and must not be sent upstream.

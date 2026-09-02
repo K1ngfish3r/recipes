@@ -1,7 +1,7 @@
 From f9513b55411e1acacac893d6a6333c6400092df2 Mon Sep 17 00:00:00 2001
 From: Fangzhi Zuo <jerry.zuo@amd.com>
 Date: Wed, 5 Aug 2026 14:36:43 +0800
-Subject: [PATCH 147/148] [FROM-ML] drm/amd/display: restore FRL cap on
+Subject: [PATCH 147/164] [FROM-ML] drm/amd/display: restore FRL cap on
  non-destructive HDMI link verify
 
 [Why&How]

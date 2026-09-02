@@ -1,7 +1,7 @@
 From efe0a283ec16466234cf8417398c13824385f396 Mon Sep 17 00:00:00 2001
 From: Ricardo Neri <ricardo.neri-calderon@linux.intel.com>
 Date: Mon, 20 Jul 2026 19:43:17 -0700
-Subject: [PATCH 053/148] [FROM-ML] sched/fair: Do not skip CPUs of similar
+Subject: [PATCH 053/164] [FROM-ML] sched/fair: Do not skip CPUs of similar
  capacity with busy SMT siblings
 
 When picking a busiest CPU with only one running task, the function

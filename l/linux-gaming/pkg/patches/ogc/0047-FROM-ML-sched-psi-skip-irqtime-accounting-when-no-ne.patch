@@ -1,7 +1,7 @@
 From 23a3662d5b2c1c290505a2a02c6969752edc0523 Mon Sep 17 00:00:00 2001
 From: Usama Arif <usama.arif@linux.dev>
 Date: Wed, 17 Jun 2026 10:50:06 -0700
-Subject: [PATCH 047/148] [FROM-ML] sched/psi: skip irqtime accounting when no
+Subject: [PATCH 047/164] [FROM-ML] sched/psi: skip irqtime accounting when no
  new irq time has elapsed
 
 psi_account_irqtime() reads irq_time_read() into a per-rq cumulative

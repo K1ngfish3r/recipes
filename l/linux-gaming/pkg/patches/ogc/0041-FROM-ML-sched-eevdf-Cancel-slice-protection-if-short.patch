@@ -1,7 +1,7 @@
 From 5d860c5cbcbf697cca1b570b29926f7c5bd96b09 Mon Sep 17 00:00:00 2001
 From: Vincent Guittot <vincent.guittot@linaro.org>
 Date: Wed, 24 Jun 2026 17:12:27 +0200
-Subject: [PATCH 041/148] [FROM-ML] sched/eevdf: Cancel slice protection if
+Subject: [PATCH 041/164] [FROM-ML] sched/eevdf: Cancel slice protection if
  short slice task is eligible
 
 If a short slice task will not be the next to be picked but is eligible,

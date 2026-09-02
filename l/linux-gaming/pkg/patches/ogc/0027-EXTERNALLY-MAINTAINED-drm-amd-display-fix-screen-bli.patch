@@ -1,7 +1,7 @@
 From cc342456dd9a06b0348658daa6cfdc00b1f1d5b1 Mon Sep 17 00:00:00 2001
 From: Melissa Wen <mwen@igalia.com>
 Date: Fri, 16 Jan 2026 13:26:01 -0300
-Subject: [PATCH 027/148] [EXTERNALLY-MAINTAINED] drm/amd/display: fix screen
+Subject: [PATCH 027/164] [EXTERNALLY-MAINTAINED] drm/amd/display: fix screen
  blinking when exits SubVP to MPO
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8

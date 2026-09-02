@@ -1,7 +1,7 @@
 From 7699bc9fce6b5a452eeaa42eb70c15473d2c0a59 Mon Sep 17 00:00:00 2001
 From: Vincent Guittot <vincent.guittot@linaro.org>
 Date: Wed, 24 Jun 2026 17:12:24 +0200
-Subject: [PATCH 038/148] [FROM-ML] sched/fair: Set next buddy for preempt
+Subject: [PATCH 038/164] [FROM-ML] sched/fair: Set next buddy for preempt
  short
 
 If a shorter slice task can preempt current at wakeup, we make sure that

@@ -1,7 +1,7 @@
 From 51bf2304d5c649c81cc32d2e8acb31221e420b57 Mon Sep 17 00:00:00 2001
 From: Ahmed Yaseen <yaseen@ghoul.dev>
 Date: Wed, 3 Jun 2026 22:09:45 +0500
-Subject: [PATCH 006/148] [FROM-ML] HID: usbhid: skip interrupt IN polling for
+Subject: [PATCH 006/164] [FROM-ML] HID: usbhid: skip interrupt IN polling for
  devices with no input reports
 
 usbhid starts polling a device's interrupt IN endpoint on open

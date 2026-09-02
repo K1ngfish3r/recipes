@@ -1,7 +1,7 @@
 From 959985b1ead71e693367eaab04e269e52ce5896f Mon Sep 17 00:00:00 2001
 From: Vincent Guittot <vincent.guittot@linaro.org>
 Date: Wed, 1 Jul 2026 18:49:20 +0200
-Subject: [PATCH 050/148] [FROM-ML] sched/eevdf: Delayed dequeue task can't
+Subject: [PATCH 050/164] [FROM-ML] sched/eevdf: Delayed dequeue task can't
  preempt
 
 Load balancing can migrate delayed dequeue tasks to even the load between

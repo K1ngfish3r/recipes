@@ -1,7 +1,7 @@
 From f2504ccf333039d661ac243e4044c5b0e56b1985 Mon Sep 17 00:00:00 2001
 From: Andrey Smirnov <andrew.smirnov@gmail.com>
 Date: Sat, 19 Feb 2022 16:08:36 -0800
-Subject: [PATCH 015/148] [EXTERNALLY-MAINTAINED] mfd: Add MFD core driver for
+Subject: [PATCH 015/164] [EXTERNALLY-MAINTAINED] mfd: Add MFD core driver for
  Steam Deck
 
 Add MFD core driver for Steam Deck. Doesn't really do much so far

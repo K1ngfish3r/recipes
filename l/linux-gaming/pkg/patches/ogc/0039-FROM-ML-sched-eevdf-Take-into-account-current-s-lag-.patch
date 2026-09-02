@@ -1,7 +1,7 @@
 From 150d568f55ef3bcf7aa6ec1858230047e511f4fb Mon Sep 17 00:00:00 2001
 From: Vincent Guittot <vincent.guittot@linaro.org>
 Date: Wed, 24 Jun 2026 17:12:25 +0200
-Subject: [PATCH 039/148] [FROM-ML] sched/eevdf: Take into account current's
+Subject: [PATCH 039/164] [FROM-ML] sched/eevdf: Take into account current's
  lag when updating slice protection
 
 Take into account the lag of current task when updating the slice

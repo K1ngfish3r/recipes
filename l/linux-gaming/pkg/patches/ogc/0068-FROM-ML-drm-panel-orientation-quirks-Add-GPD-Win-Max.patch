@@ -1,7 +1,7 @@
 From 485daab6f732e939dce070478d74c5bbec1fbfb5 Mon Sep 17 00:00:00 2001
 From: Antheas Kapenekakis <lkml@antheas.dev>
 Date: Mon, 16 Feb 2026 21:45:41 +0100
-Subject: [PATCH 068/148] [FROM-ML] drm: panel-orientation-quirks: Add GPD Win
+Subject: [PATCH 068/164] [FROM-ML] drm: panel-orientation-quirks: Add GPD Win
  Max (2021)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8

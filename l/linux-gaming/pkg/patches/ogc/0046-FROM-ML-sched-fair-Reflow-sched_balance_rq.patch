@@ -1,7 +1,7 @@
 From 340f1d66dceaa55642bcffd5f2438d3951a13a44 Mon Sep 17 00:00:00 2001
 From: Peter Zijlstra <peterz@infradead.org>
 Date: Thu, 18 Jun 2026 10:51:49 +0200
-Subject: [PATCH 046/148] [FROM-ML] sched/fair: Reflow sched_balance_rq()
+Subject: [PATCH 046/164] [FROM-ML] sched/fair: Reflow sched_balance_rq()
 
 Reflow to reduce indenting.
 

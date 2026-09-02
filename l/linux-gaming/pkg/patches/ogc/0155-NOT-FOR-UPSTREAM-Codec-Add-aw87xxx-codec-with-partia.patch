@@ -1,29 +1,25 @@
-From 6f2e0c947d41c8af9cbe1b0bd1a338fdbb6e8018 Mon Sep 17 00:00:00 2001
-From: CVMagic <546352+CVMagic@users.noreply.github.com>
-Date: Tue, 25 Aug 2026 15:24:38 +0900
-Subject: [PATCH 1/2] feat: Add aw87xxx codec with ACPI implementation and
- DMI-based firmware selection
+From 6b04802e9ea9f453b9dbf833d98d760881e6bea6 Mon Sep 17 00:00:00 2001
+From: Matthew Anderson <ruinairas1992@gmail.com>
+Date: Thu, 25 Apr 2024 09:39:40 -0500
+Subject: [PATCH 155/164] [NOT-FOR-UPSTREAM] Codec: Add aw87xxx codec with
+ partial acpi implementation Contribution by CVMagic
+ (https://github.com/CVMagic)
 
-Adds the Awinic AW87XXX Smart K PA codec driver, ported from
-hhd-dev/patchwork. This chip is used as the speaker amplifier on
-several handhelds (AyaNeo Flip KB/DS, AIR 1S, AIR Plus, Kun; Ayn
-Loki MiniPro; Orange Pi NEO-01 per the DMI match table below),
-none of which currently have audio output without this driver.
-Verified on AyaNeo Flip KB.
+aw87xxx: Use strscpy instead of strlcpy
 
-Includes DMI-based firmware filename selection so multiple devices'
-firmware blobs can coexist under /lib/firmware without collision.
+awinic: i2c_driver cleanup and fixes
 
-Co-developed-by: bouhaa <boukehaarsma23@gmail.com>
-Co-developed-by: Antheas Kapenekakis <git@antheas.dev>
+This is deliberately an OGC-carried patch and must not be sent upstream.
+
+(cherry picked from commit 91a51cacadb95ba80227663a75fd113552b18e45)
 Signed-off-by: Hijae Song <hijae@naver.com>
 ---
  sound/soc/codecs/Kconfig                      |    2 +
  sound/soc/codecs/Makefile                     |    1 +
  sound/soc/codecs/aw87xxx/Kconfig              |    5 +
  sound/soc/codecs/aw87xxx/Makefile             |    4 +
- sound/soc/codecs/aw87xxx/aw87xxx.c            | 1601 +++++
- sound/soc/codecs/aw87xxx/aw87xxx.h            |  130 +
+ sound/soc/codecs/aw87xxx/aw87xxx.c            | 1457 +++++
+ sound/soc/codecs/aw87xxx/aw87xxx.h            |  121 +
  sound/soc/codecs/aw87xxx/aw87xxx_acf_bin.c    | 1558 +++++
  sound/soc/codecs/aw87xxx/aw87xxx_acf_bin.h    |  191 +
  sound/soc/codecs/aw87xxx/aw87xxx_bin_parse.c  |  515 ++
@@ -43,7 +39,7 @@ Signed-off-by: Hijae Song <hijae@naver.com>
  sound/soc/codecs/aw87xxx/aw87xxx_pid_60_reg.h | 5246 +++++++++++++++++
  sound/soc/codecs/aw87xxx/aw87xxx_pid_76_reg.h | 1205 ++++
  sound/soc/codecs/aw87xxx/aw87xxx_pid_9b_reg.h |   81 +
- 25 files changed, 20188 insertions(+)
+ 25 files changed, 20035 insertions(+)
  create mode 100644 sound/soc/codecs/aw87xxx/Kconfig
  create mode 100644 sound/soc/codecs/aw87xxx/Makefile
  create mode 100644 sound/soc/codecs/aw87xxx/aw87xxx.c
@@ -69,10 +65,10 @@ Signed-off-by: Hijae Song <hijae@naver.com>
  create mode 100644 sound/soc/codecs/aw87xxx/aw87xxx_pid_9b_reg.h
 
 diff --git a/sound/soc/codecs/Kconfig b/sound/soc/codecs/Kconfig
-index d43475a63ac29..c2ecfc31a4900 100644
+index e4d139108d72..19bcaed00460 100644
 --- a/sound/soc/codecs/Kconfig
 +++ b/sound/soc/codecs/Kconfig
-@@ -2919,4 +2919,6 @@ config SND_SOC_LPASS_TX_MACRO
+@@ -2920,4 +2920,6 @@ config SND_SOC_LPASS_TX_MACRO
  	select SND_SOC_LPASS_MACRO_COMMON
  	tristate "Qualcomm TX Macro in LPASS(Low Power Audio SubSystem)"
  
@@ -80,7 +76,7 @@ index d43475a63ac29..c2ecfc31a4900 100644
 +
  endmenu
 diff --git a/sound/soc/codecs/Makefile b/sound/soc/codecs/Makefile
-index aa0396e5b575b..14516b38ab676 100644
+index aa0396e5b575..14516b38ab67 100644
 --- a/sound/soc/codecs/Makefile
 +++ b/sound/soc/codecs/Makefile
 @@ -879,6 +879,7 @@ obj-$(CONFIG_SND_SOC_WSA884X)	+= snd-soc-wsa884x.o
@@ -93,7 +89,7 @@ index aa0396e5b575b..14516b38ab676 100644
  obj-$(CONFIG_SND_SOC_SIMPLE_AMPLIFIER)	+= snd-soc-simple-amplifier.o
 diff --git a/sound/soc/codecs/aw87xxx/Kconfig b/sound/soc/codecs/aw87xxx/Kconfig
 new file mode 100644
-index 0000000000000..bd0f208e2cfed
+index 000000000000..bd0f208e2cfe
 --- /dev/null
 +++ b/sound/soc/codecs/aw87xxx/Kconfig
 @@ -0,0 +1,5 @@
@@ -104,7 +100,7 @@ index 0000000000000..bd0f208e2cfed
 +	  This option enables support for AW87XXX Smart K PA.
 diff --git a/sound/soc/codecs/aw87xxx/Makefile b/sound/soc/codecs/aw87xxx/Makefile
 new file mode 100644
-index 0000000000000..d32f319a5b014
+index 000000000000..d32f319a5b01
 --- /dev/null
 +++ b/sound/soc/codecs/aw87xxx/Makefile
 @@ -0,0 +1,4 @@
@@ -114,10 +110,10 @@ index 0000000000000..d32f319a5b014
 +
 diff --git a/sound/soc/codecs/aw87xxx/aw87xxx.c b/sound/soc/codecs/aw87xxx/aw87xxx.c
 new file mode 100644
-index 0000000000000..3d732400e4491
+index 000000000000..eddb016955e9
 --- /dev/null
 +++ b/sound/soc/codecs/aw87xxx/aw87xxx.c
-@@ -0,0 +1,1601 @@
+@@ -0,0 +1,1457 @@
 +/*
 + * aw87xxx.c  aw87xxx pa module
 + *
@@ -153,7 +149,6 @@ index 0000000000000..3d732400e4491
 +#include <linux/io.h>
 +#include <linux/init.h>
 +#include <linux/pci.h>
-+#include <linux/dmi.h>
 +#include <linux/dma-mapping.h>
 +#include <linux/gameport.h>
 +#include <linux/moduleparam.h>
@@ -163,7 +158,6 @@ index 0000000000000..3d732400e4491
 +#include <linux/hrtimer.h>
 +#include <linux/ktime.h>
 +#include <linux/kthread.h>
-+#include <linux/vmalloc.h>
 +#include <uapi/sound/asound.h>
 +#include <sound/control.h>
 +#include <sound/soc.h>
@@ -192,16 +186,7 @@ index 0000000000000..3d732400e4491
 +static const char *const aw87xxx_monitor_switch[] = {"Disable", "Enable"};
 +static const char *const aw87xxx_spin_switch[] = {"spin_0", "spin_90",
 +					 "spin_180", "spin_270"};
-+#if defined(AW_KERNEL_VER_OVER_6_16_1)
-+static void new_snd_soc_unregister_component(struct device *dev)
-+{
-+	return snd_soc_unregister_component_by_driver(dev, NULL);
-+}
-+static struct aw_componet_codec_ops aw_componet_codec_ops = {
-+	.add_codec_controls = snd_soc_add_component_controls,
-+	.unregister_codec = new_snd_soc_unregister_component,
-+};
-+#elif defined(AW_KERNEL_VER_OVER_4_19_1)
++#ifdef AW_KERNEL_VER_OVER_4_19_1
 +static struct aw_componet_codec_ops aw_componet_codec_ops = {
 +	.add_codec_controls = snd_soc_add_component_controls,
 +	.unregister_codec = snd_soc_unregister_component,
@@ -213,22 +198,6 @@ index 0000000000000..3d732400e4491
 +};
 +#endif
 +
-+enum smi_bus_type {
-+	SMI_I2C,
-+	SMI_SPI,
-+	SMI_AUTO_DETECT,
-+};
-+
-+struct smi_instance {
-+	const char *type;
-+	unsigned int flags;
-+	int irq_idx;
-+};
-+
-+struct smi_node {
-+	enum smi_bus_type bus_type;
-+	struct smi_instance instances[];
-+};
 +
 +/************************************************************************
 + *
@@ -962,48 +931,6 @@ index 0000000000000..3d732400e4491
 +	}
 +}
 +
-+static const struct dmi_system_id firmware_names[] = {
-+	{
-+		.matches = {
-+			DMI_EXACT_MATCH(DMI_BOARD_VENDOR, "AYANEO"),
-+			DMI_EXACT_MATCH(DMI_BOARD_NAME, "KUN"),
-+		},
-+		.driver_data = (void *)"aw87xxx_acf_kun.bin",
-+	},
-+	{
-+		.matches = {
-+			DMI_MATCH(DMI_PRODUCT_NAME, "Loki MiniPro"),
-+		},
-+		.driver_data = (void *)"aw87xxx_acf_minipro.bin",
-+	},
-+	{
-+		.matches = {
-+			DMI_MATCH(DMI_PRODUCT_NAME, "AIR 1S"),
-+		},
-+		.driver_data = (void *)"aw87xxx_acf_air1s.bin",
-+	},
-+	{
-+		.matches = {
-+			DMI_MATCH(DMI_PRODUCT_NAME, "AIR Plus"),
-+		},
-+		.driver_data = (void *)"aw87xxx_acf_airplus.bin",
-+	},
-+	{
-+		.matches = {
-+		  DMI_EXACT_MATCH(DMI_SYS_VENDOR, "AYANEO"),
-+		  DMI_MATCH(DMI_PRODUCT_NAME, "FLIP"),
-+		},
-+		.driver_data = (void *)"aw87xxx_acf_flip.bin",
-+	},
-+	{
-+		.matches = {
-+			DMI_MATCH(DMI_PRODUCT_NAME, "NEO-01"),
-+		},
-+		.driver_data = (void *)"aw87xxx_acf_orangepi.bin",
-+	},
-+	{}
-+};
-+
 +static void aw87xxx_fw_load_init(struct aw87xxx *aw87xxx)
 +{
 +#ifdef AW_CFG_UPDATE_DELAY
@@ -1011,12 +938,8 @@ index 0000000000000..3d732400e4491
 +#else
 +	int cfg_timer_val = 0;
 +#endif
-+	const struct dmi_system_id *fwname_sysid = dmi_first_match(firmware_names);
-+	const char *fwname = fwname_sysid ?
-+		fwname_sysid->driver_data : AW87XXX_FW_BIN_NAME;
-+
-+	AW_DEV_LOGI(aw87xxx->dev, "loading firmware name: [%s]", fwname);
-+	snprintf(aw87xxx->fw_name, AW87XXX_FW_NAME_MAX, "%s", fwname);
++	AW_DEV_LOGI(aw87xxx->dev, "enter");
++	snprintf(aw87xxx->fw_name, AW87XXX_FW_NAME_MAX, "%s", AW87XXX_FW_BIN_NAME);
 +	aw87xxx_acf_init(&aw87xxx->aw_dev, &aw87xxx->acf_info, aw87xxx->dev_index);
 +
 +	INIT_DELAYED_WORK(&aw87xxx->fw_load_work, aw87xxx_fw_load_work_routine);
@@ -1477,27 +1400,20 @@ index 0000000000000..3d732400e4491
 +
 +	mutex_init(&aw87xxx->reg_lock);
 +
-+	AW_DEV_LOGI(&client->dev, "Driver struct alloc and mutex init done, devinfo: i2c_bus=%u, i2c_addr=%x", client->adapter->nr, client->addr);
++	AW_DEV_LOGI(&client->dev, "struct aw87xxx devm_kzalloc and init down");
 +	return aw87xxx;
 +}
 +
 +static int aw87xxx_i2c_probe(struct i2c_client *client)
 +{
 +	struct device_node *dev_node = client->dev.of_node;
-+	const struct smi_node *node;
-+	struct acpi_device *adev = ACPI_COMPANION(&client->dev);
 +	struct aw87xxx *aw87xxx = NULL;
 +	struct gpio_desc *gpiod = NULL;
-+	struct i2c_board_info board_info = {};
-+	char i2c_name[32];
 +	int ret = -1;
-+	int acpi_dev_count = 0;
 +
-+	/* aw87xxx Get APCI I2C device count */
-+	if(g_aw87xxx_dev_cnt == 0){
-+		acpi_dev_count = i2c_acpi_client_count(adev);
-+		AW_DEV_LOGI(&client->dev, "I2C_ACPI_CLIENT_COUNT returned [%d]", acpi_dev_count);
-+	}
++
++// To do, add this function
++//acpi_dev_add_driver_gpios()
 +
 +	if (!i2c_check_functionality(client->adapter, I2C_FUNC_I2C)) {
 +		AW_DEV_LOGE(&client->dev, "check_functionality failed");
@@ -1516,48 +1432,39 @@ index 0000000000000..3d732400e4491
 +	aw87xxx_device_parse_topo_id_dt(&aw87xxx->aw_dev);
 +
 +	/* aw87xxx Get ACPI GPIO */
-+
-+	if (g_aw87xxx_dev_cnt == 0){
-+		ret = devm_acpi_dev_add_driver_gpios(aw87xxx->dev, reset_acpi_gpios);
-+		if(ret){
-+			AW_DEV_LOGE(aw87xxx->dev, "Unable to add GPIO mapping table");
-+			goto exit_device_init_failed;
-+		}
-+
-+		gpiod = devm_gpiod_get(aw87xxx->dev, "reset", GPIOD_OUT_LOW);
-+		if (gpiod == NULL){
-+			AW_DEV_LOGE(aw87xxx->dev, "Gpiod returned NULL failing gracefully.");
-+			goto exit_device_init_failed;
-+		}
-+
-+		if (IS_ERR(gpiod)){
-+			AW_DEV_LOGE(aw87xxx->dev, "Get gpiod failed.");
-+			goto exit_device_init_failed;
-+		}
-+
-+		aw87xxx->aw_dev.rst_gpio = desc_to_gpio(gpiod);
-+		aw87xxx->aw_dev.hwen_status = AW_DEV_HWEN_OFF;
-+		AW_DEV_LOGI(aw87xxx->dev, "reset gpio[%x] parse succeed", aw87xxx->aw_dev.rst_gpio);
-+
-+		if (gpio_is_valid(aw87xxx->aw_dev.rst_gpio)) {
-+			ret = devm_gpio_request_one(aw87xxx->dev, aw87xxx->aw_dev.rst_gpio, GPIOF_OUT_INIT_LOW, "aw87xxx_reset");
-+			if ((ret < 0) && (ret != -EBUSY)) {
-+					AW_DEV_LOGE(aw87xxx->dev, "reset request failed, returned [%d]", ret);
-+					goto exit_device_init_failed;
-+			}
-+		}else{
-+			/*Disabling RESET GPIO*/
-+			AW_DEV_LOGI(aw87xxx->dev, "no reset gpio provided, hardware reset unavailable");
-+			aw87xxx->aw_dev.rst_gpio = AW_NO_RESET_GPIO;
-+			aw87xxx->aw_dev.hwen_status = AW_DEV_HWEN_INVALID;
-+		}
-+
++/*
++	ret = devm_acpi_dev_add_driver_gpios(aw87xxx->dev, reset_acpi_gpios);
++	if(ret){
++		AW_DEV_LOGE(aw87xxx->dev, "Unable to add GPIO mapping table");
++		goto exit_device_init_failed;
 +	}
++
++	gpiod = gpiod_get_optional(aw87xxx->dev, "reset", GPIOD_OUT_LOW);
++	if (IS_ERR(gpiod)){
++		AW_DEV_LOGE(aw87xxx->dev, "Get gpiod failed");
++		goto exit_device_init_failed;
++	}
++
++	aw87xxx->aw_dev.rst_gpio = desc_to_gpio(gpiod);
++        aw87xxx->aw_dev.hwen_status = AW_DEV_HWEN_OFF;
++        AW_DEV_LOGI(aw87xxx->dev, "reset gpio[%d] parse succeed", aw87xxx->aw_dev.rst_gpio);
++        if (gpio_is_valid(aw87xxx->aw_dev.rst_gpio)) {
++                ret = devm_gpio_request_one(aw87xxx->dev, aw87xxx->aw_dev.rst_gpio, GPIOF_OUT_INIT_LOW, "aw87xxx_reset");
++                if (ret < 0) {
++                        AW_DEV_LOGE(aw87xxx->dev, "reset request failed");
++                        goto exit_device_init_failed;
++                }
++        }
++*/
++
++	/*Disabling RESET GPIO*/
++        AW_DEV_LOGI(aw87xxx->dev, "no reset gpio provided, hardware reset unavailable");
++        aw87xxx->aw_dev.rst_gpio = AW_NO_RESET_GPIO;
++        aw87xxx->aw_dev.hwen_status = AW_DEV_HWEN_INVALID;
++
 +
 +	/*hw power on PA*/
-+	if(g_aw87xxx_dev_cnt == 0) {
-+		aw87xxx_dev_hw_pwr_ctrl(&aw87xxx->aw_dev, true);
-+	}
++	aw87xxx_dev_hw_pwr_ctrl(&aw87xxx->aw_dev, true);
 +
 +	/* aw87xxx devices private attributes init */
 +	ret = aw87xxx_dev_init(&aw87xxx->aw_dev);
@@ -1568,9 +1475,7 @@ index 0000000000000..3d732400e4491
 +	aw87xxx_dev_soft_reset(&aw87xxx->aw_dev);
 +
 +	/*hw power off */
-+	if(g_aw87xxx_dev_cnt == 0) {
-+		aw87xxx_dev_hw_pwr_ctrl(&aw87xxx->aw_dev, false);
-+	}
++	aw87xxx_dev_hw_pwr_ctrl(&aw87xxx->aw_dev, false);
 +
 +	/* create debug attrbute nodes */
 +	ret = sysfs_create_group(&aw87xxx->dev->kobj, &aw87xxx_attribute_group);
@@ -1592,22 +1497,6 @@ index 0000000000000..3d732400e4491
 +	mutex_unlock(&g_aw87xxx_mutex_lock);
 +	AW_DEV_LOGI(aw87xxx->dev, "succeed, dev_index=[%d], g_aw87xxx_dev_cnt= [%d]",
 +			aw87xxx->dev_index, g_aw87xxx_dev_cnt);
-+
-+	AW_DEV_LOGI(aw87xxx->dev, "acpi_c=[%d] dev_c=[%d]", acpi_dev_count, g_aw87xxx_dev_cnt);
-+
-+	/* Attempt to add other I2C AMPs */
-+	if ((acpi_dev_count > 1) && (g_aw87xxx_dev_cnt == 1)){
-+		/* power on the chip */
-+		aw87xxx_dev_hw_pwr_ctrl(&aw87xxx->aw_dev, true);
-+
-+		node = device_get_match_data(aw87xxx->dev);
-+		memset(&board_info, 0, sizeof(board_info));
-+		strscpy(board_info.type, client->name, I2C_NAME_SIZE);
-+		snprintf(i2c_name, sizeof(i2c_name), "%s.%d", client->name, 1);
-+		board_info.dev_name = i2c_name;
-+
-+		aw87xxx_i2c_probe(i2c_acpi_new_device_by_fwnode(acpi_fwnode_handle(adev), 1, &board_info));
-+	}
 +
 +	return 0;
 +
@@ -1653,42 +1542,6 @@ index 0000000000000..3d732400e4491
 +	aw87xxx_update_profile(aw87xxx, aw87xxx->prof_off_name);
 +}
 +
-+static int aw87xxx_runtime_suspend(struct device *dev)
-+{
-+	struct aw87xxx *aw87xxx = dev_get_drvdata(dev);
-+
-+	AW_DEV_LOGI(aw87xxx->dev, "Suspending...");
-+
-+	// soft and hw power off
-+	aw87xxx_update_profile(aw87xxx, aw87xxx->prof_off_name);
-+
-+	return 0;
-+}
-+
-+static int aw87xxx_runtime_resume(struct device *dev)
-+{
-+	struct list_head *pos = NULL;
-+	struct aw87xxx *aw87xxx = dev_get_drvdata(dev);
-+
-+	// Power on PA
-+	if (aw87xxx->dev_index == 1)
-+		aw87xxx_dev_hw_pwr_ctrl(&aw87xxx->aw_dev, true);
-+
-+	// Set profile to Music
-+	list_for_each_prev(pos, &g_aw87xxx_list) {
-+		aw87xxx = list_entry(pos, struct aw87xxx, list);
-+		AW_DEV_LOGI(aw87xxx->dev, "Resuming...");
-+
-+		mutex_lock(&aw87xxx->reg_lock);
-+		aw87xxx_power_on(aw87xxx, AW87XXX_PROF_MUSIC);
-+		mutex_unlock(&aw87xxx->reg_lock);
-+	}
-+
-+	return 0;
-+}
-+
-+static SIMPLE_DEV_PM_OPS(aw87xxx_pm_ops, aw87xxx_runtime_suspend, aw87xxx_runtime_resume);
-+
 +static const struct acpi_device_id aw87xxx_acpi_match[] = {
 +        { "AWDZ8830", 0 },
 +	{ }
@@ -1706,7 +1559,6 @@ index 0000000000000..3d732400e4491
 +		.owner = THIS_MODULE,
 +		.name = AW87XXX_I2C_NAME,
 +		.acpi_match_table = aw87xxx_acpi_match,
-+		.pm = &aw87xxx_pm_ops,
 +		},
 +	.probe = aw87xxx_i2c_probe,
 +	.remove = aw87xxx_i2c_remove,
@@ -1721,10 +1573,10 @@ index 0000000000000..3d732400e4491
 +MODULE_LICENSE("GPL v2");
 diff --git a/sound/soc/codecs/aw87xxx/aw87xxx.h b/sound/soc/codecs/aw87xxx/aw87xxx.h
 new file mode 100644
-index 0000000000000..9638819cdc7ef
+index 000000000000..ed052226a003
 --- /dev/null
 +++ b/sound/soc/codecs/aw87xxx/aw87xxx.h
-@@ -0,0 +1,130 @@
+@@ -0,0 +1,121 @@
 +#ifndef __AW87XXX_H__
 +#define __AW87XXX_H__
 +#include <linux/version.h>
@@ -1765,10 +1617,6 @@ index 0000000000000..9638819cdc7ef
 + * aw87xxx codec control compatible with kernel 4.19
 + *
 + ***********************************************************/
-+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 16, 1)
-+#define AW_KERNEL_VER_OVER_6_16_1
-+#endif
-+
 +#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 19, 1)
 +#define AW_KERNEL_VER_OVER_4_19_1
 +#endif
@@ -1849,15 +1697,10 @@ index 0000000000000..9638819cdc7ef
 +int aw87xxx_update_profile(struct aw87xxx *aw87xxx, char *profile);
 +int aw87xxx_update_profile_esd(struct aw87xxx *aw87xxx, char *profile);
 +
-+char *aw87xxx_show_current_profile(int dev_index);
-+int aw87xxx_set_profile(int dev_index, char *profile);
-+int aw87xxx_set_profile_by_id(int dev_index, int profile_id);
-+int aw87xxx_add_codec_controls(void *codec);
-+int aw87xxx_awrw_write(struct aw87xxx *aw87xxx, const char *buf, size_t count);
 +#endif
 diff --git a/sound/soc/codecs/aw87xxx/aw87xxx_acf_bin.c b/sound/soc/codecs/aw87xxx/aw87xxx_acf_bin.c
 new file mode 100644
-index 0000000000000..00c7aedb7c113
+index 000000000000..0de7085cb345
 --- /dev/null
 +++ b/sound/soc/codecs/aw87xxx/aw87xxx_acf_bin.c
 @@ -0,0 +1,1558 @@
@@ -3421,7 +3264,7 @@ index 0000000000000..00c7aedb7c113
 +
 diff --git a/sound/soc/codecs/aw87xxx/aw87xxx_acf_bin.h b/sound/soc/codecs/aw87xxx/aw87xxx_acf_bin.h
 new file mode 100644
-index 0000000000000..ebe0c77f5674b
+index 000000000000..3a14d9b8af9b
 --- /dev/null
 +++ b/sound/soc/codecs/aw87xxx/aw87xxx_acf_bin.h
 @@ -0,0 +1,191 @@
@@ -3618,7 +3461,7 @@ index 0000000000000..ebe0c77f5674b
 +#endif
 diff --git a/sound/soc/codecs/aw87xxx/aw87xxx_bin_parse.c b/sound/soc/codecs/aw87xxx/aw87xxx_bin_parse.c
 new file mode 100644
-index 0000000000000..ccf475e4c94d3
+index 000000000000..c40055460278
 --- /dev/null
 +++ b/sound/soc/codecs/aw87xxx/aw87xxx_bin_parse.c
 @@ -0,0 +1,515 @@
@@ -4139,7 +3982,7 @@ index 0000000000000..ccf475e4c94d3
 +}
 diff --git a/sound/soc/codecs/aw87xxx/aw87xxx_bin_parse.h b/sound/soc/codecs/aw87xxx/aw87xxx_bin_parse.h
 new file mode 100644
-index 0000000000000..a99c2409e6133
+index 000000000000..a99c2409e613
 --- /dev/null
 +++ b/sound/soc/codecs/aw87xxx/aw87xxx_bin_parse.h
 @@ -0,0 +1,73 @@
@@ -4218,7 +4061,7 @@ index 0000000000000..a99c2409e6133
 +#endif
 diff --git a/sound/soc/codecs/aw87xxx/aw87xxx_device.c b/sound/soc/codecs/aw87xxx/aw87xxx_device.c
 new file mode 100644
-index 0000000000000..a4c9ad7d96dca
+index 000000000000..8d7b7b83d694
 --- /dev/null
 +++ b/sound/soc/codecs/aw87xxx/aw87xxx_device.c
 @@ -0,0 +1,977 @@
@@ -4326,8 +4169,8 @@ index 0000000000000..a4c9ad7d96dca
 +	while (cnt < AW_I2C_RETRIES) {
 +		ret = i2c_smbus_write_byte_data(aw_dev->i2c, reg_addr, reg_data);
 +		if (ret < 0)
-+			AW_DEV_LOGE(aw_dev->dev, "i2c_write cnt=%d error=%d i2c_bus=%u i2c_addr=%X chipid=%X",
-+				cnt, ret, aw_dev->i2c_bus, aw_dev->i2c_addr, aw_dev->chipid);
++			AW_DEV_LOGE(aw_dev->dev, "i2c_write cnt=%d error=%d",
++				cnt, ret);
 +		else
 +			break;
 +
@@ -4347,8 +4190,8 @@ index 0000000000000..a4c9ad7d96dca
 +	while (cnt < AW_I2C_RETRIES) {
 +		ret = i2c_smbus_read_byte_data(aw_dev->i2c, reg_addr);
 +		if (ret < 0) {
-+			AW_DEV_LOGE(aw_dev->dev, "i2c_read cnt=%d error=%d i2c_bus=%u i2c_addr=%X chipid=%X",
-+				cnt, ret, aw_dev->i2c_bus, aw_dev->i2c_addr, aw_dev->chipid);
++			AW_DEV_LOGE(aw_dev->dev, "i2c_read cnt=%d error=%d",
++				cnt, ret);
 +		} else {
 +			*reg_data = ret;
 +			break;
@@ -5201,7 +5044,7 @@ index 0000000000000..a4c9ad7d96dca
 +
 diff --git a/sound/soc/codecs/aw87xxx/aw87xxx_device.h b/sound/soc/codecs/aw87xxx/aw87xxx_device.h
 new file mode 100644
-index 0000000000000..7c85f80a958e6
+index 000000000000..7c85f80a958e
 --- /dev/null
 +++ b/sound/soc/codecs/aw87xxx/aw87xxx_device.h
 @@ -0,0 +1,149 @@
@@ -5356,7 +5199,7 @@ index 0000000000000..7c85f80a958e6
 +#endif
 diff --git a/sound/soc/codecs/aw87xxx/aw87xxx_dsp.c b/sound/soc/codecs/aw87xxx/aw87xxx_dsp.c
 new file mode 100644
-index 0000000000000..93b02e30122d8
+index 000000000000..93b02e30122d
 --- /dev/null
 +++ b/sound/soc/codecs/aw87xxx/aw87xxx_dsp.c
 @@ -0,0 +1,355 @@
@@ -5717,7 +5560,7 @@ index 0000000000000..93b02e30122d8
 +
 diff --git a/sound/soc/codecs/aw87xxx/aw87xxx_dsp.h b/sound/soc/codecs/aw87xxx/aw87xxx_dsp.h
 new file mode 100644
-index 0000000000000..7acc4dc0dfd9b
+index 000000000000..7acc4dc0dfd9
 --- /dev/null
 +++ b/sound/soc/codecs/aw87xxx/aw87xxx_dsp.h
 @@ -0,0 +1,65 @@
@@ -5788,7 +5631,7 @@ index 0000000000000..7acc4dc0dfd9b
 +#endif
 diff --git a/sound/soc/codecs/aw87xxx/aw87xxx_log.h b/sound/soc/codecs/aw87xxx/aw87xxx_log.h
 new file mode 100644
-index 0000000000000..b3bde38a23c67
+index 000000000000..b3bde38a23c6
 --- /dev/null
 +++ b/sound/soc/codecs/aw87xxx/aw87xxx_log.h
 @@ -0,0 +1,33 @@
@@ -5827,7 +5670,7 @@ index 0000000000000..b3bde38a23c67
 +#endif
 diff --git a/sound/soc/codecs/aw87xxx/aw87xxx_monitor.c b/sound/soc/codecs/aw87xxx/aw87xxx_monitor.c
 new file mode 100644
-index 0000000000000..f580506b27864
+index 000000000000..f580506b2786
 --- /dev/null
 +++ b/sound/soc/codecs/aw87xxx/aw87xxx_monitor.c
 @@ -0,0 +1,1208 @@
@@ -7041,7 +6884,7 @@ index 0000000000000..f580506b27864
 +
 diff --git a/sound/soc/codecs/aw87xxx/aw87xxx_monitor.h b/sound/soc/codecs/aw87xxx/aw87xxx_monitor.h
 new file mode 100644
-index 0000000000000..daf9f2bfa09f5
+index 000000000000..daf9f2bfa09f
 --- /dev/null
 +++ b/sound/soc/codecs/aw87xxx/aw87xxx_monitor.h
 @@ -0,0 +1,96 @@
@@ -7143,7 +6986,7 @@ index 0000000000000..daf9f2bfa09f5
 +#endif
 diff --git a/sound/soc/codecs/aw87xxx/aw87xxx_pid_18_reg.h b/sound/soc/codecs/aw87xxx/aw87xxx_pid_18_reg.h
 new file mode 100644
-index 0000000000000..74d6548db91e3
+index 000000000000..74d6548db91e
 --- /dev/null
 +++ b/sound/soc/codecs/aw87xxx/aw87xxx_pid_18_reg.h
 @@ -0,0 +1,2315 @@
@@ -9465,7 +9308,7 @@ index 0000000000000..74d6548db91e3
 \ No newline at end of file
 diff --git a/sound/soc/codecs/aw87xxx/aw87xxx_pid_39_reg.h b/sound/soc/codecs/aw87xxx/aw87xxx_pid_39_reg.h
 new file mode 100644
-index 0000000000000..0dfd9751c39e5
+index 000000000000..0dfd9751c39e
 --- /dev/null
 +++ b/sound/soc/codecs/aw87xxx/aw87xxx_pid_39_reg.h
 @@ -0,0 +1,67 @@
@@ -9538,7 +9381,7 @@ index 0000000000000..0dfd9751c39e5
 +#endif
 diff --git a/sound/soc/codecs/aw87xxx/aw87xxx_pid_59_3x9_reg.h b/sound/soc/codecs/aw87xxx/aw87xxx_pid_59_3x9_reg.h
 new file mode 100644
-index 0000000000000..67f73477b892a
+index 000000000000..67f73477b892
 --- /dev/null
 +++ b/sound/soc/codecs/aw87xxx/aw87xxx_pid_59_3x9_reg.h
 @@ -0,0 +1,93 @@
@@ -9637,7 +9480,7 @@ index 0000000000000..67f73477b892a
 +#endif
 diff --git a/sound/soc/codecs/aw87xxx/aw87xxx_pid_59_5x9_reg.h b/sound/soc/codecs/aw87xxx/aw87xxx_pid_59_5x9_reg.h
 new file mode 100644
-index 0000000000000..6a0cae4c49acc
+index 000000000000..6a0cae4c49ac
 --- /dev/null
 +++ b/sound/soc/codecs/aw87xxx/aw87xxx_pid_59_5x9_reg.h
 @@ -0,0 +1,94 @@
@@ -9737,7 +9580,7 @@ index 0000000000000..6a0cae4c49acc
 +#endif
 diff --git a/sound/soc/codecs/aw87xxx/aw87xxx_pid_5a_reg.h b/sound/soc/codecs/aw87xxx/aw87xxx_pid_5a_reg.h
 new file mode 100644
-index 0000000000000..020bf5496d013
+index 000000000000..020bf5496d01
 --- /dev/null
 +++ b/sound/soc/codecs/aw87xxx/aw87xxx_pid_5a_reg.h
 @@ -0,0 +1,4124 @@
@@ -13868,7 +13711,7 @@ index 0000000000000..020bf5496d013
 \ No newline at end of file
 diff --git a/sound/soc/codecs/aw87xxx/aw87xxx_pid_60_reg.h b/sound/soc/codecs/aw87xxx/aw87xxx_pid_60_reg.h
 new file mode 100644
-index 0000000000000..ba47dd1ff546f
+index 000000000000..7e0eb0795e0d
 --- /dev/null
 +++ b/sound/soc/codecs/aw87xxx/aw87xxx_pid_60_reg.h
 @@ -0,0 +1,5246 @@
@@ -14595,7 +14438,7 @@ index 0000000000000..ba47dd1ff546f
 +	(AW87XXX_PID_60_PA_GAIN_27DB << AW87XXX_PID_60_PA_GAIN_START_BIT)
 +/*
 +Fix me here:
-+reg_addr:0x05, reg_name:PAG, field_name:PA_GAIN, content:when RCV_MODE=0ï¿½ï¿½PA_GAIN  defaultï¿½ï¿½ 10000
++reg_addr:0x05, reg_name:PAG, field_name:PA_GAIN, content:when RCV_MODE=0£¬PA_GAIN  default£º 10000
 +maybe need to fix manually
 +*/
 +#define AW87XXX_PID_60_PA_GAIN_DEFAULT_VALUE	(0x10)
@@ -19105,7 +18948,7 @@ index 0000000000000..ba47dd1ff546f
 +	(AW87XXX_PID_60_PRODUCT_REG_ENCRY_AW87501 << AW87XXX_PID_60_PRODUCT_REG_ENCRY_START_BIT)
 +/*
 +Fix me here:
-+reg_addr:0x7C, reg_name:ENCR, field_name:PRODUCT_REG_ENCRY, content:Production encryption  register (when0x7D=7a & test_Reg_Encry=11 ï¿½ï¿½
++reg_addr:0x7C, reg_name:ENCR, field_name:PRODUCT_REG_ENCRY, content:Production encryption  register (when0x7D=7a & test_Reg_Encry=11 £©
 +maybe need to fix manually
 +*/
 +#define AW87XXX_PID_60_PRODUCT_REG_ENCRY_DEFAULT_VALUE	(0x1)
@@ -19121,7 +18964,7 @@ index 0000000000000..ba47dd1ff546f
 \ No newline at end of file
 diff --git a/sound/soc/codecs/aw87xxx/aw87xxx_pid_76_reg.h b/sound/soc/codecs/aw87xxx/aw87xxx_pid_76_reg.h
 new file mode 100644
-index 0000000000000..13280cdb5b2ef
+index 000000000000..13280cdb5b2e
 --- /dev/null
 +++ b/sound/soc/codecs/aw87xxx/aw87xxx_pid_76_reg.h
 @@ -0,0 +1,1205 @@
@@ -20333,7 +20176,7 @@ index 0000000000000..13280cdb5b2ef
 \ No newline at end of file
 diff --git a/sound/soc/codecs/aw87xxx/aw87xxx_pid_9b_reg.h b/sound/soc/codecs/aw87xxx/aw87xxx_pid_9b_reg.h
 new file mode 100644
-index 0000000000000..27baeb96ce7ca
+index 000000000000..27baeb96ce7c
 --- /dev/null
 +++ b/sound/soc/codecs/aw87xxx/aw87xxx_pid_9b_reg.h
 @@ -0,0 +1,81 @@
@@ -20418,69 +20261,6 @@ index 0000000000000..27baeb96ce7ca
 +	(AW87XXX_PID_9B_SPK_MODE_ENABLE << AW87XXX_PID_9B_SPK_MODE_START_BIT)
 +
 +#endif
+-- 
+2.55.0
 
-From e27ec596474731af0618a9239d6b288483256628 Mon Sep 17 00:00:00 2001
-From: Hijae Song <hijae@naver.com>
-Date: Tue, 25 Aug 2026 15:25:52 +0900
-Subject: [PATCH 2/2] fix: aw87xxx: drop unused linux/of_gpio.h include
-
-linux/of_gpio.h has been removed from the tree. None of these
-files actually use anything from it (no of_gpio_* calls), so drop
-the dead include to fix the build.
-
-Signed-off-by: Hijae Song <hijae@naver.com>
----
- sound/soc/codecs/aw87xxx/aw87xxx.c           | 1 -
- sound/soc/codecs/aw87xxx/aw87xxx_bin_parse.c | 1 -
- sound/soc/codecs/aw87xxx/aw87xxx_device.c    | 1 -
- sound/soc/codecs/aw87xxx/aw87xxx_monitor.c   | 1 -
- 4 files changed, 4 deletions(-)
-
-diff --git a/sound/soc/codecs/aw87xxx/aw87xxx.c b/sound/soc/codecs/aw87xxx/aw87xxx.c
-index 3d732400e4491..18b29f6092192 100644
---- a/sound/soc/codecs/aw87xxx/aw87xxx.c
-+++ b/sound/soc/codecs/aw87xxx/aw87xxx.c
-@@ -16,7 +16,6 @@
- #include <sound/pcm.h>
- #include <sound/pcm_params.h>
- #include <linux/gpio.h>
--#include <linux/of_gpio.h>
- #include <linux/gpio/consumer.h>
- #include <linux/interrupt.h>
- #include <linux/delay.h>
-diff --git a/sound/soc/codecs/aw87xxx/aw87xxx_bin_parse.c b/sound/soc/codecs/aw87xxx/aw87xxx_bin_parse.c
-index ccf475e4c94d3..967662628399f 100644
---- a/sound/soc/codecs/aw87xxx/aw87xxx_bin_parse.c
-+++ b/sound/soc/codecs/aw87xxx/aw87xxx_bin_parse.c
-@@ -12,7 +12,6 @@
- #include <linux/module.h>
- #include <linux/kernel.h>
- #include <linux/i2c.h>
--#include <linux/of_gpio.h>
- #include <linux/delay.h>
- #include <linux/device.h>
- #include <linux/firmware.h>
-diff --git a/sound/soc/codecs/aw87xxx/aw87xxx_device.c b/sound/soc/codecs/aw87xxx/aw87xxx_device.c
-index a4c9ad7d96dca..8619aacc2ccfe 100644
---- a/sound/soc/codecs/aw87xxx/aw87xxx_device.c
-+++ b/sound/soc/codecs/aw87xxx/aw87xxx_device.c
-@@ -14,7 +14,6 @@
- 
- #include <linux/i2c.h>
- #include <linux/gpio.h>
--#include <linux/of_gpio.h>
- #include <linux/interrupt.h>
- #include <linux/delay.h>
- #include <linux/kernel.h>
-diff --git a/sound/soc/codecs/aw87xxx/aw87xxx_monitor.c b/sound/soc/codecs/aw87xxx/aw87xxx_monitor.c
-index f580506b27864..61adba6b6169e 100644
---- a/sound/soc/codecs/aw87xxx/aw87xxx_monitor.c
-+++ b/sound/soc/codecs/aw87xxx/aw87xxx_monitor.c
-@@ -23,7 +23,6 @@
- #include <linux/hrtimer.h>
- #include <linux/i2c.h>
- #include <linux/gpio.h>
--#include <linux/of_gpio.h>
- #include <linux/interrupt.h>
- #include <linux/irq.h>
- #include <linux/firmware.h>

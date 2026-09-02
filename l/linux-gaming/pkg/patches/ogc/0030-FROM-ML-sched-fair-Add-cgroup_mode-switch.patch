@@ -1,7 +1,7 @@
 From d4515208252de1dd81588af3685b56c87604b072 Mon Sep 17 00:00:00 2001
 From: Peter Zijlstra <peterz@infradead.org>
 Date: Thu, 12 Mar 2026 14:48:44 +0100
-Subject: [PATCH 030/148] [FROM-ML] sched/fair: Add cgroup_mode switch
+Subject: [PATCH 030/164] [FROM-ML] sched/fair: Add cgroup_mode switch
 
 The effective task weight (W_t') for a task in cgroup g on CPU n is given by:
 

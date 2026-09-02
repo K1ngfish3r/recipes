@@ -1,7 +1,7 @@
 From 6e381b9ae98180b12f287527f5cfabe2424d7b17 Mon Sep 17 00:00:00 2001
 From: Andrea Righi <arighi@nvidia.com>
 Date: Tue, 4 Aug 2026 17:13:24 +0200
-Subject: [PATCH 052/148] [FROM-ML] sched/fair: Prefer fully idle cores for
+Subject: [PATCH 052/164] [FROM-ML] sched/fair: Prefer fully idle cores for
  NOHZ balancing
 
 find_new_ilb() selects the first idle housekeeping CPU without

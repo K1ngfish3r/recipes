@@ -1,6 +1,8 @@
 # Upstream patches
 upstream/0000-iwlwifi-fix.patch
 upstream/0000-drm-amdgpu-fix-race-condition-in-amdgpu_vm_wait_idle-during-process-kill.patch
+# https://gitlab.freedesktop.org/drm/amd/-/work_items/5490
+upstream/amdgpu/0001-drm-amd-display-Fix-HPD-consideration-for-VGA-LVDS-connectors-on-DCE.patch
 
 # Enable x86_64-v2 build optimisations
 more-ISA-levels-and-uarches-for-kernel-6.16+.patch
@@ -155,13 +157,22 @@ ogc/0145-MAINTAINED-EXTERNALLY-hid-asus-ally-Separate-trigger.patch
 ogc/0146-MAINTAINED-EXTERNALLY-hid-asus-ally-add-sleep_animat.patch
 ogc/0147-FROM-ML-drm-amd-display-restore-FRL-cap-on-non-destr.patch
 ogc/0148-FROM-ML-drm-amd-display-Force-FreeSync-range-minimum.patch
-# https://github.com/OpenGamingCollective/linux/pull/102
-ogc/PRs/stable/PR102/102.patch
-ogc/PRs/stable/PR102/0000-fixup.patch
-# https://github.com/OpenGamingCollective/linux/pull/105
-ogc/PRs/stable/PR105/105.patch
-# https://github.com/OpenGamingCollective/linux/pull/106
-ogc/PRs/stable/PR106/106.patch
+ogc/0149-FROM-ML-platform-x86-asus-armoury-fix-sysfs_notify-o.patch
+ogc/0150-FROM-ML-platform-x86-asus-armoury-fix-pending_reboot.patch
+ogc/0151-FROM-ML-platform-x86-asus-wmi-validate-custom-fan-cu.patch
+ogc/0152-MAINTAINED-EXTERNALLY-tmp-apply-zotac-screen-quirk.patch
+ogc/0153-FOR-UPSTREAM-drm-panel_orientation_quirks-Add-missin.patch
+ogc/0154-FROM-ML-lib-group_cpus-Snapshot-cluster-masks-to-kee.patch
+ogc/0155-NOT-FOR-UPSTREAM-Codec-Add-aw87xxx-codec-with-partia.patch
+ogc/0156-NOT-FOR-UPSTREAM-Updated-AW87xxx-driver-to-be-more-v.patch
+ogc/0157-NOT-FOR-UPSTREAM-Updated-AW87xxx-driver-to-automatic.patch
+ogc/0158-NOT-FOR-UPSTREAM-Updated-AW87xxx-driver-to-implement.patch
+ogc/0159-NOT-FOR-UPSTREAM-fixup-aw87xxx.-c-h-warnings.patch
+ogc/0160-NOT-FOR-UPSTREAM-aw87xxx-add-DMI-based-firmware-file.patch
+ogc/0161-NOT-FOR-UPSTREAM-aw87xxx-drop-unused-linux-of_gpio.h.patch
+ogc/0162-NOT-FOR-UPSTREAM-aw87xxx-add-compat-shim-for-snd_soc.patch
+ogc/0163-NOT-FOR-UPSTREAM-aw87xxx-request-the-reset-GPIO-when.patch
+ogc/0164-NOT-FOR-UPSTREAM-ALSA-hda-realtek-Add-Ayaneo-Air-1S-.patch
 # https://github.com/OpenGamingCollective/linux-unstable/pull/6
 # https://github.com/Lawstorant/linux/tree/hdmi-7.2
 # https://gitlab.freedesktop.org/drm/amd/-/work_items/5649
@@ -186,7 +197,6 @@ gaming/0016-wifi-ath11k-Rename-QCA2066-fw-dir-to-QCA206X.patch
 # ZOTAC patches by Luke and Philip
 zotac/0001-zotac-zone-hid-initial-impl.patch
 zotac/0002-xpad-gate-the-zotac-zone-PID-behind-if-IS_REACHABLE-.patch
-zotac/0003-tmp-apply-zotac-screen-quirk.patch
 zotac/0005-zone-fix-6.15-rename-del_timer-to-timer_delete.patch
 
 # MS Surface device patches
