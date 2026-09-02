@@ -1,0 +1,30 @@
+From fa73ebfc5af79166e8d0d9b8ab68e13a0bdeb320 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Tomasz=20Paku=C5=82a?= <tomasz.pakula.oficjalny@gmail.com>
+Date: Sun, 1 Mar 2026 19:41:35 +0100
+Subject: [PATCH] Force freesync_on_desktop for HDMI
+
+Enable freesync_on_desktop for HDMI streams so the display can keep
+FreeSync enabled during normal desktop use.
+
+This allows the HDMI VRR path to support fixed-refresh desktop
+operation while retaining FreeSync signaling for the display.
+
+---
+ drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
+index e16621acbf1574..38b701c2866875 100644
+--- a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
++++ b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
+@@ -10053,6 +10053,10 @@ static void update_stream_irq_parameters(
+ 						     VRR_STATE_ACTIVE_VARIABLE :
+ 						     VRR_STATE_INACTIVE;
+ 		}
++
++		/* Enable freesync on desktop for HDMI */
++		if (dc_is_hdmi_signal(new_stream->signal))
++			new_stream->freesync_on_desktop = true;
+ 	} else {
+ 		config.state = VRR_STATE_UNSUPPORTED;
+ 	}
