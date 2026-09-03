@@ -2,10 +2,10 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name        : multipath-tools
-version     : "0.15.0"
-release     : 3
+version     : "0.15.1"
+release     : 4
 upstreams   :
-    - https://github.com/opensvc/multipath-tools/archive/refs/tags/0.15.0.tar.gz : 23e8500f7d12f1fbc571aafbcdaa4a07e9a1ec46920078ce92882ca6d71d45c7
+    - https://github.com/opensvc/multipath-tools/archive/refs/tags/0.15.1.tar.gz : 99e4a4b8c245479dd5c5d473a031acb67d752b94dcd76be172279cd445845421
 homepage    : https://github.com/opensvc/multipath-tools
 license     :
     - GPL-2.0-or-later
