@@ -2,11 +2,11 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name        : dgop
-version     : "0.2.3"
-release     : 1
+version     : "1.6.0"
+release     : 2
 homepage    : https://github.com/AvengeMedia/dgop
 upstreams   :
-    - https://github.com/AvengeMedia/dgop/archive/refs/tags/v0.2.3.zip : 2307a2e7ed6180c59b01bf258aaf8fbe1e8d6376cb1c5dc3608e5ff66b28c4ad
+    - https://github.com/AvengeMedia/dgop/archive/refs/tags/v1.6.0.zip : 573519e148f84ac7d8109a697d22f41144e47a59da9ce0700ee15fad706b7aa5
 summary     : System monitoring tool with CLI & REST API built in Go
 description : |
     dgop is a stateless system and process monitoring tool that provides a top-like tui,
