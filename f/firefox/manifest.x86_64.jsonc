@@ -119,9 +119,11 @@
 				"/usr/share/gnome-shell/search-providers/org.mozilla.firefox.search-provider.ini",
 				"/usr/share/icons/hicolor/128x128/apps/org.mozilla.firefox.png",
 				"/usr/share/icons/hicolor/16x16/apps/org.mozilla.firefox.png",
+				"/usr/share/icons/hicolor/192x192/apps/org.mozilla.firefox.png",
 				"/usr/share/icons/hicolor/32x32/apps/org.mozilla.firefox.png",
 				"/usr/share/icons/hicolor/48x48/apps/org.mozilla.firefox.png",
 				"/usr/share/icons/hicolor/64x64/apps/org.mozilla.firefox.png",
+				"/usr/share/icons/hicolor/scalable/apps/org.mozilla.firefox.svg",
 				"/usr/share/icons/hicolor/symbolic/apps/firefox-symbolic.svg"
 			],
 			"name": "firefox",
@@ -142,6 +144,6 @@
 		}
 	},
 	"source-name": "firefox",
-	"source-release": "82",
+	"source-release": "83",
 	"source-version": "155.0"
 }

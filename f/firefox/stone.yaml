@@ -3,12 +3,17 @@
 
 name        : firefox
 version     : "155.0"
-release     : 82
+release     : 83
 homepage    : https://www.mozilla.org/
 upstreams   :
     - https://releases.mozilla.org/pub/firefox/releases/155.0/source/firefox-155.0.source.tar.xz:
         hash: c57fd59835f8c5b9c7f68bead2782238c11d8626b57509cc809915b0b4d70dfb
         unpackdir: firefox
+
+    # This should _usually_ be the latest version. Make sure you check which LLVM version is used for this and update the WASI_SDK_LLVM_VER below accordingly
+    - https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-34/wasi-sdk-34.0-x86_64-linux.tar.gz:
+        hash: b761e3a0721dbae9c09a0059e5fdb2bf917d1b4a8a7b430fb3b5aafb0984b2c4
+        unpackdir: firefox/wasi-sdk
 summary     : Firefox web browser
 description : |
     Firefox web browser
@@ -54,8 +59,8 @@ environment : |
     # Note that you still need to do a full release build locally and test it before pushing it
     FULL_BUILD=1
 
+    # Skip desktop notifications for build events
     export MOZ_NOSPAM=1
-    export PIP_NETWORK_INSTALL_RESTRICTED_VIRTUALENVS=mach
 
     # Saves some time compressing the archive when we're just going to immediately decompress it to install it
     # Saves about 23 seconds on the build server. Very important.
@@ -68,29 +73,44 @@ environment : |
     export CXX=clang++-22
     export LLVM_PROFDATA="llvm-profdata-22"
 
+    # These need to match the version of LLVM in the wasm-sdk
+    WASI_SDK_LLVM_VER=23
+
     # Temporarily disabled due to mozshellutil build failure
     # 2026-09-02 Update: Still bork
     # export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE="none"
+    export PIP_NETWORK_INSTALL_RESTRICTED_VIRTUALENVS=mach
+
     export MOZ_BUILD_DATE="$(date -u${SOURCE_DATE_EPOCH:+d @$SOURCE_DATE_EPOCH} +%%Y%%m%%d%%H%%M%%S)"
 setup       : |
     # Looks like this causes build hangs because it disables the watchdog...
-    # %%patch %(pkgdir)/patches/pgo.patch
     %patch %(pkgdir)/patches/0001-Fix-Firefox-Thunderbird-envvar-conflicts.patch
     %patch %(pkgdir)/patches/0001-Allow-installing-addons-from-user-scope.patch
+    %patch %(pkgdir)/patches/wasm-sdk.patch
 
     # Fixes a build issue with PGO introduced with f1d273acc9442cc43a8c340a86056fbc4ad85d57. Unknown if there's an upstream fix
     %patch %(pkgdir)/patches/pgo-simple-programs-2.patch
 
     # TODO: Figure out if we still need to enable unsigned addon loading considering we switched back to unmodified langpacks
 
-    cp %(pkgdir)/build/mozconfig .
-    sed -e 's|@@JOBCOUNT@@|%(jobs)|' -e 's|@@LIBDIR@@|%(libdir)|' -i mozconfig
+    cp %(pkgdir)/build/mozconfig mozconfig.save
+    sed -e 's|@@JOBCOUNT@@|%(jobs)|' \
+        -e 's|@@LIBDIR@@|%(libdir)|' \
+        -e 's|@@WASI@@|%(workdir)/wasi-sdk|' \
+        -i mozconfig.save
+
+    sed -i \
+        -e 's|@@BOULDER_WORKDIR@@|%(workdir)|' \
+        -e "s|@@WASI_SDK_LLVM_VER@@|${WASI_SDK_LLVM_VER}|" \
+        toolkit/moz.configure
+
+    cp mozconfig.save mozconfig
 
     if [ $FULL_BUILD -ne 0 ]; then
         # PGO build, no LTO
         echo "ac_add_options --enable-profile-generate=cross" >> mozconfig
     else
-        # Might as well do it with LTO
+        # Might as well do it with full LTO
         echo "ac_add_options MOZ_LTO=cross,full" >> mozconfig
         echo "ac_add_options --enable-lto=cross,full" >> mozconfig
     fi
@@ -109,18 +129,10 @@ build       : |
         # Much of this taken from https://github.com/chaotic-aur/packages/blob/main/firefox-nightly/PKGBUILD
         env \
             JARLOG_FILE="${PWD}/jarlog" \
-            XDG_RUNTIME_DIR="$(mktemp -p $(pwd) -d xdg-runtime-XXXXXX)" \
             LIBGL_ALWAYS_SOFTWARE=true \
-            MOZ_DISABLE_CONTENT_SANDBOX=1 \
-            MOZ_DISABLE_GMP_SANDBOX=1 \
-            MOZ_DISABLE_GPU_SANDBOX=1 \
-            MOZ_DISABLE_RDD_SANDBOX=1 \
-            MOZ_DISABLE_SOCKET_PROCESS_SANDBOX=1 \
-            MOZ_DISABLE_UTILITY_SANDBOX=1 \
-            MOZ_DISABLE_VR_SANDBOX=1 \
-            GTK_A11Y=none \
-            NO_AT_BRIDGE=1 \
+            LLVM_PROFDATA="${LLVM_PROFDATA:-llvm-profdata}" \
             MOZ_REMOTE_SETTINGS_DEVTOOLS=1 \
+            XDG_RUNTIME_DIR="$(mktemp -p $(pwd) -d xdg-runtime-XXXXXX)" \
         dbus-run-session \
             wlheadless-run \
                 -c weston --width=1920 --height=1080 \
@@ -136,8 +148,7 @@ build       : |
         ./mach clobber objdir
 
         # Reset mozconfig
-        rm mozconfig && cp %(pkgdir)/build/mozconfig .
-        sed -e 's|@@JOBCOUNT@@|%(jobs)|' -e 's|@@LIBDIR@@|%(libdir)|' -i mozconfig
+        cp mozconfig.save mozconfig
 
         # Enable LTO
         echo "ac_add_options MOZ_LTO=cross,full" >> mozconfig
@@ -157,6 +168,9 @@ install     : |
         %install_dir %(installroot)/%(datadir)/icons/hicolor/${i}x${i}/apps
         ln -srv %(installroot)/%(libdir)/firefox/browser/chrome/icons/default/default${i}.png %(installroot)/%(datadir)/icons/hicolor/${i}x${i}/apps/org.mozilla.firefox.png
     done
+
+    %install_file browser/branding/official/content/about-logo.png %(installroot)/%(datadir)/icons/hicolor/192x192/apps/org.mozilla.firefox.png
+    %install_file browser/branding/official/content/about-logo.svg %(installroot)/%(datadir)/icons/hicolor/scalable/apps/org.mozilla.firefox.svg
 
     %install_file %(pkgdir)/install/firefox-symbolic.svg %(installroot)%(datadir)/icons/hicolor/symbolic/apps/firefox-symbolic.svg
     %install_file %(pkgdir)/install/org.mozilla.firefox.desktop %(installroot)%(datadir)/applications/org.mozilla.firefox.desktop
