@@ -1,7 +1,7 @@
 From 1c43de43514e909dc474019eaf6addffeeaab850 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Tomasz=20Paku=C5=82a?= <tomasz.pakula.oficjalny@gmail.com>
 Date: Tue, 3 Feb 2026 18:56:14 +0000
-Subject: [PATCH 001/164] [FROM-ML] drm/amd/display: Add CH7218 PCON ID
+Subject: [PATCH 001/172] [FROM-ML] drm/amd/display: Add CH7218 PCON ID
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

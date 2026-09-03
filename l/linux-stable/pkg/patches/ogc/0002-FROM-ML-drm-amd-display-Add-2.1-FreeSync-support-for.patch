@@ -1,7 +1,7 @@
 From de5bbf97e4fab33a0c86419af662ce5d6eb4985e Mon Sep 17 00:00:00 2001
 From: Fangzhi Zuo <Jerry.Zuo@amd.com>
 Date: Fri, 14 Aug 2026 12:43:41 -0400
-Subject: [PATCH 002/164] [FROM-ML] drm/amd/display: Add 2.1 FreeSync support
+Subject: [PATCH 002/172] [FROM-ML] drm/amd/display: Add 2.1 FreeSync support
  for AMD VSDB EDID Block
 
 why:
