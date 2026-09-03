@@ -10,7 +10,7 @@ upstreams   :
         hash: c57fd59835f8c5b9c7f68bead2782238c11d8626b57509cc809915b0b4d70dfb
         unpackdir: firefox
 
-    # This should _usually_ be the latest version. Make sure you check which LLVM version is used for this and update the WASI_SDK_LLVM_VER below accordingly
+    # This should _usually_ be the latest version unless it's somehow incompatible with the used LLVM toolchain
     - https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-34/wasi-sdk-34.0-x86_64-linux.tar.gz:
         hash: b761e3a0721dbae9c09a0059e5fdb2bf917d1b4a8a7b430fb3b5aafb0984b2c4
         unpackdir: firefox/wasi-sdk
@@ -73,9 +73,6 @@ environment : |
     export CXX=clang++-22
     export LLVM_PROFDATA="llvm-profdata-22"
 
-    # These need to match the version of LLVM in the wasm-sdk
-    WASI_SDK_LLVM_VER=23
-
     # Temporarily disabled due to mozshellutil build failure
     # 2026-09-02 Update: Still bork
     # export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE="none"
@@ -97,6 +94,8 @@ setup       : |
         -e 's|@@LIBDIR@@|%(libdir)|' \
         -e 's|@@WASI@@|%(workdir)/wasi-sdk|' \
         -i mozconfig.save
+
+    WASI_SDK_LLVM_VER=$(grep llvm-version wasi-sdk/VERSION | cut -d ' ' -f2 | cut -d '.' -f1)
 
     sed -i \
         -e 's|@@BOULDER_WORKDIR@@|%(workdir)|' \
