@@ -235,13 +235,12 @@
 				"iproute2"
 			],
 			"files": [
-				"/usr/include/iproute2/bpf_elf.h",
-				"/usr/share/man/man3/libnetlink.3"
+				"/usr/include/iproute2/bpf_elf.h"
 			],
 			"name": "iproute2-devel"
 		}
 	},
 	"source-name": "iproute2",
-	"source-release": "15",
-	"source-version": "7.1.0"
+	"source-release": "16",
+	"source-version": "7.2.0"
 }
