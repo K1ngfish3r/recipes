@@ -2,11 +2,11 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name        : prism-launcher
-version     : "11.0.3"
-release     : 9
+version     : "11.1.0"
+release     : 10
 homepage    : https://github.com/PrismLauncher/PrismLauncher
 upstreams   :
-    - https://github.com/PrismLauncher/PrismLauncher/releases/download/11.0.3/PrismLauncher-11.0.3.tar.gz : 78c368140a4d49bf2a12ef0e03d045c6723fe8e5a5c9590668fb63ee0a264ef2
+    - https://github.com/PrismLauncher/PrismLauncher/releases/download/11.1.0/PrismLauncher-11.1.0.tar.gz : c0f6965f6c61055f92872d6eb9e79b845d3684f03bfd5a2ffc533a29fb26e604
 summary     : A custom launcher for Minecraft
 description : |
     A custom launcher for Minecraft that allows you to easily manage multiple installations of Minecraft at once (Fork of MultiMC)
