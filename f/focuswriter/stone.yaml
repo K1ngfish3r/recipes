@@ -1,0 +1,29 @@
+# SPDX-FileCopyrightText: 2025 AerynOS Developers
+# SPDX-License-Identifier: MPL-2.0
+
+name        : focuswriter
+version     : "1.9.1"
+release     : 1
+upstreams   :
+    - https://gottcode.org/focuswriter/focuswriter-1.9.1.tar.bz2 : e6e2ac78c45f0331d8ebd33517910ae13a839b0288e4315a8429ba026900f211
+homepage    : https://gottcode.org/focuswriter/
+license     : GPL-3.0-or-later
+summary     : Simple, distraction-free word processor
+builddeps   :
+    - binary(msgfmt)
+    - cmake(KDSingleApplication-qt6)
+    - cmake(Qt6)
+    - cmake(Qt6LinguistTools)
+    - cmake(Qt6Multimedia)
+    - pkgconfig(hunspell)
+    - pkgconfig(zlib)
+rundeps     :
+    - qt6-wayland
+description : |
+    Simple, distraction-free word processor
+setup       : |
+    %cmake
+build       : |
+    %cmake_build
+install     : |
+    %cmake_install

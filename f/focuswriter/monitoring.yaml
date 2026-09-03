@@ -1,0 +1,9 @@
+# SPDX-FileCopyrightText: 2025 AerynOS Developers
+# SPDX-License-Identifier: MPL-2.0
+
+releases:
+  id: 825
+  rss: https://github.com/gottcode/focuswriter/tags.atom
+# Last checked: 20240503
+security:
+  cpe: ~
