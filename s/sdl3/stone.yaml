@@ -2,11 +2,11 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name        : sdl3
-version     : "3.4.14"
-release     : 18
+version     : "3.4.16"
+release     : 19
 homepage    : https://libsdl.org
 upstreams   :
-    - https://github.com/libsdl-org/SDL/releases/download/release-3.4.14/SDL3-3.4.14.tar.gz : 30d4aa2b3037718142b32dffd4e72f917ebb6cc5227150e7bb9c45efb2153aeb
+    - https://github.com/libsdl-org/SDL/releases/download/release-3.4.16/SDL3-3.4.16.tar.gz : 7322236cd12090c3eb40b9728be4d49c76f66ad17d04369584d4ecad5cf77c68
 summary     : Simple DirectMedia Library
 description : |
     Simple DirectMedia Library
