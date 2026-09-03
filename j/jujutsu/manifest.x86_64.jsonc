@@ -41,6 +41,7 @@
 				"/usr/share/man/man1/jj-config-set.1",
 				"/usr/share/man/man1/jj-config-unset.1",
 				"/usr/share/man/man1/jj-config.1",
+				"/usr/share/man/man1/jj-converge.1",
 				"/usr/share/man/man1/jj-describe.1",
 				"/usr/share/man/man1/jj-diff.1",
 				"/usr/share/man/man1/jj-diffedit.1",
@@ -146,6 +147,6 @@
 		}
 	},
 	"source-name": "jujutsu",
-	"source-release": "15",
-	"source-version": "0.44.0"
+	"source-release": "16",
+	"source-version": "0.45.0"
 }
