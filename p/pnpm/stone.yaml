@@ -2,36 +2,28 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name        : pnpm
-version     : "11.19.0"
-release     : 7
+version     : "12.3.1"
+release     : 8
 homepage    : https://pnpm.io
 upstreams   :
-    - https://registry.npmjs.org/pnpm/-/pnpm-11.19.0.tgz : b9e49603540d04107b98e93917a30e6114970d403c23e40309a44ea9c2bca7fd
+    - https://github.com/pnpm/pnpm/archive/refs/tags/v12.3.1.tar.gz : 24984620f95e2236a5d60ddbaeaad6dc54663e27eee8b29ffa24f13dd8fe16de
 summary     : Fast, disk space efficient package manager
 description : |
     Fast, disk space efficient package manager
 license     : MIT
-builddeps   :
-    - binary(npm-22)
-    - binary(npm-24)
+networking  : true
 rundeps     :
-    - binary(make)
-    - binary(npm)
-    - binary(python) # This is technically required by node-gyp but that's not split
+    - binary(node)
+setup       : |
+    %cargo_fetch
+build       : |
+    %cargo_build -p pnpm-cli --bin pnpm
 install     : |
-    OLDPATH=${PATH}
+    %cargo_install
 
-    # Nodejs-22 (non-default)
-    mkdir tmpinstall
-    export PATH=/usr/lib/nodejs-22/bin:$OLDPATH
-    npm install -g --prefix tmpinstall %(sourcedir)/pnpm-%(version).tgz
+    # Aliases upstream ships next to the binary in its npm package
+    %install_bin pnpm/npm/pnpm/{pn,pnpx,pnx}
 
-    # We only care about the node_modules for non-default nodejs versions
-    mkdir -p %(installroot)%(libdir)/
-    mv tmpinstall/lib/node_modules %(installroot)%(libdir)/node_modules_22
-
-    # Nodejs-24 (default)
-    export PATH=/usr/lib/nodejs-24/bin:$OLDPATH
-    npm install -g --prefix %(installroot)%(prefix) %(sourcedir)/pnpm-%(version).tgz
-
-    mv %(installroot)%(libdir)/node_modules %(installroot)%(libdir)/node_modules_24
+    %(cargo_target_dir)/pnpm completion bash | %install_file /dev/stdin %(installroot)%(bashcompletionsdir)/pnpm
+    %(cargo_target_dir)/pnpm completion fish | %install_file /dev/stdin %(installroot)%(fishcompletionsdir)/pnpm.fish
+    %(cargo_target_dir)/pnpm completion zsh | %install_file /dev/stdin %(installroot)%(zshcompletionsdir)/_pnpm
