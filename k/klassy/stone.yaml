@@ -2,10 +2,10 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name        : klassy
-version     : "6.7.1"
-release     : 6
+version     : "6.7.2"
+release     : 7
 upstreams   :
-    - https://github.com/paulmcauley/klassy/archive/refs/tags/v6.7.1.tar.gz : 663aefe67d9a86f4fd7e0203bcf674850b03d4a1f10ba2ad106f4fd3eac51987
+    - https://github.com/paulmcauley/klassy/archive/refs/tags/v6.7.2.tar.gz : 00e4ba3986e019f7156442e9cac613c621a68fd868fe17e25ca0b45180d26661
 homepage    : https://github.com/paulmcauley/klassy
 license     :
     - BSD-3-Clause
