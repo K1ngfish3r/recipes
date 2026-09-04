@@ -3,7 +3,7 @@
 
 name        : zxing-cpp
 version     : "3.1.1"
-release     : 7
+release     : 8
 upstreams   :
     - https://github.com/zxing-cpp/zxing-cpp/releases/download/v3.1.1/zxing-cpp-3.1.1.tar.gz : c3c02c29c0b519de7bd4e25b376e606e87f0761befd1282815642a2246613d14
 homepage    : https://github.com/zxing-cpp/zxing-cpp
@@ -28,10 +28,12 @@ setup       : |
     # ZXING_PYTHON_MODULE=ON builds the Python shared library but not the metadata, so we still need to build the wheel with pyproject
     %cmake \
         -DSTB_IMAGE_INCLUDE_DIR=%(includedir)/stb \
+        -DZXING_C_API=ON \
         -DZXING_EXAMPLES=OFF \
         -DZXING_PYTHON_INSTALL_LIBDIR=%(libdir) \
         -DZXING_PYTHON_MODULE=ON \
-        -DZXING_USE_BUNDLED_ZINT=OFF
+        -DZXING_USE_BUNDLED_ZINT=OFF \
+        -DZXING_WRITERS=BOTH
 build       : |
     %cmake_build
 

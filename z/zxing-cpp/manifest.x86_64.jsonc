@@ -80,12 +80,16 @@
 			"files": [
 				"/usr/include/ZXing/Barcode.h",
 				"/usr/include/ZXing/BarcodeFormat.h",
+				"/usr/include/ZXing/BitMatrix.h",
+				"/usr/include/ZXing/BitMatrixIO.h",
 				"/usr/include/ZXing/CharacterSet.h",
 				"/usr/include/ZXing/ContentType.h",
 				"/usr/include/ZXing/CreateBarcode.h",
 				"/usr/include/ZXing/Error.h",
 				"/usr/include/ZXing/GTIN.h",
 				"/usr/include/ZXing/ImageView.h",
+				"/usr/include/ZXing/Matrix.h",
+				"/usr/include/ZXing/MultiFormatWriter.h",
 				"/usr/include/ZXing/Point.h",
 				"/usr/include/ZXing/Quadrilateral.h",
 				"/usr/include/ZXing/ReadBarcode.h",
@@ -111,6 +115,6 @@
 		}
 	},
 	"source-name": "zxing-cpp",
-	"source-release": "7",
+	"source-release": "8",
 	"source-version": "3.1.1"
 }
