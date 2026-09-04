@@ -1262,6 +1262,7 @@
 				"/usr/lib/wine/x86_64-windows/localspl.dll",
 				"/usr/lib/wine/x86_64-windows/localui.dll",
 				"/usr/lib/wine/x86_64-windows/lodctr.exe",
+				"/usr/lib/wine/x86_64-windows/lsass.exe",
 				"/usr/lib/wine/x86_64-windows/lz32.dll",
 				"/usr/lib/wine/x86_64-windows/magnification.dll",
 				"/usr/lib/wine/x86_64-windows/makecab.exe",
@@ -4154,6 +4155,6 @@
 		}
 	},
 	"source-name": "wine",
-	"source-release": "37",
-	"source-version": "11.16"
+	"source-release": "38",
+	"source-version": "11.17"
 }
