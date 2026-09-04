@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 AerynOS Developers
+# SPDX-License-Identifier: MPL-2.0
+
+name        : ant
+version     : "1.10.17"
+release     : 1
+homepage    : https://ant.apache.org/
+upstreams   :
+    - https://dlcdn.apache.org/ant/binaries/apache-ant-1.10.17-bin.tar.gz : 9dc984c208585461e81ab34e9bbbfd9b25459956d7b105169ce9f148feded1e9
+summary     : Java library and command-line tool for building software
+description : |
+    Apache Ant is a Java library and command-line tool whose mission is to
+    drive processes described in build files as targets and extension points
+    dependent upon each other. The main known usage of Ant is the build of
+    Java applications.
+license     : Apache-2.0
+rundeps     :
+    - binary(java-25)
+install     : |
+    _ant_home="%(datadir)/%(name)"
+
+    %install_dir %(installroot)${_ant_home}
+    cp -a bin etc lib %(installroot)${_ant_home}/
+
+    # Remove Windows helpers
+    rm -f %(installroot)${_ant_home}/bin/*.{bat,cmd}
+
+    %install_exe %(pkgdir)/ant.sh %(installroot)%(bindir)/ant
