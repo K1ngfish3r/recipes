@@ -2,11 +2,11 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name        : egl-x11
-version     : "1.0.5"
-release     : 4
+version     : "1.0.6"
+release     : 5
 homepage    : https://github.com/NVIDIA/egl-x11
 upstreams   :
-    - https://github.com/NVIDIA/egl-x11/archive/refs/tags/v1.0.5.tar.gz : 92e22178b3aba63be4cb2bf8953991bdf52ad3e5ec26212143b2df46d16e82d7
+    - https://github.com/NVIDIA/egl-x11/archive/refs/tags/v1.0.6.tar.gz : 370870b0dea12dde0ddac0b77594ff94215cf2694ac0a5ded98f5d2f9864f6e0
 summary     : The X11/XCB external platform library
 description : |
     EGL platform library for the NVIDIA driver to support XWayland via xlib (using EGL_KHR_platform_x11) or xcb (using EGL_EXT_platform_xcb)
