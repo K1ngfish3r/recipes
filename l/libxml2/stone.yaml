@@ -2,16 +2,16 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name        : libxml2
-version     : "2.15.3"
-release     : 22
+version     : "2.15.4"
+release     : 23
 summary     : XML parsing library
 license     : MIT
 homepage    : http://www.xmlsoft.org/
 description : |
     XML parsing library
 upstreams   :
-    - https://download.gnome.org/sources/libxml2/2.15/libxml2-2.15.3.tar.xz:
-        hash: 78262a6e7ac170d6528ebfe2efccdf220191a5af6a6cd61ea4a9a9a5042c7a07
+    - https://download.gnome.org/sources/libxml2/2.15/libxml2-2.15.4.tar.xz:
+        hash: 98087fd181d9070724f3fbc65c7377db03038eb92bd882374daff44940138821
         unpackdir: current
 
     # Don't delete this section, just comment it out if it's not needed. The build recipe accounts for it possibly not existing
@@ -94,6 +94,9 @@ install     : |
 
     %meson_install
 check       : |
+    # These are no longer built by default but they are required by the tests
+    %meson_build runsuite runtest runxmlconf testapi testcatalog testchar testdict testlimits testparser testrecurse example/io1
+
     %meson_test
 workload    : |
     # Script is no longer included with the source tarballs and so has been vendored
