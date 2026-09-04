@@ -2,11 +2,11 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name        : egl-wayland
-version     : "1.1.21"
-release     : 7
+version     : "1.1.22"
+release     : 8
 homepage    : https://github.com/NVIDIA/egl-wayland
 upstreams   :
-    - https://github.com/NVIDIA/egl-wayland/archive/refs/tags/1.1.21.tar.gz : da232d46ec4553b2f4b057b705acfa63466318f91f7e8de38dcfb30243fb6898
+    - https://github.com/NVIDIA/egl-wayland/archive/refs/tags/1.1.22.tar.gz : 9df3f0d69d6c99ead7f8a329a5f370aea8408f2064a349d7e24c144515dacf65
 summary     : The Wayland External Platform interface for EGL
 description : |
     The EGL External Platform interface for Wayland
