@@ -3,7 +3,7 @@
 
 name        : linux-lts
 version     : "6.18.49"
-release     : 31
+release     : 32
 homepage    : https://kernel.org/
 upstreams   :
     - https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.49.tar.xz : ae826f33111fea6f1d279dde7299d7463c8dfd204aeb75a8fb5432bc60a28191
