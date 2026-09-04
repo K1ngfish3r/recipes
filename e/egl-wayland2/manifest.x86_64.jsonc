@@ -22,7 +22,7 @@
 			"files": [
 				"/usr/lib/libnvidia-egl-wayland2.so",
 				"/usr/lib/libnvidia-egl-wayland2.so.1",
-				"/usr/lib/libnvidia-egl-wayland2.so.1.0.1",
+				"/usr/lib/libnvidia-egl-wayland2.so.1.0.2",
 				"/usr/share/egl/egl_external_platform.d/09_nvidia_wayland2.json"
 			],
 			"name": "egl-wayland2",
@@ -46,13 +46,12 @@
 				"soname(libc.so.6(386))",
 				"soname(libdrm.so.2(386))",
 				"soname(libgbm.so.1(386))",
-				"soname(libgcc_s.so.1(386))",
 				"soname(libwayland-client.so.0(386))"
 			],
 			"files": [
 				"/usr/lib32/libnvidia-egl-wayland2.so",
 				"/usr/lib32/libnvidia-egl-wayland2.so.1",
-				"/usr/lib32/libnvidia-egl-wayland2.so.1.0.1"
+				"/usr/lib32/libnvidia-egl-wayland2.so.1.0.2"
 			],
 			"name": "egl-wayland2-32bit",
 			"provides": [
@@ -61,6 +60,6 @@
 		}
 	},
 	"source-name": "egl-wayland2",
-	"source-release": "2",
-	"source-version": "1.0.1"
+	"source-release": "3",
+	"source-version": "1.0.2"
 }
