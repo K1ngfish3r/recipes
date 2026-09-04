@@ -60,8 +60,9 @@ ogc/0002-FROM-ML-drm-amd-display-Add-2.1-FreeSync-support-for.patch
 ogc/0003-FROM-ML-drm-edid-parse-HDMI-2.1-gaming-ALLM-VRR-capa.patch
 ogc/0004-FROM-ML-drm-amd-display-Add-HDMI-2.1-VRR-support-fro.patch
 ogc/0005-FROM-ML-drm-amd-display-Enable-HDMI-ALLM-for-Gaming-.patch
-# https://github.com/OpenGamingCollective/linux-unstable/pull/6
-# https://github.com/Lawstorant/linux/tree/hdmi-7.2
-# https://gitlab.freedesktop.org/drm/amd/-/work_items/5649
-ogc/PRs/unstable/PR6/0001-Force-freesync_on_desktop-for-HDMI.patch
-ogc/PRs/unstable/PR6/0002-drm-amd-display-Simplify-VRR-state-handling-in.patch
+ogc/0167-FROM-ML-drm-Add-passive_vrr-properties-for-passive-d.patch
+ogc/0168-FROM-ML-drm-amd-display-Use-passive_vrr-properties-i.patch
+ogc/0169-FROM-ML-drm-amd-display-Keep-FreeSync-for-HF-VSDB-VR.patch
+ogc/0170-FROM-ML-drm-amd-display-Emit-VTEM-for-HF-VSDB-VRR-on.patch
+ogc/0171-FROM-ML-drm-amd-display-freesync_on_desktop-support-.patch
+ogc/0172-FROM-ML-drm-amd-display-Fix-NULL-deref-of-new_stream.patch

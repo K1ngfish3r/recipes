@@ -3,7 +3,7 @@
 
 name        : linux-stable
 version     : "7.2.3"
-release     : 55
+release     : 56
 homepage    : https://kernel.org/
 upstreams   :
         - https://cdn.kernel.org/pub/linux/kernel/v7.x/linux-7.2.3.tar.xz : 8ba259e8e7b13ec6ef0941c8a39ad90b24bd4a4d6c0010ba6bafb794550ecd03
@@ -278,6 +278,10 @@ install     : |
     # linux-headers
     %make ${_common_make_build_args} INSTALL_HDR_PATH=%(installroot)%(prefix) headers_install
 
+    # Ensure that amdgpu HDMI 2.1 Fixed Rate Link (FRL) support in the open-source AMDGPU display driver gets enabled.
+    # AMD initially keeps FRL disabled by default, until Variable Refresh Rate (VRR) code is fully integrated.
+    %install_file %(pkgdir)/20-linux-stable-amdgpu-feature-mask-vrr.cmdline -t %(installroot)%(libdir)/kernel/cmdline.d/
+
 packages    :
     - "%(name)-devel":
         rundeps:
@@ -291,3 +295,10 @@ packages    :
         description: Headers for the kernel libc interface
         paths:
             - /usr/include/
+    - "%(name)-enable-amdgpu-vrr":
+        summary     : Enables amdgpu HDMI 2.1 Fixed Rate Link (FRL) support
+        description : AMD initially keeps FRL disabled by default, until Variable Refresh Rate (VRR) code is fully integrated.
+        rundeps:
+            - "%(name)"
+        paths:
+            - /usr/lib/kernel/cmdline.d/20-linux-stable-amdgpu-feature-mask-vrr.cmdline

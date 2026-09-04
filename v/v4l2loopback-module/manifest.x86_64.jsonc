@@ -15,7 +15,7 @@
 				"sysbinary(depmod)"
 			],
 			"files": [
-				"/usr/lib/modules/7.2.3-32.gaming/extra/v4l2loopback.ko.zst"
+				"/usr/lib/modules/7.2.3-33.gaming/extra/v4l2loopback.ko.zst"
 			],
 			"name": "v4l2loopback-module-gaming"
 		},
@@ -32,7 +32,7 @@
 				"sysbinary(depmod)"
 			],
 			"files": [
-				"/usr/lib/modules/6.18.49-31.lts/extra/v4l2loopback.ko.zst"
+				"/usr/lib/modules/6.18.49-32.lts/extra/v4l2loopback.ko.zst"
 			],
 			"name": "v4l2loopback-module-lts"
 		},
@@ -49,12 +49,12 @@
 				"sysbinary(depmod)"
 			],
 			"files": [
-				"/usr/lib/modules/7.2.3-55.stable/extra/v4l2loopback.ko.zst"
+				"/usr/lib/modules/7.2.3-56.stable/extra/v4l2loopback.ko.zst"
 			],
 			"name": "v4l2loopback-module-stable"
 		}
 	},
 	"source-name": "v4l2loopback-module",
-	"source-release": "36",
+	"source-release": "37",
 	"source-version": "0.15.4"
 }

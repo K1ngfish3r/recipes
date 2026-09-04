@@ -1,129 +1,87 @@
-From b2b8ebbef6a9edfa36f40bbe55e3ae20618309d4 Mon Sep 17 00:00:00 2001
+From 2d6df7ecdf7667ac87dec4f42d95d8e26bdac395 Mon Sep 17 00:00:00 2001
 From: Andrey Smirnov <andrew.smirnov@gmail.com>
-Date: Sun, 27 Feb 2022 12:58:05 -0800
-Subject: [PATCH 017/164] [EXTERNALLY-MAINTAINED] leds: steamdeck: Add support
- for Steam Deck LED
+Date: Mon, 20 Nov 2023 05:42:03 -0800
+Subject: [PATCH 017/172] [EXTERNALLY-MAINTAINED] leds-steamdeck: Add support
+ for LED birghtness multiplier
 
-(cherry picked from commit 85a86d19aa7022ff0555023d53aef78323a42d0c)
-[cristian: fwd-ported to v6.8]
+Add support for LED birghtness multiplier exposed via custom sysfs
+attribute (led_brightness_multiplier).
+
+Signed-off-by: Andrey Smirnov <andrew.smirnov@gmail.com>
+(cherry picked from commit c4ea057992e189ec8821cde3a65e2cc0529a5088)
+(cherry picked from commit e90fb9bec45c15c0c541ce60b994bab3922ddadf)
 Signed-off-by: Cristian Ciocaltea <cristian.ciocaltea@collabora.com>
 ---
- drivers/leds/Kconfig          |  7 ++++
- drivers/leds/Makefile         |  1 +
- drivers/leds/leds-steamdeck.c | 74 +++++++++++++++++++++++++++++++++++
- 3 files changed, 82 insertions(+)
- create mode 100644 drivers/leds/leds-steamdeck.c
+ drivers/leds/leds-steamdeck.c | 49 +++++++++++++++++++++++++++++++++++
+ 1 file changed, 49 insertions(+)
 
-diff --git a/drivers/leds/Kconfig b/drivers/leds/Kconfig
-index f4a0a3c8c870..c4bbc6175303 100644
---- a/drivers/leds/Kconfig
-+++ b/drivers/leds/Kconfig
-@@ -1028,6 +1028,13 @@ config LEDS_ACER_A500
- 	  This option enables support for the Power Button LED of
- 	  Acer Iconia Tab A500.
- 
-+config LEDS_STEAMDECK
-+	tristate "LED support for Steam Deck"
-+	depends on LEDS_CLASS && MFD_STEAMDECK
-+	help
-+	  This option enabled support for the status LED (next to the
-+	  power button) on Steam Deck
-+
- source "drivers/leds/blink/Kconfig"
- 
- comment "Flash and Torch LED drivers"
-diff --git a/drivers/leds/Makefile b/drivers/leds/Makefile
-index 7db3768912ca..2b8132b9916a 100644
---- a/drivers/leds/Makefile
-+++ b/drivers/leds/Makefile
-@@ -87,6 +87,7 @@ obj-$(CONFIG_LEDS_QNAP_MCU)		+= leds-qnap-mcu.o
- obj-$(CONFIG_LEDS_REGULATOR)		+= leds-regulator.o
- obj-$(CONFIG_LEDS_SC27XX_BLTC)		+= leds-sc27xx-bltc.o
- obj-$(CONFIG_LEDS_ST1202)		+= leds-st1202.o
-+obj-$(CONFIG_LEDS_STEAMDECK)		+= leds-steamdeck.o
- obj-$(CONFIG_LEDS_SUN50I_A100)		+= leds-sun50i-a100.o
- obj-$(CONFIG_LEDS_SUNFIRE)		+= leds-sunfire.o
- obj-$(CONFIG_LEDS_SYSCON)		+= leds-syscon.o
 diff --git a/drivers/leds/leds-steamdeck.c b/drivers/leds/leds-steamdeck.c
-new file mode 100644
-index 000000000000..686500b8de73
---- /dev/null
+index 686500b8de73..ada9fffc0a42 100644
+--- a/drivers/leds/leds-steamdeck.c
 +++ b/drivers/leds/leds-steamdeck.c
-@@ -0,0 +1,74 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+/*
-+ * Steam Deck EC MFD LED cell driver
-+ *
-+ * Copyright (C) 2021-2022 Valve Corporation
-+ *
-+ */
-+
-+#include <linux/acpi.h>
-+#include <linux/leds.h>
-+#include <linux/platform_device.h>
-+
-+struct steamdeck_led {
-+	struct acpi_device *adev;
-+	struct led_classdev cdev;
-+};
-+
-+static int steamdeck_leds_brightness_set(struct led_classdev *cdev,
-+					 enum led_brightness value)
+@@ -16,6 +16,54 @@ struct steamdeck_led {
+ 	struct led_classdev cdev;
+ };
+ 
++static ssize_t led_brightness_multiplier_show(struct device *dev,
++					      struct device_attribute *attr,
++					      char *buf)
 +{
++	struct led_classdev *cdev = dev_get_drvdata(dev);
 +	struct steamdeck_led *sd = container_of(cdev, struct steamdeck_led,
 +						cdev);
++	unsigned long long led_brightness_multiplier;
 +
-+	if (ACPI_FAILURE(acpi_execute_simple_method(sd->adev->handle,
-+						    "CHBV", value)))
++	if (ACPI_FAILURE(acpi_evaluate_integer(sd->adev->handle,
++					       "GLDM",
++					       NULL,
++					       &led_brightness_multiplier)))
 +		return -EIO;
 +
-+	return 0;
++
++	return sprintf(buf, "%llu", led_brightness_multiplier);
 +}
 +
-+static int steamdeck_leds_probe(struct platform_device *pdev)
++static ssize_t led_brightness_multiplier_store(struct device *dev,
++					       struct device_attribute *attr,
++					       const char *buf, size_t count)
 +{
-+  	struct device *dev = &pdev->dev;
-+	struct steamdeck_led *sd;
-+	int ret;
++	struct led_classdev *cdev = dev_get_drvdata(dev);
++	struct steamdeck_led *sd = container_of(cdev, struct steamdeck_led,
++						cdev);
++	unsigned long value;
 +
-+	sd = devm_kzalloc(dev, sizeof(*sd), GFP_KERNEL);
-+	if (!sd)
-+		return -ENOMEM;
++	if (kstrtoul(buf, 10, &value) || value > 100)
++		return -EINVAL;
 +
-+	sd->adev = ACPI_COMPANION(dev->parent);
 +
-+	sd->cdev.name = "status:white";
-+	sd->cdev.brightness_set_blocking = steamdeck_leds_brightness_set;
-+	sd->cdev.max_brightness = 100;
++	if (ACPI_FAILURE(acpi_execute_simple_method(sd->adev->handle,
++						    "SLDM", value)))
++		return -EIO;
 +
-+	ret = devm_led_classdev_register(dev, &sd->cdev);
-+	if (ret) {
-+		dev_err(dev, "Failed to register LEDs device: %d\n", ret);
-+		return ret;
-+	}
 +
-+	return 0;
++	return count;
 +}
 +
-+static const struct platform_device_id steamdeck_leds_id_table[] = {
-+	{ .name = "steamdeck-leds" },
-+	{}
-+};
-+MODULE_DEVICE_TABLE(platform, steamdeck_leds_id_table);
++static DEVICE_ATTR_RW(led_brightness_multiplier);
 +
-+static struct platform_driver steamdeck_leds_driver = {
-+	.probe = steamdeck_leds_probe,
-+	.driver = {
-+		.name = "steamdeck-leds",
-+	},
-+	.id_table = steamdeck_leds_id_table,
++static struct attribute *steamdeck_led_attrs[] = {
++	&dev_attr_led_brightness_multiplier.attr,
++	NULL
 +};
-+module_platform_driver(steamdeck_leds_driver);
++ATTRIBUTE_GROUPS(steamdeck_led);
 +
-+MODULE_AUTHOR("Andrey Smirnov <andrew.smirnov@gmail.com>");
-+MODULE_DESCRIPTION("Steam Deck LEDs driver");
-+MODULE_LICENSE("GPL");
+ static int steamdeck_leds_brightness_set(struct led_classdev *cdev,
+ 					 enum led_brightness value)
+ {
+@@ -44,6 +92,7 @@ static int steamdeck_leds_probe(struct platform_device *pdev)
+ 	sd->cdev.name = "status:white";
+ 	sd->cdev.brightness_set_blocking = steamdeck_leds_brightness_set;
+ 	sd->cdev.max_brightness = 100;
++	sd->cdev.groups = steamdeck_led_groups;
+ 
+ 	ret = devm_led_classdev_register(dev, &sd->cdev);
+ 	if (ret) {
 -- 
 2.55.0
 
