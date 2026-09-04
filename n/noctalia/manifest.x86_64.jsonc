@@ -69,6 +69,7 @@
 				"soname(libwayland-client.so.0(x86_64))",
 				"soname(libwayland-egl.so.1(x86_64))",
 				"soname(libwebp.so.7(x86_64))",
+				"soname(libwebpdemux.so.2(x86_64))",
 				"soname(libwireplumber-0.5.so.0(x86_64))",
 				"soname(libxkbcommon.so.0(x86_64))",
 				"soname(libxml2.so.16(x86_64))",
@@ -107,6 +108,7 @@
 				"/usr/share/noctalia/assets/templates/foot/undo.sh",
 				"/usr/share/noctalia/assets/templates/ghostty/apply.sh",
 				"/usr/share/noctalia/assets/templates/ghostty/ghostty",
+				"/usr/share/noctalia/assets/templates/ghostty/reload.sh",
 				"/usr/share/noctalia/assets/templates/ghostty/undo.sh",
 				"/usr/share/noctalia/assets/templates/gtk/apply.sh",
 				"/usr/share/noctalia/assets/templates/gtk/gtk3.css",
@@ -160,6 +162,7 @@
 				"/usr/share/noctalia/assets/translations/es.json",
 				"/usr/share/noctalia/assets/translations/fr.json",
 				"/usr/share/noctalia/assets/translations/gl-ES.json",
+				"/usr/share/noctalia/assets/translations/he.json",
 				"/usr/share/noctalia/assets/translations/hu.json",
 				"/usr/share/noctalia/assets/translations/it.json",
 				"/usr/share/noctalia/assets/translations/ko.json",
@@ -173,7 +176,8 @@
 				"/usr/share/noctalia/assets/translations/tr.json",
 				"/usr/share/noctalia/assets/translations/uk-UA.json",
 				"/usr/share/noctalia/assets/translations/vi.json",
-				"/usr/share/noctalia/assets/translations/zh-Hans.json"
+				"/usr/share/noctalia/assets/translations/zh-Hans.json",
+				"/usr/share/noctalia/assets/translations/zh-Hant.json"
 			],
 			"name": "noctalia",
 			"provides": [
@@ -182,6 +186,6 @@
 		}
 	},
 	"source-name": "noctalia",
-	"source-release": "5",
-	"source-version": "5.0.0-beta.10"
+	"source-release": "6",
+	"source-version": "5.0.1"
 }
