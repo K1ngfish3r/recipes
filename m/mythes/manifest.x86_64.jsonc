@@ -1,0 +1,51 @@
+/** Human readable report. This is not consumed by boulder */
+{
+	"manifest-version": "0.2",
+	"packages": {
+		"mythes": {
+			"build-depends": [
+				"binary(bison)",
+				"binary(flex)",
+				"pkgconfig(hunspell)"
+			],
+			"depends": [
+				"soname(libc.so.6(x86_64))",
+				"soname(libgcc_s.so.1(x86_64))",
+				"soname(libstdc++.so.6(x86_64))"
+			],
+			"files": [
+				"/usr/lib/libmythes-1.2.so.0",
+				"/usr/lib/libmythes-1.2.so.0.0.0"
+			],
+			"name": "mythes",
+			"provides": [
+				"soname(libmythes-1.2.so.0(x86_64))"
+			]
+		},
+		"mythes-devel": {
+			"build-depends": [
+				"binary(bison)",
+				"binary(flex)",
+				"pkgconfig(hunspell)"
+			],
+			"depends": [
+				"binary(perl)",
+				"mythes"
+			],
+			"files": [
+				"/usr/bin/th_gen_idx.pl",
+				"/usr/include/mythes.hxx",
+				"/usr/lib/libmythes-1.2.so",
+				"/usr/lib/pkgconfig/mythes.pc"
+			],
+			"name": "mythes-devel",
+			"provides": [
+				"binary(th_gen_idx.pl)",
+				"pkgconfig(mythes)"
+			]
+		}
+	},
+	"source-name": "mythes",
+	"source-release": "1",
+	"source-version": "1.2.6"
+}
