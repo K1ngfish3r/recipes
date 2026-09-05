@@ -1,0 +1,10 @@
+# SPDX-FileCopyrightText: 2026 AerynOS Developers
+# SPDX-License-Identifier: MPL-2.0
+
+releases:
+  id: 50
+  rss: https://github.com/apache/ant/releases.atom
+security:
+  cpe:
+  - vendor: apache
+    product: ant
