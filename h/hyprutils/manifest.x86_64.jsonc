@@ -14,7 +14,7 @@
 				"soname(libstdc++.so.6(x86_64))"
 			],
 			"files": [
-				"/usr/lib/libhyprutils.so.0.14.1",
+				"/usr/lib/libhyprutils.so.0.14.2",
 				"/usr/lib/libhyprutils.so.13"
 			],
 			"name": "hyprutils",
@@ -37,7 +37,14 @@
 				"/usr/include/hyprutils/animation/Spring.hpp",
 				"/usr/include/hyprutils/cli/ArgumentParser.hpp",
 				"/usr/include/hyprutils/cli/Logger.hpp",
+				"/usr/include/hyprutils/eventLoop/EventLoop.hpp",
+				"/usr/include/hyprutils/eventLoop/EventMask.hpp",
+				"/usr/include/hyprutils/eventLoop/Executor.hpp",
+				"/usr/include/hyprutils/eventLoop/FDSource.hpp",
+				"/usr/include/hyprutils/eventLoop/PostDispatchHook.hpp",
+				"/usr/include/hyprutils/eventLoop/Timer.hpp",
 				"/usr/include/hyprutils/i18n/I18nEngine.hpp",
+				"/usr/include/hyprutils/macros/Enums.hpp",
 				"/usr/include/hyprutils/math/Box.hpp",
 				"/usr/include/hyprutils/math/Edges.hpp",
 				"/usr/include/hyprutils/math/Mat3x3.hpp",
@@ -75,6 +82,6 @@
 		}
 	},
 	"source-name": "hyprutils",
-	"source-release": "5",
-	"source-version": "0.14.1"
+	"source-release": "6",
+	"source-version": "0.14.2"
 }
