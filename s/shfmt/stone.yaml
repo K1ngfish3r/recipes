@@ -2,11 +2,11 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name        : shfmt
-version     : "3.14.0"
-release     : 2
+version     : "3.14.1"
+release     : 3
 homepage    : https://github.com/mvdan/sh
 upstreams   :
-    - https://github.com/mvdan/sh/archive/refs/tags/v3.14.0.tar.gz : f193c946e2882c4fa04935cd583f60e2cab60344209bd982a3a5933c4192aad8
+    - https://github.com/mvdan/sh/archive/refs/tags/v3.14.1.tar.gz : ec4bdb88ab6c95686be3a4eeb4ad77d2b49d33d2ed7b0a65035cd52d2d87c443
 summary     : Shell formatter
 description : Format shell programs
 license     : 
