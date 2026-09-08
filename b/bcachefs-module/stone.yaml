@@ -2,11 +2,11 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name        : bcachefs-module
-version     : "1.39.4"
-release     : 47
+version     : "1.39.5"
+release     : 48
 homepage    : https://bcachefs.org
 upstreams   :
-    - https://evilpiepirate.org/bcachefs-tools/bcachefs-tools-vendored-1.39.4.tar.zst : 38139be812f32a41c49067f86734a2cdf8279bec09ec219cdcd46eb344125643
+    - https://evilpiepirate.org/bcachefs-tools/bcachefs-tools-vendored-1.39.5.tar.zst : eeb3acfe39882a09ccf74457778797ce8bcc1c477c333204f2d79086a6c69231
 summary     : bcachefs kernel module
 description : |
     bcachefs kernel module
@@ -55,8 +55,10 @@ install     : |
     #  instead of in the bcachefs-tools build. By doing this the bcachefs tools
     #  initrd is guaranteed to be rebuilt immediately after the root initrd is
     #  built, guaranteeing ABI compatibility.
-    %install_dir initrd/%(libdir)
+    %install_dir initrd/%(libdir)/systemd/system-generators
     %install_exe %(sbindir)/bcachefs initrd/%(sbindir)/bcachefs
+    %install_file %(udevrulesdir)/64-bcachefs.rules -t initrd/%(udevrulesdir)/
+    ln -srv initrd/%(sbindir)/bcachefs initrd/%(libdir)/systemd/system-generators/bcachefs-mount-generator
     for i in fsck.bcachefs mount.bcachefs; do
         ln -srv initrd/%(sbindir)/bcachefs initrd/%(sbindir)/${i}
     done
