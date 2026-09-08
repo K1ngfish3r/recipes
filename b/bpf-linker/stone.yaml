@@ -2,10 +2,10 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name        : bpf-linker
-version     : "0.11.0"
-release     : 1
+version     : "0.11.1"
+release     : 2
 upstreams   :
-    - https://github.com/aya-rs/bpf-linker/archive/refs/tags/v0.11.0.tar.gz: e32948056bd2604cdcc7fb384155feaf52f05512e02f4e8a7368af48e22f30f2
+    - https://github.com/aya-rs/bpf-linker/archive/refs/tags/v0.11.1.tar.gz: 9e7791bb5edaab7670e15ade3cc1df549cf5f672401b52c354643e9e9d6de31c
 homepage    : https://github.com/aya-rs/bpf-linker
 license     :
     - Apache-2.0
@@ -14,7 +14,8 @@ summary     : Simple BPF static linker
 description : |
     BPF static linker
 builddeps   :
-    - binary(llvm-config)
+    # Needs to match whatever Rust is using, which I _think_ just means the system llvm
+    - binary(llvm-config-23)
 networking  : true
 setup       : |
     %cargo_fetch
