@@ -10,7 +10,7 @@
 			],
 			"files": [
 				"/usr/lib/libpathrs.so.0",
-				"/usr/lib/libpathrs.so.0.2.5"
+				"/usr/lib/libpathrs.so.0.2.6"
 			],
 			"name": "libpathrs",
 			"provides": [
@@ -33,6 +33,6 @@
 		}
 	},
 	"source-name": "libpathrs",
-	"source-release": "3",
-	"source-version": "0.2.5"
+	"source-release": "4",
+	"source-version": "0.2.6"
 }
