@@ -117,7 +117,6 @@
 				"soname(libeis.so.1(x86_64))",
 				"soname(libepoxy.so.0(x86_64))",
 				"soname(libevdev.so.2(x86_64))",
-				"soname(libgcc_s.so.1(x86_64))",
 				"soname(libkcmkwincommon.so.6(x86_64))",
 				"soname(libkdecorations3.so.6(x86_64))",
 				"soname(libkdecorations3private.so.2(x86_64))",
@@ -662,6 +661,7 @@
 				"/usr/share/locale/hr/LC_MESSAGES/kcm_kwindecoration.mo",
 				"/usr/share/locale/hr/LC_MESSAGES/kcm_kwinrules.mo",
 				"/usr/share/locale/hr/LC_MESSAGES/kcm_kwintabbox.mo",
+				"/usr/share/locale/hr/LC_MESSAGES/kcmkwincommon.mo",
 				"/usr/share/locale/hr/LC_MESSAGES/kcmkwinscreenedges.mo",
 				"/usr/share/locale/hr/LC_MESSAGES/kcmkwm.mo",
 				"/usr/share/locale/hr/LC_MESSAGES/kwin.mo",
@@ -1778,7 +1778,6 @@
 				"soname(libdrm.so.2(x86_64))",
 				"soname(libepoxy.so.0(x86_64))",
 				"soname(libgbm.so.1(x86_64))",
-				"soname(libgcc_s.so.1(x86_64))",
 				"soname(libinput.so.10(x86_64))",
 				"soname(libkdecorations3.so.6(x86_64))",
 				"soname(libkdecorations3private.so.2(x86_64))",
@@ -1808,9 +1807,9 @@
 			],
 			"files": [
 				"/usr/lib/libkcmkwincommon.so.6",
-				"/usr/lib/libkcmkwincommon.so.6.7.4",
+				"/usr/lib/libkcmkwincommon.so.6.7.5",
 				"/usr/lib/libkwin.so.6",
-				"/usr/lib/libkwin.so.6.7.4",
+				"/usr/lib/libkwin.so.6.7.5",
 				"/usr/share/qlogging-categories6/org_kde_kwin.categories"
 			],
 			"name": "kwin-libs",
@@ -1821,6 +1820,6 @@
 		}
 	},
 	"source-name": "kwin",
-	"source-release": "39",
-	"source-version": "6.7.4"
+	"source-release": "40",
+	"source-version": "6.7.5"
 }
