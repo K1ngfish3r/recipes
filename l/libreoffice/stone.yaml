@@ -8,7 +8,7 @@ name        : libreoffice
 ##@@BEGIN_VERSION
 version     : "26.8.0.3"
 ##@@END_VERSION
-release     : 1
+release     : 2
 upstreams   :
 ##@@BEGIN_SOURCE
     - https://download.documentfoundation.org/libreoffice/src/26.8.0/libreoffice-26.8.0.3.tar.xz:
@@ -534,11 +534,13 @@ builddeps   :
     - pkgconfig(krb5-gssapi)
     - pkgconfig(lcms2)
     - pkgconfig(ldap)
+    - pkgconfig(libabw-0.1)
     - pkgconfig(libargon2)
     - pkgconfig(libcurl)
     - pkgconfig(libjpeg)
     - pkgconfig(libpng)
     - pkgconfig(libpq)
+    - pkgconfig(librevenge-0.0)
     - pkgconfig(libtiff-4)
     - pkgconfig(libwebp)
     - pkgconfig(libxml-2.0)
@@ -637,7 +639,6 @@ setup       : |
         --without-system-glm \
         --without-system-java-websocket \
         --without-system-jfreereport \
-        --without-system-libabw \
         --without-system-libcdr \
         --without-system-libcmis \
         --without-system-libebook \
@@ -654,7 +655,6 @@ setup       : |
         --without-system-libodfgen \ \
         --without-system-libpagemaker \
         --without-system-libqxp \
-        --without-system-librevenge \
         --without-system-libstaroffice \
         --without-system-libtommath \
         --without-system-libvisio \
@@ -676,9 +676,38 @@ install     : |
 packages    :
     - "%(name)":
         paths:
-        - /usr/lib/libreoffice/program/**/*.so
+            - /usr/lib/libreoffice/program/**/*.so
+        rundeps:
+            - "%(name)-gtk3"
         rundeps-exclude:
             # This is for Java and is loaded dynamically as needed
             - 'soname\(libjawt.so.*\)'
             # These are for vendored libs
             - 'soname\(libfbclient.so.*\)'
+
+    - "%(name)-x11":
+        summary: LibreOffice generic X11 support plug-in
+        description: A plug-in for LibreOffice that enables generic X11 support.
+        paths:
+            - /usr/lib/libreoffice/program/libvclplug_genlo.so
+
+    - "%(name)-gtk3":
+        summary: LibreOffice GTK+ 3 integration plug-in
+        description: A plug-in for LibreOffice that enables integration into GTK+ 3 environment.
+        paths:
+            - /usr/lib/libreoffice/program/libvclplug_gtk3lo.so
+
+    - "%(name)-gtk4":
+        summary: LibreOffice GTK+ 4 experimental integration plug-in
+        description: An experimental plug-in for LibreOffice that enables integration into GTK+ 4 environment.
+        paths:
+            - /usr/lib/libreoffice/program/libavmediagtk.so
+            - /usr/lib/libreoffice/program/libvclplug_gtk4lo.so
+
+    - "%(name)-kf6":
+        summary: LibreOffice KDE Frameworks 6 integration plug-in
+        description: A plug-in for LibreOffice that enables integration into the KDE Frameworks 6.
+        paths:
+            - /usr/lib/libreoffice/program/libavmediaqt6.so
+            - /usr/lib/libreoffice/program/libvclplug_kf6lo.so
+            - /usr/lib/libreoffice/program/libvclplug_qt6lo.so
