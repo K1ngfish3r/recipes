@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name        : llvm
-version     : "23.1.0"
-release     : 63
+version     : "23.1.1"
+release     : 64
 summary     : Low Level Virtual Machine
 license     :
     - Apache-2.0 WITH LLVM-exception
@@ -12,7 +12,7 @@ homepage    : https://www.llvm.org
 description : |
     Low Level Virtual Machine
 upstreams   :
-    - https://github.com/llvm/llvm-project/releases/download/llvmorg-23.1.0/llvm-project-23.1.0.src.tar.xz : ab1f0e3ec52448c33e8782eaf0422504b87c7b016b22514653ee0d8fcee479ff
+    - https://github.com/llvm/llvm-project/releases/download/llvmorg-23.1.1/llvm-project-23.1.1.src.tar.xz : ebe9be46fe8756d58c5b198ffad0fa2a766257add81a4dc52179bfacc7888ee6
 builddeps   :
     - binary(node)
     - binary(perl)
@@ -122,6 +122,8 @@ environment : |
         %patch %(pkgdir)/patches/upstream/0001-BOLT-Ensure-runtime-is-built-with-uncompressed-debug.patch
         %patch %(pkgdir)/patches/upstream/215835.patch
         %patch %(pkgdir)/patches/upstream/219861.patch
+        %patch %(pkgdir)/patches/upstream/add-option-merge-text-sections.patch
+        %patch %(pkgdir)/patches/upstream/avoid-large-caps-in-dso-layout.patch
     }
 
     function cmake_llvm_configure() {
