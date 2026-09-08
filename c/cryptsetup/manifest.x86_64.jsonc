@@ -151,7 +151,8 @@
 				"/usr/share/locale/sv/LC_MESSAGES/cryptsetup.mo",
 				"/usr/share/locale/uk/LC_MESSAGES/cryptsetup.mo",
 				"/usr/share/locale/vi/LC_MESSAGES/cryptsetup.mo",
-				"/usr/share/locale/zh_CN/LC_MESSAGES/cryptsetup.mo"
+				"/usr/share/locale/zh_CN/LC_MESSAGES/cryptsetup.mo",
+				"/usr/share/locale/zh_TW/LC_MESSAGES/cryptsetup.mo"
 			],
 			"name": "cryptsetup-libs",
 			"provides": [
@@ -255,6 +256,6 @@
 		}
 	},
 	"source-name": "cryptsetup",
-	"source-release": "14",
-	"source-version": "2.8.7"
+	"source-release": "15",
+	"source-version": "2.8.8"
 }
