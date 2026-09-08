@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2025 AerynOS Developers
+# SPDX-License-Identifier: MPL-2.0
+
+name        : librevenge
+version     : "0.0.6"
+release     : 1
+upstreams   :
+    - https://sourceforge.net/projects/libwpd/files/librevenge/librevenge-0.0.6/librevenge-0.0.6.tar.xz : 19eacf5ce55d7fe6a990a45142589cdf7da0c7b68701797f133482cb44f189fa
+homepage    : https://sf.net/p/libwpd/librevenge
+license     :
+    - LGPL-2.1
+    - MPL-2.0
+summary     : Library for writing document import filters
+description : |
+    Librevenge is a base library for writing document import filters. It has interfaces for text documents, vector graphics, spreadsheets and presentations.
+builddeps   :
+    - binary(doxygen)
+    - cmake(Boost)
+    - pkgconfig(cppunit)
+    - pkgconfig(zlib)
+setup       : |
+    # --enable-pretty-printers enables the GDB extension which is probably not needed
+    %configure
+build       : |
+    %make
+install     : |
+    %make_install
+packages    :
+    - "%(name)-docs":
+        paths:
+            - /usr/share/doc
