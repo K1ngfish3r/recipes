@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: 2025 AerynOS Developers
+# SPDX-License-Identifier: MPL-2.0
+
+name        : libabw
+version     : "0.1.4"
+release     : 1
+upstreams   :
+    - https://dev-www.libreoffice.org/src/libabw/libabw-0.1.4.tar.xz : fa2685a3440da6e03a66a778480d93cb95f6064e4541e58e37397680760fd6a0
+homepage    : https://wiki.documentfoundation.org/DLP/Libraries/libabw
+license     : MPL-2.0
+summary     : a library that parses the file format of AbiWord documents
+description : |
+    a library that parses the file format of AbiWord documents
+builddeps   :
+    - binary(doxygen)
+    - binary(gperf)
+    - cmake(Boost)
+    - pkgconfig(librevenge-0.0)
+    - pkgconfig(libxml-2.0)
+    - pkgconfig(zlib)
+setup       : |
+    %configure
+build       : |
+    %make
+install     : |
+    %make_install
+packages    :
+    - "%(name)-tools":
+        summary: Tools to transform AbiWord files into other formats
+        description: Tools to transform AbiWord files into other formats
+        paths:
+            - /usr/bin/
+
+    - "%(name)-docs":
+        paths:
+            - /usr/share/doc
