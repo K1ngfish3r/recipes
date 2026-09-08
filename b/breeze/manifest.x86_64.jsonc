@@ -99,6 +99,7 @@
 				"/usr/share/locale/he/LC_MESSAGES/breeze_style_config.mo",
 				"/usr/share/locale/hi/LC_MESSAGES/breeze_kwin_deco.mo",
 				"/usr/share/locale/hi/LC_MESSAGES/breeze_style_config.mo",
+				"/usr/share/locale/hr/LC_MESSAGES/breeze_kwin_deco.mo",
 				"/usr/share/locale/hu/LC_MESSAGES/breeze_kwin_deco.mo",
 				"/usr/share/locale/hu/LC_MESSAGES/breeze_style_config.mo",
 				"/usr/share/locale/ia/LC_MESSAGES/breeze_kwin_deco.mo",
@@ -876,6 +877,6 @@
 		}
 	},
 	"source-name": "breeze",
-	"source-release": "24",
-	"source-version": "6.7.4"
+	"source-release": "25",
+	"source-version": "6.7.5"
 }
