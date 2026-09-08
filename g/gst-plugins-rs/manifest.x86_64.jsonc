@@ -209,6 +209,6 @@
 		}
 	},
 	"source-name": "gst-plugins-rs",
-	"source-release": "22",
-	"source-version": "1.28.6"
+	"source-release": "23",
+	"source-version": "1.28.7"
 }
