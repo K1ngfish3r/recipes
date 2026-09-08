@@ -2,10 +2,10 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name        : powerdevil
-version     : "6.7.4"
-release     : 32
+version     : "6.7.5"
+release     : 33
 upstreams   :
-    - https://download.kde.org/stable/plasma/6.7.4/powerdevil-6.7.4.tar.xz : cfd53172f168b5a80cba7ab85e7b929f6d7c7e0fa80ed0d48da140b5a7d698e3
+    - https://download.kde.org/stable/plasma/6.7.5/powerdevil-6.7.5.tar.xz : 6a738fccf01e4d1b10fea68ff8b404a406f95bc36fcb593bcc70fafb1c53258b
 homepage    : https://kde.org/plasma-desktop/
 license     : GPL-2.0-or-later
 summary     : Manages the power settings of KDE Plasma

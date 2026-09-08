@@ -2,10 +2,10 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name        : plasma-bigscreen
-version     : "6.7.4"
-release     : 5
+version     : "6.7.5"
+release     : 6
 upstreams   :
-    - https://download.kde.org/stable/plasma/6.7.4/plasma-bigscreen-6.7.4.tar.xz : 5fb76e3777ce03bd4ded119fb169efeb308a38f43dec009197158abec134441c
+    - https://download.kde.org/stable/plasma/6.7.5/plasma-bigscreen-6.7.5.tar.xz : fd00b8ffd6a1c0fd7058acd06098110b00b5ca1dc720167058fad65d2ab50bdc
 homepage    : https://kde.org/plasma-desktop/
 license     : GPL-2.0-or-later
 summary     : Plasma shell for TVs
