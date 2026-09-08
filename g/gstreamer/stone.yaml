@@ -2,11 +2,11 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name        : gstreamer
-version     : "1.28.6"
-release     : 59
+version     : "1.28.7"
+release     : 60
 homepage    : https://gstreamer.freedesktop.org/
 upstreams   :
-    - https://gitlab.freedesktop.org/gstreamer/gstreamer/-/archive/1.28.6/gstreamer-1.28.6.tar.gz : c46ea808af5f073ee68cd0e66734c1c103a2bd001e7a3e35c79908613f11d17b
+    - https://gitlab.freedesktop.org/gstreamer/gstreamer/-/archive/1.28.7/gstreamer-1.28.7.tar.gz : 58dd845a6473355edd71f67227219ec04e039cee5c000265d3fbbd2e7920a3a8
 summary     : GStreamer multimedia framework
 description : |
     GStreamer can bridge to other multimedia frameworks in order to reuse existing components (e.g. codecs) and use platform input/output mechanisms.
@@ -570,7 +570,7 @@ packages    :
             - /usr/lib/libgstcodecs-1.0.so.*
             - /usr/lib/libgstcuda-1.0.so.*
             - /usr/lib/libgstdxva-1.0.so.*
-            - /usr/lib/libgsthip.so.*
+            - /usr/lib/libgsthip-1.0.so.*
             - /usr/lib/libgstinsertbin-1.0.so.*
             - /usr/lib/libgstisoff-1.0.so.*
             - /usr/lib/libgstmpegts-1.0.so.*
@@ -643,7 +643,7 @@ packages    :
             - /usr/lib/libgstcodecs-1.0.so
             - /usr/lib/libgstcuda-1.0.so
             - /usr/lib/libgstdxva-1.0.so
-            - /usr/lib/libgsthip.so
+            - /usr/lib/libgsthip-1.0.so
             - /usr/lib/libgstinsertbin-1.0.so
             - /usr/lib/libgstisoff-1.0.so
             - /usr/lib/libgstmpegts-1.0.so
