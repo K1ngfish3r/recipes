@@ -181,6 +181,7 @@ ogc/0169-FROM-ML-drm-amd-display-Keep-FreeSync-for-HF-VSDB-VR.patch
 ogc/0170-FROM-ML-drm-amd-display-Emit-VTEM-for-HF-VSDB-VRR-on.patch
 ogc/0171-FROM-ML-drm-amd-display-freesync_on_desktop-support-.patch
 ogc/0172-FROM-ML-drm-amd-display-Fix-NULL-deref-of-new_stream.patch
+ogc/0173-FROM-UPSTREAM-Bluetooth-btusb-Add-new-VID-PID-0x0489-.patch
 
 # Valve patches
 # https://github.com/ValveSoftware/steam-devices/pull/83#issuecomment-4786835173
