@@ -23,7 +23,7 @@
 			"files": [
 				"/usr/bin/kbuildsycoca6",
 				"/usr/lib/libKF6Service.so.6",
-				"/usr/lib/libKF6Service.so.6.29.0",
+				"/usr/lib/libKF6Service.so.6.30.0",
 				"/usr/share/locale/af/LC_MESSAGES/kservice6.mo",
 				"/usr/share/locale/ar/LC_MESSAGES/kservice6.mo",
 				"/usr/share/locale/as/LC_MESSAGES/kservice6.mo",
@@ -128,6 +128,7 @@
 				"/usr/share/locale/zh_TW/LC_MESSAGES/kservice6.mo",
 				"/usr/share/man/ca/man8/kbuildsycoca6.8",
 				"/usr/share/man/ca@valencia/man8/kbuildsycoca6.8",
+				"/usr/share/man/de/man8/kbuildsycoca6.8",
 				"/usr/share/man/es/man8/kbuildsycoca6.8",
 				"/usr/share/man/fr/man8/kbuildsycoca6.8",
 				"/usr/share/man/it/man8/kbuildsycoca6.8",
@@ -188,6 +189,6 @@
 		}
 	},
 	"source-name": "kf6-kservice",
-	"source-release": "23",
-	"source-version": "6.29.0"
+	"source-release": "24",
+	"source-version": "6.30.0"
 }

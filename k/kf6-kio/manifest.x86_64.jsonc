@@ -59,6 +59,7 @@
 				"soname(libKF6Wallet.so.6(x86_64))",
 				"soname(libKF6WidgetsAddons.so.6(x86_64))",
 				"soname(libKF6WindowSystem.so.6(x86_64))",
+				"soname(libQt6Concurrent.so.6(x86_64))",
 				"soname(libQt6Core.so.6(x86_64))",
 				"soname(libQt6DBus.so.6(x86_64))",
 				"soname(libQt6Gui.so.6(x86_64))",
@@ -79,13 +80,13 @@
 				"/usr/lib/kf6/kioexec",
 				"/usr/lib/kf6/kioworker",
 				"/usr/lib/libKF6KIOCore.so.6",
-				"/usr/lib/libKF6KIOCore.so.6.29.0",
+				"/usr/lib/libKF6KIOCore.so.6.30.0",
 				"/usr/lib/libKF6KIOFileWidgets.so.6",
-				"/usr/lib/libKF6KIOFileWidgets.so.6.29.0",
+				"/usr/lib/libKF6KIOFileWidgets.so.6.30.0",
 				"/usr/lib/libKF6KIOGui.so.6",
-				"/usr/lib/libKF6KIOGui.so.6.29.0",
+				"/usr/lib/libKF6KIOGui.so.6.30.0",
 				"/usr/lib/libKF6KIOWidgets.so.6",
-				"/usr/lib/libKF6KIOWidgets.so.6.29.0",
+				"/usr/lib/libKF6KIOWidgets.so.6.30.0",
 				"/usr/lib/libkuriikwsfiltereng_private.so",
 				"/usr/lib/qt6/plugins/kf6/kded/remotenotifier.so",
 				"/usr/lib/qt6/plugins/kf6/kio/kio_file.so",
@@ -993,6 +994,6 @@
 		}
 	},
 	"source-name": "kf6-kio",
-	"source-release": "34",
-	"source-version": "6.29.0"
+	"source-release": "35",
+	"source-version": "6.30.0"
 }

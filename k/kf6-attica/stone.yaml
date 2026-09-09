@@ -2,10 +2,10 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name        : kf6-attica
-version     : "6.29.0"
-release     : 20
+version     : "6.30.0"
+release     : 21
 upstreams   :
-    - https://download.kde.org/stable/frameworks/6.29/attica-6.29.0.tar.xz : b980fc74c3657efb840322ef35956c0caec07d9efa576cd52d86488937dcc815
+    - https://download.kde.org/stable/frameworks/6.30/attica-6.30.0.tar.xz : 3eec8d2d9c77ad5f7cfd38e44e4b1492c5d0dec695b13f711c09f7d6187c276c
 homepage    : https://community.kde.org/Frameworks
 license     : LGPL-2.1-only
 summary     : Open Collaboration Service client library.

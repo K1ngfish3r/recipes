@@ -2,10 +2,10 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name        : kf6-ktextwidgets
-version     : "6.29.0"
-release     : 21
+version     : "6.30.0"
+release     : 22
 upstreams   :
-    - https://download.kde.org/stable/frameworks/6.29/ktextwidgets-6.29.0.tar.xz : d245721f27078e00f1241e7471ca2a4e46c6ccaa50bb33201869054e37be4ae0
+    - https://download.kde.org/stable/frameworks/6.30/ktextwidgets-6.30.0.tar.xz : b06b11bb727bf9c3578797b1e40daad5f48e10433e456a337f1c40b4082879c8
 homepage    : https://community.kde.org/Frameworks
 license     :
     - LGPL-2.0-only
