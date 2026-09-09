@@ -2,10 +2,10 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name        : kf6-kcrash
-version     : "6.29.0"
-release     : 20
+version     : "6.30.0"
+release     : 21
 upstreams   :
-    - https://download.kde.org/stable/frameworks/6.29/kcrash-6.29.0.tar.xz : decb363261fe5f6df984fa0cfa42243aca9eea352045b18ffe1b86a0bd5b1736
+    - https://download.kde.org/stable/frameworks/6.30/kcrash-6.30.0.tar.xz : b17f8242309e1502119c48b1ef5059a396a3068596a84fb79fdef6d9e2cd4f49
 homepage    : https://community.kde.org/Frameworks
 license     : LGPL-2.0-or-later
 summary     : Graceful handling of application crashes.
