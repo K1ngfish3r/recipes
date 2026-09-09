@@ -2,16 +2,16 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name        : nvidia-graphics-driver
-version     : "610.57.04"
-release     : 49
+version     : "615.71.09"
+release     : 50
 homepage    : https://www.nvidia.com/
 upstreams   :
-    - https://us.download.nvidia.com/XFree86/Linux-x86_64/610.57.04/NVIDIA-Linux-x86_64-610.57.04.run:
-        hash: b2e935c66b83bb00c0c857bc8e0ee0fd52de9286b40c9cc1eec29a7ce7eb116d
+    - https://us.download.nvidia.com/XFree86/Linux-x86_64/615.71.09/NVIDIA-Linux-x86_64-615.71.09.run:
+        hash: cdceed22bbeb61248d1a6deabc2596673e3a6501698ee71ac8d2fdc28f3b70fe
         unpack: false
         rename: NVIDIA.run
-    - https://download.nvidia.com/XFree86/nvidia-persistenced/nvidia-persistenced-610.57.04.tar.bz2:
-        hash: 5b2d348e52865f3e605afdd2aa40cf2246d3ff62c5cec4c344cd64f145bcab97
+    - https://download.nvidia.com/XFree86/nvidia-persistenced/nvidia-persistenced-615.71.09.tar.bz2:
+        hash: 3df4921b644e95dc7e7813c24355a6d7a460f9d103a82b6952a69b12b6f9f0c4
         rename: nvidia-persistenced.tar.bz2
         extract: false
 summary     : The proprietary NVIDIA graphics driver
@@ -49,7 +49,6 @@ install     : |
         --no-kernel-modules \
         --no-nouveau-check \
         --no-rebuild-initramfs \
-        --no-sigwinch-workaround \
         --no-x-check \
         --skip-depmod \
         --glvnd-egl-config-path=%(installroot)%(datadir)/glvnd/egl_vendor.d \
