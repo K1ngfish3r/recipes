@@ -275,3 +275,7 @@ NB: Each entry *must* contain all sub-packages created by the package!
 
 ### Replaced by mesa-libclc
 - libclc
+
+### No longer used
+- hyprland-qt-support
+- hyprland-qt-support-dbginfo
