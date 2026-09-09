@@ -107,6 +107,7 @@
 				"/usr/share/ECM/modules/ECMGenerateQDoc.cmake",
 				"/usr/share/ECM/modules/ECMGenerateQmlTypes.cmake",
 				"/usr/share/ECM/modules/ECMInstallIcons.cmake",
+				"/usr/share/ECM/modules/ECMInstalledLibraryCheck.cmake",
 				"/usr/share/ECM/modules/ECMMarkAsTest.cmake",
 				"/usr/share/ECM/modules/ECMMarkNonGuiExecutable.cmake",
 				"/usr/share/ECM/modules/ECMOptionalAddSubdirectory.cmake",
@@ -137,6 +138,7 @@
 				"/usr/share/ECM/modules/ECMWinResolveSymlinks.cmake",
 				"/usr/share/ECM/modules/QtVersionOption.cmake",
 				"/usr/share/ECM/modules/check-outbound-license.py",
+				"/usr/share/ECM/modules/ecm_create_installed_library_check.cmake",
 				"/usr/share/ECM/modules/ecm_uninstall.cmake.in",
 				"/usr/share/ECM/test-modules/test_execute_and_compare.cmake",
 				"/usr/share/ECM/toolchain/Android.cmake",
@@ -246,6 +248,7 @@
 				"/usr/share/doc/ECM/html/_sources/module/ECMGenerateQDoc.rst.txt",
 				"/usr/share/doc/ECM/html/_sources/module/ECMGenerateQmlTypes.rst.txt",
 				"/usr/share/doc/ECM/html/_sources/module/ECMInstallIcons.rst.txt",
+				"/usr/share/doc/ECM/html/_sources/module/ECMInstalledLibraryCheck.rst.txt",
 				"/usr/share/doc/ECM/html/_sources/module/ECMMarkAsTest.rst.txt",
 				"/usr/share/doc/ECM/html/_sources/module/ECMMarkNonGuiExecutable.rst.txt",
 				"/usr/share/doc/ECM/html/_sources/module/ECMOptionalAddSubdirectory.rst.txt",
@@ -355,6 +358,7 @@
 				"/usr/share/doc/ECM/html/module/ECMGenerateQDoc.html",
 				"/usr/share/doc/ECM/html/module/ECMGenerateQmlTypes.html",
 				"/usr/share/doc/ECM/html/module/ECMInstallIcons.html",
+				"/usr/share/doc/ECM/html/module/ECMInstalledLibraryCheck.html",
 				"/usr/share/doc/ECM/html/module/ECMMarkAsTest.html",
 				"/usr/share/doc/ECM/html/module/ECMMarkNonGuiExecutable.html",
 				"/usr/share/doc/ECM/html/module/ECMOptionalAddSubdirectory.html",
@@ -378,6 +382,6 @@
 		}
 	},
 	"source-name": "extra-cmake-modules",
-	"source-release": "25",
-	"source-version": "6.29.0"
+	"source-release": "26",
+	"source-version": "6.30.0"
 }
