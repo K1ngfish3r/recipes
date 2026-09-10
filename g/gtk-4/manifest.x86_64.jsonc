@@ -99,7 +99,7 @@
 				"/usr/lib/girepository-1.0/Gsk-4.0.typelib",
 				"/usr/lib/girepository-1.0/Gtk-4.0.typelib",
 				"/usr/lib/libgtk-4.so.1",
-				"/usr/lib/libgtk-4.so.1.2200.4",
+				"/usr/lib/libgtk-4.so.1.2200.5",
 				"/usr/share/glib-2.0/schemas/org.gtk.gtk4.Inspector.gschema.xml",
 				"/usr/share/glib-2.0/schemas/org.gtk.gtk4.Settings.ColorChooser.gschema.xml",
 				"/usr/share/glib-2.0/schemas/org.gtk.gtk4.Settings.Debug.gschema.xml",
@@ -943,6 +943,6 @@
 		}
 	},
 	"source-name": "gtk-4",
-	"source-release": "37",
-	"source-version": "4.22.4"
+	"source-release": "38",
+	"source-version": "4.22.5"
 }
