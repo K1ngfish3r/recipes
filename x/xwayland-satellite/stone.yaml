@@ -3,7 +3,7 @@
 
 name        : xwayland-satellite
 version     : "0.8.2"
-release     : 7
+release     : 8
 upstreams   :
     - https://github.com/Supreeeme/xwayland-satellite/archive/refs/tags/v0.8.2.tar.gz : cb50bb6948582d5ec3aa511d2d66ad622989bb14bef94e3bb81bae8b64c120b1
 homepage    : https://github.com/Supreeeme/xwayland-satellite
@@ -21,6 +21,7 @@ rundeps     :
     - binary(Xwayland)
 setup       : |
     %patch %(pkgdir)/0001-fix-binary-path.patch
+    %patch %(pkgdir)/494.patch
 
     %cargo_fetch
 build       : |
