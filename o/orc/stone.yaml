@@ -2,11 +2,11 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name        : orc
-version     : "0.4.43"
-release     : 7
+version     : "0.4.44"
+release     : 8
 homepage    : https://gitlab.freedesktop.org/gstreamer/orc
 upstreams   :
-    - https://gstreamer.freedesktop.org/src/orc/orc-0.4.43.tar.xz : 82394e20e5c4dffe8b45ea8525c62dd4e3e8be7f253ac11c19297ba7ea5473e0
+    - https://gstreamer.freedesktop.org/src/orc/orc-0.4.44.tar.xz : 4aeb97aea2b58224029dc2b23d7d064cfa990cb4fb8c4da440bcbe9c95bc5d2d
 summary     : Optimized Inner Loop Runtime Compiler
 description : |
     Orc is a library and set of tools for compiling and executing
