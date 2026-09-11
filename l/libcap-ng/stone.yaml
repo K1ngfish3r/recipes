@@ -2,15 +2,15 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name        : libcap-ng
-version     : "0.9.5"
-release     : 9
+version     : "0.9.6"
+release     : 10
 summary     : Libcap-ng is a library that makes using posix capabilities easier
 license     : LGPL-2.1-or-later
 homepage    : https://people.redhat.com/sgrubb/libcap-ng/
 description : |
     The libcap-ng library should make programming with posix capabilities easier. The library has some utilities to help you analyse a system for apps that may have too much privileges.
 upstreams   :
-    - https://github.com/stevegrubb/libcap-ng/archive/refs/tags/v0.9.5.tar.gz: a2b4211f59b231d607c61ea2a13e9ecb38f446fe769b44e12da939d5af6d978a
+    - https://github.com/stevegrubb/libcap-ng/archive/refs/tags/v0.9.6.tar.gz: 399040138e0ca62fa2bcabd63da9af4431a246ef7a654561a0ca3cb00010a539
 emul32      : true
 builddeps   :
     - binary(bison)
