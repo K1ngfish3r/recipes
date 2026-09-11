@@ -13,7 +13,7 @@
 			],
 			"files": [
 				"/usr/lib/libgcrypt.so.20",
-				"/usr/lib/libgcrypt.so.20.8.8"
+				"/usr/lib/libgcrypt.so.20.8.9"
 			],
 			"name": "libgcrypt",
 			"provides": [
@@ -56,6 +56,6 @@
 		}
 	},
 	"source-name": "libgcrypt",
-	"source-release": "12",
-	"source-version": "1.12.3"
+	"source-release": "13",
+	"source-version": "1.12.4"
 }
