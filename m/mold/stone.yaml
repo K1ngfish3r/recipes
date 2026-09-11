@@ -2,15 +2,15 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name        : mold
-version     : "2.42.0"
-release     : 14
+version     : "2.42.1"
+release     : 15
 summary     : A Modern Linker
 license     : BSD-3-Clause
 homepage    : https://github.com/rui314/mold
 description : |
     mold is a faster drop-in replacement for existing Unix linkers.
 upstreams   :
-    - https://github.com/rui314/mold/archive/refs/tags/v2.42.0.tar.gz: 6c0f3308c5b3159a369202d970922ad819bab1bfcb5a3b3c06a723d19f65373e
+    - https://github.com/rui314/mold/archive/refs/tags/v2.42.1.tar.gz: 0580221bfdad7148ceeafd0ad3c1c7b3ca9e66b45950405230cc3f81a205c816
 builddeps   :
     - pkgconfig(libblake3)
     - pkgconfig(libzstd)
